@@ -27,7 +27,7 @@ function Header({
 
   return (
     <header
-      className={`livro-header relative w-full min-w-0 overflow-visible bg-no-repeat py-8 px-8 text-white ${isSas ? 'livro-header--sas' : 'livro-header--sae'}`}
+      className={`livro-header relative w-full min-w-0 bg-no-repeat py-8 px-8 text-white ${isSas ? 'livro-header--sas' : 'livro-header--sae'} ${isUnidade ? 'livro-header--unidade' : ''}`}
       style={{
         backgroundColor: isUnidade ? '#1689c5' : isSas ? '#1b4b8a' : '#80298F',
         backgroundImage: `url('${capaSrc}')`,
@@ -35,11 +35,11 @@ function Header({
         backgroundPosition: isSas ? 'center center' : 'top center',
       }}
     >
-      <div className="relative z-10">
+      <div className="livro-header__conteudo relative z-10">
         <div className="flex items-center gap-3 mb-4">
-          <div className="flex flex-col" style={{ marginLeft: isSas ? 'clamp(6.5rem, 16%, 11rem)' : '90px' }}>
+          <div className="livro-header__texto flex min-w-0 flex-col">
             <p
-              className="font-inter rounded-[20px]"
+              className="livro-header__selo font-inter rounded-[20px]"
               style={{
                 backgroundColor: badgeBg,
                 color: badgeColor,
@@ -55,14 +55,7 @@ function Header({
             >
               {badge}
             </p>
-            <h1
-              className="font-inter font-bold"
-              style={{
-                fontWeight: 900,
-                fontSize: '48px',
-                lineHeight: 1.15,
-              }}
-            >
+            <h1 className="livro-header__titulo font-inter font-bold">
               <span style={{ color: numberColor }}>{chapterNumber}.</span> {chapterTitle}
             </h1>
           </div>

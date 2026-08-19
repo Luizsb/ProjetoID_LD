@@ -371,9 +371,59 @@ td {
 /* Faixa de paginação: mesma largura da coluna em todas as páginas (topo e miolo) */
 .livro-header--sas {
   min-height: 168px;
+  overflow: visible;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+}
+
+.livro-header--sae .livro-header__texto {
+  margin-left: 90px;
+}
+
+.livro-header--sas .livro-header__texto {
+  margin-left: clamp(6.5rem, 16%, 11rem);
+}
+
+.livro-header__titulo {
+  font-weight: 900;
+  font-size: 48px;
+  line-height: 1.15;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+@media (max-width: 639px) {
+  .livro-header {
+    padding: 1.75rem 1.25rem 1.5rem !important;
+    overflow: hidden;
+    background-image: none !important;
+    min-height: 0;
+  }
+
+  .livro-header--sas,
+  .livro-header--sae {
+    min-height: 0;
+  }
+
+  .livro-header--sae .livro-header__texto,
+  .livro-header--sas .livro-header__texto {
+    margin-left: 0;
+    max-width: 100%;
+  }
+
+  .livro-header__selo {
+    margin-bottom: 0.65rem;
+  }
+
+  .livro-header__titulo {
+    font-size: 1.5rem;
+    line-height: 1.25;
+  }
+
+  .livro-header__conteudo .mb-4 {
+    margin-bottom: 0;
+  }
 }
 
 .unidade-recolhivel {
@@ -502,21 +552,24 @@ td {
   flex-direction: column;
   align-items: center;
   margin: 1.75rem auto;
-  max-width: none;
-  width: fit-content;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .balao-fala__personagem {
   display: block;
-  width: 168px;
+  width: 200px;
+  max-width: 70%;
   height: auto;
   object-fit: contain;
 }
 
 .balao-fala__nuvem {
   position: relative;
+  box-sizing: border-box;
   width: max-content;
-  max-width: none;
+  max-width: 100%;
   margin-bottom: 14px;
   padding: 0.85rem 1.15rem 1rem;
   background: #e6eef2;
@@ -533,6 +586,7 @@ td {
 
 .balao-fala__nuvem--longo {
   white-space: normal;
+  width: 100%;
   max-width: 360px;
   font-weight: 400;
 }
@@ -559,6 +613,28 @@ td {
   border-left: 9px solid transparent;
   border-right: 9px solid transparent;
   border-top: 12px solid #e6eef2;
+}
+
+@media (max-width: 639px) {
+  .balao-fala__nuvem {
+    white-space: normal;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .balao-fala__nuvem--longo {
+    max-width: 100%;
+  }
+
+  .investigue-material,
+  .investigue-passo-c {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .investigue-passo-c img {
+    align-self: center;
+  }
 }
 
 .caixa-hipotese {
@@ -627,6 +703,27 @@ td {
   text-align: center;
   writing-mode: horizontal-tb;
   transform: none;
+}
+
+@media (max-width: 639px) {
+  .caixa-hipotese {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .caixa-hipotese__textos {
+    order: 1;
+  }
+
+  .caixa-hipotese__foto {
+    order: 2;
+    width: 100%;
+  }
+
+  .caixa-hipotese__textos p {
+    text-align: left;
+  }
 }
 
 .experimento-plantas {
@@ -832,6 +929,29 @@ td {
   text-align: center;
 }
 
+@media (max-width: 639px) {
+  .fique-ligado__caixa {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .fique-ligado__textos p {
+    text-align: left;
+  }
+
+  .fique-ligado__capa {
+    width: 100%;
+    max-width: 220px;
+    margin: 0 auto;
+  }
+
+  .fique-ligado__capa img {
+    width: 100%;
+    height: auto;
+  }
+}
+
 .investigue {
   position: relative;
   margin: 2.25rem 0 1.5rem;
@@ -862,6 +982,7 @@ td {
   background: #f8e6cf;
   border: 1.5px solid #ea8244;
   border-radius: 18px;
+  overflow: hidden;
 }
 
 .investigue__caixa > :first-child {
@@ -961,7 +1082,7 @@ td {
 
 .investigue-copos img {
   display: block;
-  width: 96px;
+  width: 128px;
   height: auto;
 }
 

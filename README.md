@@ -115,8 +115,7 @@ ProjetoID_LD/
 
 O guia visual entra no Git com o restante do projeto.
 
-**Acesso rápido (depois de `npm run dev`):** http://localhost:5173/#/guia  
-Na biblioteca, o botão **Como trabalhar em conjunto** abre a mesma página.
+**Acesso rápido (depois de `npm run dev`):** http://localhost:5173/#/guia
 
 Cópia no repositório: `docs/trabalho-em-conjunto.canvas.tsx`
 

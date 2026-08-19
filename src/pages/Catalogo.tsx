@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { conteudoUrl, getBrand, useCatalogo } from '../catalog/catalogo';
 import { livroEstaPronto } from '../catalog/registry';
 import { textoSobreFundo } from '../catalog/contrast';
-import { bookHref, guiaHref } from '../catalog/useHashRoute';
+import { bookHref } from '../catalog/useHashRoute';
 
 function StatusTag({ playerKey }: { playerKey: string }) {
   const ok = livroEstaPronto(playerKey);
@@ -49,27 +49,21 @@ function Catalogo() {
         <p className="mb-2 text-sm font-medium tracking-wide text-[#F4C2FF]">Novo modelo · ID</p>
         <h1 className="text-3xl font-black md:text-4xl">{catalogo.titulo}</h1>
         <p className="mt-3 max-w-2xl text-white/90">{catalogo.descricao}</p>
-        <a
-          href={guiaHref()}
-          className="mt-6 inline-block rounded-full bg-white px-4 py-2 text-sm font-medium text-[#80298F]"
-        >
-          Como trabalhar em conjunto
-        </a>
       </header>
 
       <main className="mx-auto max-w-6xl px-6 py-8 md:px-12">
         {catalogo.playerReferencia ? (
           <a
             href={bookHref(catalogo.playerReferencia.id)}
-            className="mb-8 block rounded-2xl bg-neutral-900 p-6 text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
+            className="mb-8 block rounded-2xl bg-white p-6 text-neutral-900 shadow-md ring-2 ring-[#80298F]/25 transition hover:-translate-y-0.5 hover:shadow-lg"
           >
-            <p className="text-xs font-semibold tracking-wide text-[#F4C2FF]">Player compartilhado</p>
-            <div className="mt-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <p className="text-xs font-semibold tracking-wide text-[#80298F]">Livro modelo · referência</p>
               <StatusTag playerKey={catalogo.playerReferencia.playerKey} />
             </div>
-            <h2 className="mt-1 text-xl font-bold">{catalogo.playerReferencia.titulo}</h2>
+            <h2 className="mt-2 text-xl font-bold">{catalogo.playerReferencia.titulo}</h2>
             {catalogo.playerReferencia.subtitulo ? (
-              <p className="mt-2 text-sm text-white/75">{catalogo.playerReferencia.subtitulo}</p>
+              <p className="mt-2 text-sm text-neutral-600">{catalogo.playerReferencia.subtitulo}</p>
             ) : null}
           </a>
         ) : null}
@@ -152,6 +146,9 @@ function Catalogo() {
           })}
         </ul>
       </main>
+      <footer className="border-t border-neutral-200 bg-white px-6 py-6 text-center text-sm text-neutral-600 md:px-12">
+        Desenvolvido pelo time de Interações Digitais
+      </footer>
     </div>
   );
 }

@@ -1,10 +1,10 @@
 {
   "titulo": "Livros digitais — novo modelo",
-  "descricao": "Catálogo de testes das marcas SAE, Geekie, SAS e Conquista no player compartilhado.",
+  "descricao": "Biblioteca das marcas SAE, Geekie, SAS e Conquista. Use o livro modelo como referência de layout e interações.",
   "playerReferencia": {
     "id": "PLAYER_REFERENCIA",
-    "titulo": "Construção atual do player",
-    "subtitulo": "Capítulo já montado na UI — use para comparar com os PDFs piloto",
+    "titulo": "Livro modelo",
+    "subtitulo": "Referência para as outras marcas — capítulo já montado na interface.",
     "playerKey": "player-referencia"
   },
   "marcas": [
