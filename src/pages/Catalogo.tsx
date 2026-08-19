@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { conteudoUrl, getBrand, useCatalogo } from '../catalog/catalogo';
+import { textoSobreFundo } from '../catalog/contrast';
 import { bookHref, guiaHref } from '../catalog/useHashRoute';
 import type { CatalogBook } from '../catalog/types';
 
@@ -83,6 +84,8 @@ function Catalogo() {
           {livros.map((livro) => {
             const marca = getBrand(catalogo, livro.marcaId);
             const pdfHref = livro.fontePdf ? conteudoUrl(livro, livro.fontePdf) : null;
+            const pillBg = marca?.corAcento ?? marca?.cor ?? '#eee';
+            const btnBg = marca?.cor ?? '#80298F';
             return (
               <li key={livro.id}>
                 <article className="flex h-full flex-col rounded-2xl bg-white p-6 shadow-md">
@@ -90,8 +93,8 @@ function Catalogo() {
                     <span
                       className="rounded-full px-3 py-1 text-xs font-semibold"
                       style={{
-                        backgroundColor: marca?.corAcento ?? '#eee',
-                        color: marca?.cor ?? '#333',
+                        backgroundColor: pillBg,
+                        color: textoSobreFundo(pillBg),
                       }}
                     >
                       {marca?.nome ?? livro.marcaId}
@@ -112,8 +115,11 @@ function Catalogo() {
                   <div className="mt-auto flex flex-wrap gap-2 pt-6">
                     <a
                       href={bookHref(livro.id)}
-                      className="rounded-full px-4 py-2 text-sm font-medium text-white"
-                      style={{ backgroundColor: marca?.cor ?? '#80298F' }}
+                      className="rounded-full px-4 py-2 text-sm font-medium"
+                      style={{
+                        backgroundColor: btnBg,
+                        color: textoSobreFundo(btnBg),
+                      }}
                     >
                       Ver no player
                     </a>
@@ -122,12 +128,12 @@ function Catalogo() {
                         href={pdfHref}
                         target="_blank"
                         rel="noreferrer"
-                        className="rounded-full bg-neutral-100 px-4 py-2 text-sm font-medium text-neutral-800"
+                        className="rounded-full bg-neutral-200 px-4 py-2 text-sm font-medium text-neutral-900"
                       >
                         Abrir PDF
                       </a>
                     ) : (
-                      <span className="rounded-full bg-neutral-50 px-4 py-2 text-sm text-neutral-400">
+                      <span className="rounded-full bg-neutral-200 px-4 py-2 text-sm font-medium text-neutral-800">
                         Sem PDF
                       </span>
                     )}
@@ -153,6 +159,7 @@ function FilterChip({
   onClick: () => void;
   children: string;
 }) {
+  const fill = color ?? '#80298F';
   return (
     <button
       type="button"
@@ -160,7 +167,7 @@ function FilterChip({
       className="rounded-full px-4 py-2 text-sm font-medium transition"
       style={
         active
-          ? { backgroundColor: color ?? '#80298F', color: '#fff' }
+          ? { backgroundColor: fill, color: textoSobreFundo(fill) }
           : { backgroundColor: '#fff', color: '#444' }
       }
     >

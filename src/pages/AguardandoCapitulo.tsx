@@ -1,4 +1,5 @@
 import { conteudoUrl } from '../catalog/catalogo';
+import { textoSobreFundo } from '../catalog/contrast';
 import type { CatalogBook, CatalogBrand } from '../catalog/types';
 
 interface AguardandoCapituloProps {
@@ -15,16 +16,20 @@ const STATUS_LABEL: Record<CatalogBook['status'], string> = {
 function AguardandoCapitulo({ book, brand }: AguardandoCapituloProps) {
   const pdfHref = book.fontePdf ? conteudoUrl(book, book.fontePdf) : null;
   const accent = brand?.cor ?? '#80298F';
+  const onAccent = textoSobreFundo(accent);
 
   return (
     <div className="min-h-screen w-full bg-gray-200">
       <div className="mx-auto w-full overflow-visible bg-white shadow-2xl md:max-w-[63%]">
-        <header className="px-8 py-10 text-white" style={{ backgroundColor: accent }}>
-          <p className="mb-3 inline-block rounded-full bg-white/20 px-3 py-1 text-xs font-medium tracking-wide">
+        <header className="px-8 py-10" style={{ backgroundColor: accent, color: onAccent }}>
+          <p
+            className="mb-3 inline-block rounded-full px-3 py-1 text-xs font-medium tracking-wide"
+            style={{ backgroundColor: onAccent === '#ffffff' ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.12)' }}
+          >
             {brand?.nome ?? book.marcaId} · {STATUS_LABEL[book.status]}
           </p>
           <h1 className="text-3xl font-black md:text-4xl">{book.titulo}</h1>
-          {book.subtitulo ? <p className="mt-2 text-white/90">{book.subtitulo}</p> : null}
+          {book.subtitulo ? <p className="mt-2 opacity-80">{book.subtitulo}</p> : null}
         </header>
 
         <div className="space-y-6 p-8 md:p-12" style={{ fontFamily: 'Ubuntu, sans-serif' }}>
