@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
+import { withBase } from '../lib/publicUrl';
 import type { Catalog, CatalogBook, CatalogBrand } from './types';
 
 export function conteudoUrl(book: CatalogBook, relativePath: string): string {
   const clean = relativePath.replace(/^\/+/, '');
-  return `/conteudo/marcas/${book.marcaId}/livros/${book.id}/${clean}`;
+  return withBase(`conteudo/marcas/${book.marcaId}/livros/${book.id}/${clean}`);
 }
 
 export function getBrand(catalogo: Catalog, marcaId: string): CatalogBrand | undefined {
@@ -33,7 +34,7 @@ export function useCatalogo() {
   useEffect(() => {
     let cancelled = false;
 
-    fetch('/conteudo/catalogo.json')
+    fetch(withBase('conteudo/catalogo.json'))
       .then((response) => {
         if (!response.ok) {
           throw new Error('Não foi possível ler o catálogo em ProjetoID_LD.');

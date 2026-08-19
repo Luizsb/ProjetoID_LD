@@ -26,6 +26,22 @@ npm run dev
 
 Abra o endereço do Vite (em geral `http://localhost:5173`).
 
+## Ver no GitHub Pages (sem `npm run dev`)
+
+Depois do merge na `main`, o GitHub Actions gera o site estático.
+
+1. No repositório: **Settings → Pages → Build and deployment**
+2. **Source:** GitHub Actions
+3. Na primeira vez, rode o workflow **GitHub Pages** em **Actions** (ou faça um push na `main`)
+
+Endereço (usuário `Luizsb`, repo `ProjetoID_LD`):
+
+https://luizsb.github.io/ProjetoID_LD/
+
+O catálogo e os PDFs/imagens de `marcas/` entram no `dist/conteudo` no build. O player usa hash (`#/livros/...`), então o Pages funciona sem servidor.
+
+---
+
 - **Biblioteca** — filtro por marca e um card por livro
 - **Ver no player** — livro digital (ou tela de slot, se o capítulo ainda não foi convertido)
 - **Abrir PDF** — PDF-fonte no navegador

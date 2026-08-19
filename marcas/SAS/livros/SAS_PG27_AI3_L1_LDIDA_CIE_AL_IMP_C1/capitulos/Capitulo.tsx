@@ -1,7 +1,7 @@
 // @ld-export-metadata: {"chapterNumber":1,"chapterTitle":"Veja exemplos de hipóteses e de respostas não científicas a algumas perguntas.","startPage":1,"pageCount":18,"componentName":"BookCap01","exportFolderName":"livro_digital_C01"}
 
 import { useState } from 'react';
-import { publicUrl } from '@player/lib/publicUrl';
+import { publicUrl, withBase } from '@player/lib/publicUrl';
 import Poster from '@player/components/Poster';
 import TeacherButton from '@player/components/TeacherButton';
 import Header from '@player/components/Header';
@@ -29,11 +29,12 @@ import Glossario from '@player/components/Glossario';
 import MapaConceitualCientifico from '@player/components/MapaConceitualCientifico';
 import { Question } from '@player/types/questions';
 
-const CAPITULO_ASSETS =
-  '/conteudo/marcas/SAS/livros/SAS_PG27_AI3_L1_LDIDA_CIE_AL_IMP_C1/capitulos/';
-
 function capAsset(pathFromCapitulos: string): string {
-  return encodeURI(`${CAPITULO_ASSETS}${pathFromCapitulos.replace(/^\/+/, '')}`);
+  return encodeURI(
+    withBase(
+      `conteudo/marcas/SAS/livros/SAS_PG27_AI3_L1_LDIDA_CIE_AL_IMP_C1/capitulos/${pathFromCapitulos.replace(/^\/+/, '')}`,
+    ),
+  );
 }
 
 const SHOW_TEACHER_BUTTON = true;

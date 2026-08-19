@@ -80,14 +80,44 @@ function serveConteudo(): Plugin {
   }
 }
 
+function copyConteudoToDist(): Plugin {
+  return {
+    name: 'copy-conteudo-livros',
+    closeBundle() {
+      const dest = path.resolve(rootDir, 'dist', 'conteudo')
+      fs.mkdirSync(dest, { recursive: true })
+      fs.copyFileSync(path.resolve(rootDir, 'catalogo.json'), path.join(dest, 'catalogo.json'))
+
+      const marcasSrc = path.resolve(rootDir, 'marcas')
+      if (fs.existsSync(marcasSrc)) {
+        fs.cpSync(marcasSrc, path.join(dest, 'marcas'), {
+          recursive: true,
+          filter: (source) => !source.toLowerCase().endsWith('.zip'),
+        })
+      }
+
+      fs.writeFileSync(path.resolve(rootDir, 'dist', '.nojekyll'), '')
+    },
+  }
+}
+
+function githubPagesBase(): string {
+  const repo = process.env.GITHUB_REPOSITORY
+  if (!repo) {
+    return '/'
+  }
+  const name = repo.split('/')[1]
+  return name ? `/${name}/` : '/'
+}
+
 export default defineConfig({
-  plugins: [react(), serveConteudo()],
+  plugins: [react(), serveConteudo(), copyConteudoToDist()],
   resolve: {
     alias: {
       '@player': path.resolve(rootDir, 'src'),
     },
   },
-  base: '/',
+  base: githubPagesBase(),
   build: {
     assetsDir: 'assets',
     outDir: 'dist',
