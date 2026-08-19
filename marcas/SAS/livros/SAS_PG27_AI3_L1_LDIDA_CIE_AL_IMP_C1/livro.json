@@ -6,7 +6,7 @@
   "segmento": "AI",
   "ano": "3",
   "capitulo": "C01",
-  "status": "fonte-recebida",
+  "status": "pronto",
   "fontePdf": "fonte/SAS_PG27_AI3_L1_LDIDA_CIE_AL_IMP_C1_miniatura.pdf",
   "playerKey": "sas-pg27-ai3-cie-c1",
   "componente": "capitulos/Capitulo.tsx"

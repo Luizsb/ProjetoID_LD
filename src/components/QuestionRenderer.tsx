@@ -6,6 +6,7 @@ import QuestionTableFill from './QuestionTableFill';
 import QuestionFillBlanks from './QuestionFillBlanks';
 import QuestionOrdering from './QuestionOrdering';
 import QuestionMultipleChoice from './QuestionMultipleChoice';
+import QuestionMultipleSelect from './QuestionMultipleSelect';
 
 interface QuestionRendererProps {
   question?: Question;
@@ -46,6 +47,15 @@ function QuestionRenderer({
     case 'alternative':
       return (
         <QuestionAlternative
+          question={question}
+          userAnswers={userAnswers}
+          onAnswerChange={onAnswerChange}
+          showResults={showResults}
+        />
+      );
+    case 'multiple-select':
+      return (
+        <QuestionMultipleSelect
           question={question}
           userAnswers={userAnswers}
           onAnswerChange={onAnswerChange}

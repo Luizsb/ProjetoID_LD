@@ -82,6 +82,11 @@ function serveConteudo(): Plugin {
 
 export default defineConfig({
   plugins: [react(), serveConteudo()],
+  resolve: {
+    alias: {
+      '@player': path.resolve(rootDir, 'src'),
+    },
+  },
   base: '/',
   build: {
     assetsDir: 'assets',

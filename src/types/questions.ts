@@ -1,10 +1,22 @@
-export type QuestionType = 'multiple-choice' | 'true-false' | 'alternative' | 'text-input' | 'table-fill' | 'fill-blanks' | 'ordering';
+export type QuestionType =
+  | 'multiple-choice'
+  | 'true-false'
+  | 'alternative'
+  | 'multiple-select'
+  | 'text-input'
+  | 'table-fill'
+  | 'fill-blanks'
+  | 'ordering';
 
 export interface MultipleChoiceQuestion {
   id: string;
   type: 'multiple-choice';
   question: string;
   number?: number;
+  /** Letra do item no impresso (ex.: A, B). */
+  letter?: string;
+  /** Texto do professor, quando não é a alternativa marcada. */
+  teacherAnswer?: string;
   options: {
     a: string;
     b: string;
@@ -35,7 +47,17 @@ export interface AlternativeQuestion {
   question: string;
   options: string[];
   correctAnswer: number;
-  number?: number; // Número da questão (ex: 3, 4, 5...)
+  number?: number;
+}
+
+export interface MultipleSelectQuestion {
+  id: string;
+  type: 'multiple-select';
+  question: string;
+  options: string[];
+  correctAnswer: number[];
+  number?: number;
+  columns?: number;
 }
 
 export interface TextInputQuestion {
@@ -53,9 +75,11 @@ export interface TextInputQuestion {
     placeholder?: string;
     correctAnswer?: string;
     subItems?: Array<{
-      label: string; // Rótulo da subquestão aninhada (ex: 'Situação inicial', 'Conflito', 'Desfecho')
+      label: string;
       placeholder?: string;
       correctAnswer?: string;
+      /** Campo redondo para H/NC (SAS). */
+      circleInput?: boolean;
     }>;
   }>;
   embeddedContent?: string; // Conteúdo a ser exibido em uma caixa (ex: versos do poema)
@@ -113,13 +137,14 @@ export type Question =
   | MultipleChoiceQuestion
   | TrueFalseQuestion
   | AlternativeQuestion
+  | MultipleSelectQuestion
   | TextInputQuestion
   | TableFillQuestion
   | FillBlanksQuestion
   | OrderingQuestion;
 
 export interface UserAnswers {
-  [questionId: string]: string | number | boolean;
+  [questionId: string]: string | number | boolean | number[];
 }
 
 export interface QuestionResult {

@@ -35,7 +35,7 @@ function QuestionTextInput({
         {/* Título principal com número */}
         <p className="mb-4">
           {question.number !== undefined && (
-            <span style={{ color: '#80298F', fontWeight: 'bold' }}>{question.number}. </span>
+            <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{question.number}. </span>
           )}
           <span style={{ color: 'black' }} dangerouslySetInnerHTML={{ __html: question.question }} />
         </p>
@@ -49,19 +49,37 @@ function QuestionTextInput({
             return (
               <div key={subQ.letter} className="mb-4">
                 <p className="mb-2">
-                  <span style={{ color: '#80298F', fontWeight: 'bold' }}>{subQ.letter}) </span>
+                  <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{subQ.letter}) </span>
                   <span style={{ color: 'black' }}>{subQ.question}</span>
                 </p>
                 
                 {/* Subquestões aninhadas (com bullets) */}
                 {subQ.subItems && subQ.subItems.length > 0 ? (
-                  <ul className="space-y-3 mt-3 question-subitems" style={{ paddingLeft: '1.5rem', listStyleType: 'disc' }}>
+                  <div className="mt-3 space-y-2">
                     {subQ.subItems.map((subItem, index) => {
                       const subItemId = `${subQuestionId}_${index}`;
                       const subItemAnswer = (userAnswers[subItemId] as string) || '';
-                      
+
+                      if (subItem.circleInput) {
+                        return (
+                          <div key={index} className="mb-2 flex items-start gap-2">
+                            <input
+                              type="text"
+                              maxLength={2}
+                              value={subItemAnswer}
+                              onChange={(e) => onAnswerChange(subItemId, e.target.value.toUpperCase())}
+                              placeholder=""
+                              disabled={showResults}
+                              className="hnc-circle"
+                              aria-label={subItem.label}
+                            />
+                            <span className="pt-1 text-black">{subItem.label}</span>
+                          </div>
+                        );
+                      }
+
                       return (
-                        <li key={index} className="mb-3">
+                        <div key={index} className="mb-3">
                           <p className="mb-2" style={{ color: 'black' }}>
                             {subItem.label}
                           </p>
@@ -70,25 +88,25 @@ function QuestionTextInput({
                             onChange={(e) => onAnswerChange(subItemId, e.target.value)}
                             placeholder={subItem.placeholder || 'Digite aqui...'}
                             disabled={showResults}
-                            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-y min-h-[60px] text-black font-myriad-vf"
+                            className="min-h-[60px] w-full resize-y rounded-lg border border-gray-300 p-3 font-myriad-vf text-black focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
                           />
                           {showResults && subItem.correctAnswer && (
-                            <div className="mt-2 p-2 bg-gray-100 rounded text-sm">
-                              <p className="font-semibold text-gray-700 mb-1">Resposta esperada:</p>
+                            <div className="mt-2 rounded bg-gray-100 p-2 text-sm">
+                              <p className="mb-1 font-semibold text-gray-700">Resposta esperada:</p>
                               <p className="text-gray-600">{subItem.correctAnswer}</p>
                             </div>
                           )}
-                        </li>
+                        </div>
                       );
                     })}
-                  </ul>
+                  </div>
                 ) : (
                   <textarea
                     value={subUserAnswer}
                     onChange={(e) => onAnswerChange(subQuestionId, e.target.value)}
                     placeholder={subQ.placeholder || 'Digite aqui...'}
                     disabled={showResults}
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-y min-h-[80px] text-black font-myriad-vf"
+                    className="mt-2 block h-[31px] w-[765px] max-w-full rounded-[5px] bg-[rgba(221,221,221,0.50)] px-3 pt-1 text-left text-[14px] font-normal leading-normal text-[#000000] placeholder:text-[#BDBDBD] font-myriad-vf focus:outline-none resize-none"
                   />
                 )}
                 
@@ -113,10 +131,10 @@ function QuestionTextInput({
   if (question.listDiscLayout) {
     return (
       <div className="mb-6 rounded-lg">
-        <ul className="list-disc marker:text-[#80298F] ml-6">
+        <ul className="list-disc ml-6">
           <li className="text-black">
             {question.number !== undefined && (
-              <span className="font-bold text-[#80298F]">{question.number}. </span>
+              <span className="question-number font-bold" style={{ color: 'var(--question-number-color, #80298F)' }}>{question.number}. </span>
             )}
             <span dangerouslySetInnerHTML={{ __html: question.question }} />
             <textarea
@@ -142,7 +160,7 @@ function QuestionTextInput({
     <div className="mb-6 rounded-lg">
       <p className="mb-4">
         {question.number !== undefined && (
-          <span style={{ color: '#80298F', fontWeight: 'bold' }}>{question.number}. </span>
+          <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{question.number}. </span>
         )}
         <span style={{ color: 'black' }} dangerouslySetInnerHTML={{ __html: question.question }} />
       </p>

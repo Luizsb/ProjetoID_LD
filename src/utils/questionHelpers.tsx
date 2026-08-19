@@ -8,38 +8,31 @@ export function renderQuestionAnswer(question: Question): React.ReactNode {
   if (question.type === 'text-input') {
     // Se tiver subquestões, renderiza cada uma
     if (question.subQuestions && question.subQuestions.length > 0) {
-      return question.subQuestions.map((subQ) => {
+      return question.subQuestions.map((subQ, index) => {
         // Se tiver subItems, renderiza com bullets
         if (subQ.subItems && subQ.subItems.length > 0) {
+          const answers = subQ.subItems.map((item) => item.correctAnswer || '').join('; ');
           return (
-            <div key={subQ.letter} className="mb-4">
-              <p className="mb-2">
-                {question.number !== undefined && (
-                  <span style={{ color: '#80298F', fontWeight: 'bold' }}>{question.number}. </span>
-                )}
-                <span style={{ color: '#80298F', fontWeight: 'bold' }}>{subQ.letter}) </span>
-                <span style={{ color: 'black' }}>{subQ.question}</span>
-              </p>
-              <ul className="question-subitems" style={{ paddingLeft: '1.5rem', listStyleType: 'disc' }}>
-                {subQ.subItems.map((subItem, index) => (
-                  <li key={index} className="mb-2">
-                    <p className="mb-1">
-                      <span style={{ color: 'black' }}>{subItem.label}: </span>
-                      <span dangerouslySetInnerHTML={{ __html: subItem.correctAnswer || '' }} />
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <p key={subQ.letter} className="mb-2">
+              {question.number !== undefined && (
+                <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>
+                  {question.number}.{' '}
+                </span>
+              )}
+              <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>
+                {subQ.letter}){' '}
+              </span>
+              <span>{answers}</span>
+            </p>
           );
         }
         // Se não tiver subItems, renderiza normalmente
         return (
           <p key={subQ.letter} className="mb-3">
-            {question.number !== undefined && (
-              <span style={{ color: '#80298F', fontWeight: 'bold' }}>{question.number}. </span>
+            {index === 0 && question.number !== undefined && (
+              <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{question.number}. </span>
             )}
-            <span style={{ color: '#80298F', fontWeight: 'bold' }}>{subQ.letter}) </span>
+            <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{subQ.letter}) </span>
             <span dangerouslySetInnerHTML={{ __html: subQ.correctAnswer || '' }} />
           </p>
         );
@@ -49,10 +42,10 @@ export function renderQuestionAnswer(question: Question): React.ReactNode {
     if (question.correctAnswer) {
       if (question.listDiscLayout) {
         return (
-          <ul className="list-disc marker:text-[#80298F] ml-6 mb-3">
+          <ul className="list-disc ml-6 mb-3">
             <li className="text-black">
               {question.number !== undefined && (
-                <span className="font-bold text-[#80298F]">{question.number}. </span>
+                <span className="question-number font-bold" style={{ color: 'var(--question-number-color, #80298F)' }}>{question.number}. </span>
               )}
               <span dangerouslySetInnerHTML={{ __html: question.correctAnswer }} />
             </li>
@@ -62,7 +55,7 @@ export function renderQuestionAnswer(question: Question): React.ReactNode {
       return (
         <p className="mb-3">
           {question.number !== undefined && (
-            <span style={{ color: '#80298F', fontWeight: 'bold' }}>{question.number}. </span>
+            <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{question.number}. </span>
           )}
           <span dangerouslySetInnerHTML={{ __html: question.correctAnswer }} />
         </p>
@@ -81,9 +74,9 @@ export function renderQuestionAnswer(question: Question): React.ReactNode {
         return (
           <p key={stmt.letter} className="mb-3">
             {question.number !== undefined && (
-              <span style={{ color: '#80298F', fontWeight: 'bold' }}>{question.number}. </span>
+              <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{question.number}. </span>
             )}
-            <span style={{ color: '#80298F', fontWeight: 'bold' }}>{stmt.letter}) </span>
+            <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{stmt.letter}) </span>
             <span dangerouslySetInnerHTML={{ __html: answerText }} />
           </p>
         );
@@ -94,7 +87,7 @@ export function renderQuestionAnswer(question: Question): React.ReactNode {
       return (
         <p className="mb-3">
           {question.number !== undefined && (
-            <span style={{ color: '#80298F', fontWeight: 'bold' }}>{question.number}. </span>
+            <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{question.number}. </span>
           )}
           <span>{question.correctAnswer ? 'Verdadeiro' : 'Falso'}</span>
         </p>
@@ -108,22 +101,36 @@ export function renderQuestionAnswer(question: Question): React.ReactNode {
     return (
       <p className="mb-3">
         {question.number !== undefined && (
-          <span style={{ color: '#80298F', fontWeight: 'bold' }}>{question.number}. </span>
+          <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{question.number}. </span>
         )}
-        <span style={{ color: '#80298F', fontWeight: 'bold' }}>{correctLetter}) </span>
+        <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{correctLetter}) </span>
         <span dangerouslySetInnerHTML={{ __html: correctOption || '' }} />
       </p>
     );
   }
 
-  if (question.type === 'multiple-choice') {
+  if (question.type === 'multiple-select') {
+    const labels = question.correctAnswer.map((index) => question.options[index]).join(', ');
     return (
       <p className="mb-3">
         {question.number !== undefined && (
-          <span style={{ color: '#80298F', fontWeight: 'bold' }}>{question.number}. </span>
+          <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{question.number}. </span>
         )}
-        <span style={{ color: '#80298F', fontWeight: 'bold' }}>{question.correctAnswer.toUpperCase()}) </span>
-        <span>{question.options[question.correctAnswer]}</span>
+        <span>{labels}</span>
+      </p>
+    );
+  }
+
+  if (question.type === 'multiple-choice') {
+    const letter = question.letter ?? question.correctAnswer.toUpperCase();
+    const answer = question.teacherAnswer ?? question.options[question.correctAnswer];
+    return (
+      <p className="mb-3">
+        {question.number !== undefined && (
+          <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{question.number}. </span>
+        )}
+        <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{letter}. </span>
+        <span dangerouslySetInnerHTML={{ __html: answer }} />
       </p>
     );
   }
@@ -136,7 +143,7 @@ export function renderQuestionAnswer(question: Question): React.ReactNode {
           <>
             <p className="mb-2 font-semibold">
               {question.number !== undefined && (
-                <span style={{ color: '#80298F', fontWeight: 'bold' }}>{question.number}. </span>
+                <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{question.number}. </span>
               )}
               Tabela:
             </p>
@@ -174,7 +181,7 @@ export function renderQuestionAnswer(question: Question): React.ReactNode {
             <p className="mb-2 mt-4 font-semibold">Subquestões:</p>
             {question.subQuestions.map((subQ) => (
               <p key={subQ.letter} className="mb-3">
-                <span style={{ color: '#80298F', fontWeight: 'bold' }}>{subQ.letter}) </span>
+                <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{subQ.letter}) </span>
                 <span dangerouslySetInnerHTML={{ __html: subQ.correctAnswer || '' }} />
               </p>
             ))}
@@ -189,14 +196,14 @@ export function renderQuestionAnswer(question: Question): React.ReactNode {
       <div className="mb-3">
         <p className="mb-2">
           {question.number !== undefined && (
-            <span style={{ color: '#80298F', fontWeight: 'bold' }}>{question.number}. </span>
+            <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{question.number}. </span>
           )}
           <span dangerouslySetInnerHTML={{ __html: question.question }} />
         </p>
         <ul className="list-none ml-0 space-y-2">
           {question.items.map((item) => (
             <li key={item.letter}>
-              <span style={{ color: '#80298F', fontWeight: 'bold' }}>{item.letter}) </span>
+              <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{item.letter}) </span>
               {item.correctAnswers?.length ? (
                 <span>{item.correctAnswers.join(' | ')}</span>
               ) : (
@@ -214,14 +221,14 @@ export function renderQuestionAnswer(question: Question): React.ReactNode {
       <div className="mb-3">
         <p className="mb-2">
           {question.number !== undefined && (
-            <span style={{ color: '#80298F', fontWeight: 'bold' }}>{question.number}. </span>
+            <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{question.number}. </span>
           )}
           <span dangerouslySetInnerHTML={{ __html: question.question }} />
         </p>
         <ul className="list-none ml-8 space-y-2">
           {question.items.map((item) => (
             <li key={item.id}>
-              <span style={{ color: '#80298F', fontWeight: 'bold' }}>{item.correctOrder}. </span>
+              <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{item.correctOrder}. </span>
               <span>{item.text}</span>
             </li>
           ))}

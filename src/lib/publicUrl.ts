@@ -3,6 +3,9 @@
  * (dev `/`, produção `/livro-bett/`, Electron `/`).
  */
 export function publicUrl(pathFromPublic: string): string {
+  if (/^(https?:)?\/\//.test(pathFromPublic) || pathFromPublic.startsWith('/conteudo/')) {
+    return pathFromPublic;
+  }
   const p = pathFromPublic.replace(/^\/+/, '');
   const base = import.meta.env.BASE_URL || '/';
   if (base === '/') return `/${p}`;

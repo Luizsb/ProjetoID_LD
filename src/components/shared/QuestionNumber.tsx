@@ -1,5 +1,3 @@
-import { COLORS } from '../../constants/colors';
-
 interface QuestionNumberProps {
   number?: number;
   letter?: string;
@@ -12,7 +10,7 @@ interface QuestionNumberProps {
 export function QuestionNumber({ number, letter, className = '' }: QuestionNumberProps) {
   if (number !== undefined) {
     return (
-      <span style={{ color: COLORS.primary, fontWeight: 'bold' }} className={className}>
+      <span className={`question-number ${className}`} style={{ color: 'var(--question-number-color, #00776E)', fontWeight: 'bold' }}>
         {number}.{' '}
       </span>
     );
@@ -20,7 +18,7 @@ export function QuestionNumber({ number, letter, className = '' }: QuestionNumbe
 
   if (letter) {
     return (
-      <span style={{ color: COLORS.primary, fontWeight: 'bold' }} className={className}>
+      <span className={`question-number ${className}`} style={{ color: 'var(--question-number-color, #00776E)', fontWeight: 'bold' }}>
         {letter}){' '}
       </span>
     );

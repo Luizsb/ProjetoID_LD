@@ -1,10 +1,11 @@
 import { MultipleChoiceQuestion, UserAnswers } from '../types/questions';
 import { QuestionWrapper } from './shared/QuestionWrapper';
-import { COLORS, FONTS } from '../constants/colors';
 
 type ChoiceKey = 'a' | 'b' | 'c';
 
 const KEYS: ChoiceKey[] = ['a', 'b', 'c'];
+const MARK = '#ea8244';
+const RING = '#2aa3a0';
 
 interface QuestionMultipleChoiceProps {
   question: MultipleChoiceQuestion;
@@ -20,64 +21,45 @@ function QuestionMultipleChoice({
   showResults = false,
 }: QuestionMultipleChoiceProps) {
   const selectedAnswer = userAnswers[question.id] as ChoiceKey | undefined;
-  const isCorrect = selectedAnswer === question.correctAnswer;
 
   return (
     <QuestionWrapper
       number={question.number}
       question={question.question}
-      className="p-4 rounded-lg"
+      useHTML
+      className="px-0"
     >
-      <div className="space-y-3">
-        {KEYS.map((key) => {
-          const label = String.fromCharCode(97 + KEYS.indexOf(key));
+      <div className="space-y-2.5">
+        {KEYS.filter((key) => question.options[key]).map((key) => {
+          const isOn = selectedAnswer === key;
           return (
-            <label
-              key={key}
-              className={`flex cursor-pointer items-center gap-3 rounded p-3 transition-colors ${
-                selectedAnswer === key
-                  ? 'border-l-4 border-blue-600 bg-blue-100'
-                  : 'bg-white hover:bg-blue-50'
-              } ${
-                showResults && selectedAnswer === key
-                  ? isCorrect
-                    ? 'border-l-4 border-green-600 bg-green-50'
-                    : 'border-l-4 border-red-600 bg-red-50'
-                  : ''
-              }`}
-            >
+            <label key={key} className="flex cursor-pointer items-start gap-2.5 select-none">
               <input
                 type="radio"
                 name={question.id}
                 value={key}
-                checked={selectedAnswer === key}
+                checked={isOn}
                 onChange={() => onAnswerChange(question.id, key)}
-                className="h-4 w-4"
+                className="sr-only"
                 disabled={showResults}
               />
-              <span style={{ fontFamily: FONTS.primary, color: COLORS.text.primary }}>
-                <span style={{ color: COLORS.primary, fontWeight: 'bold' }}>{label}) </span>
-                {question.options[key]}
+              <span
+                className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-[1.5px] bg-white text-[13px] font-bold leading-none"
+                style={{ borderColor: RING, color: MARK }}
+                aria-hidden
+              >
+                {isOn ? 'X' : ''}
               </span>
-              {showResults && selectedAnswer === key && (
-                <span
-                  className={`ml-auto text-sm font-semibold ${
-                    isCorrect ? 'text-green-600' : 'text-red-600'
-                  }`}
-                >
-                  {isCorrect ? '✓ Correto' : '✗ Incorreto'}
-                </span>
-              )}
+              <span className="text-[16px] leading-[150%] text-neutral-800">{question.options[key]}</span>
             </label>
           );
         })}
       </div>
-      {showResults && selectedAnswer !== question.correctAnswer && (
+      {showResults && selectedAnswer !== question.correctAnswer ? (
         <p className="mt-3 text-sm text-red-600">
-          Resposta correta:{' '}
-          <strong>{question.options[question.correctAnswer]}</strong>
+          Resposta correta: <strong>{question.options[question.correctAnswer]}</strong>
         </p>
-      )}
+      ) : null}
     </QuestionWrapper>
   );
 }

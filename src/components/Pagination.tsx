@@ -7,9 +7,6 @@ interface PaginationProps {
 }
 
 function Pagination({ currentPage, expandToBookColumn = false }: PaginationProps) {
-  const page4Plus = currentPage >= 4;
-  const page4Padding = page4Plus ? 'pt-[25px] pb-[25px]' : '';
-
   const bar = (
     <div
       data-page={currentPage}
@@ -21,20 +18,19 @@ function Pagination({ currentPage, expandToBookColumn = false }: PaginationProps
     </div>
   );
 
-  const inner =
-    expandToBookColumn ? (
+  if (!expandToBookColumn) {
+    return bar;
+  }
+
+  const midChapterSpacing = currentPage >= 4 ? 'pt-[25px] pb-[25px]' : '';
+
+  return (
+    <div className={midChapterSpacing || undefined}>
       <div className="-mx-8 flex w-[calc(100%+4rem)] max-w-none shrink-0 justify-center md:-mx-12 md:w-[calc(100%+6rem)]">
         {bar}
       </div>
-    ) : (
-      bar
-    );
-
-  if (page4Padding) {
-    return <div className={page4Padding}>{inner}</div>;
-  }
-
-  return inner;
+    </div>
+  );
 }
 
 export default Pagination;
