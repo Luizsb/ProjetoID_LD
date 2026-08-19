@@ -97,15 +97,16 @@ ProjetoID_LD/
 
 ## Git — trabalhar em conjunto
 
-Repositório: [https://github.com/Luizsb/ProjetoID_LD](https://github.com/Luizsb/ProjetoID_LD)
+O guia visual entra no Git com o restante do projeto.
 
-### 1. Convidar a colega (só o dono do repo)
+**Acesso rápido (depois de `npm run dev`):** http://localhost:5173/#/guia  
+Na biblioteca, o botão **Como trabalhar em conjunto** abre a mesma página.
 
-No GitHub: **Settings → Collaborators → Add people**. Ela aceita o convite no e-mail.
+Cópia no repositório: `docs/trabalho-em-conjunto.canvas.tsx`
 
-Permissão **Write** (pode dar push). Sem isso ela só vê, não sobe alteração.
+Repositório: https://github.com/Luizsb/ProjetoID_LD
 
-### 2. Primeiro clone (cada pessoa)
+### Primeira vez no projeto
 
 ```bash
 git clone https://github.com/Luizsb/ProjetoID_LD.git
@@ -114,16 +115,16 @@ npm install
 npm run dev
 ```
 
-### 3. Rotina no dia a dia
+### Rotina no dia a dia
 
-Antes de mexer, atualize o que a outra pessoa já subiu:
+Antes de mexer:
 
 ```bash
 git checkout main
 git pull origin main
 ```
 
-Trabalhe numa **branch** (evita um sobrescrever o outro na `main`):
+Uma tarefa = uma branch:
 
 ```bash
 git checkout -b feat/nome-curto-da-tarefa
@@ -139,14 +140,14 @@ git pull origin main
 git push -u origin feat/nome-curto-da-tarefa
 ```
 
-No GitHub, abra um **Pull Request** da branch para `main`. A outra pessoa revisa e faz merge. Depois:
+No GitHub, abra um **Pull Request** da branch para `main`. Depois do merge:
 
 ```bash
 git checkout main
 git pull origin main
 ```
 
-Se os dois editarem o mesmo arquivo, o `git pull` pode pedir para resolver conflito. Ajustem o arquivo, depois:
+Se o `git pull` apontar conflito, ajustem o arquivo e:
 
 ```bash
 git add .

@@ -1,5 +1,6 @@
 import Catalogo from './pages/Catalogo';
 import LivroViewer from './pages/LivroViewer';
+import GuiaGit from './pages/GuiaGit';
 import { useHashRoute } from './catalog/useHashRoute';
 
 function App() {
@@ -7,6 +8,10 @@ function App() {
 
   if (route.name === 'book') {
     return <LivroViewer bookId={route.bookId} />;
+  }
+
+  if (route.name === 'guia') {
+    return <GuiaGit />;
   }
 
   return <Catalogo />;

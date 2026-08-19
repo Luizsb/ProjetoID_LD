@@ -29,8 +29,8 @@
     {
       "id": "CONQUISTA",
       "nome": "Conquista",
-      "cor": "#C2410C",
-      "corAcento": "#FDBA74"
+      "cor": "#f8b9cb",
+      "corAcento": "#fff5f8"
     }
   ],
   "livros": [

@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { conteudoUrl, getBrand, useCatalogo } from '../catalog/catalogo';
-import { bookHref } from '../catalog/useHashRoute';
+import { bookHref, guiaHref } from '../catalog/useHashRoute';
 import type { CatalogBook } from '../catalog/types';
 
 const STATUS_LABEL: Record<CatalogBook['status'], string> = {
@@ -41,6 +41,12 @@ function Catalogo() {
         <p className="mb-2 text-sm font-medium tracking-wide text-[#F4C2FF]">Novo modelo · ID</p>
         <h1 className="text-3xl font-black md:text-4xl">{catalogo.titulo}</h1>
         <p className="mt-3 max-w-2xl text-white/90">{catalogo.descricao}</p>
+        <a
+          href={guiaHref()}
+          className="mt-6 inline-block rounded-full bg-white px-4 py-2 text-sm font-medium text-[#80298F]"
+        >
+          Como trabalhar em conjunto
+        </a>
       </header>
 
       <main className="mx-auto max-w-6xl px-6 py-8 md:px-12">

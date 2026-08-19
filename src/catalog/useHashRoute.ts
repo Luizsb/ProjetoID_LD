@@ -2,11 +2,16 @@ import { useEffect, useState } from 'react';
 
 export type AppRoute =
   | { name: 'catalog' }
-  | { name: 'book'; bookId: string };
+  | { name: 'book'; bookId: string }
+  | { name: 'guia' };
 
 function parseHash(hash: string): AppRoute {
   const path = hash.replace(/^#/, '').replace(/^\/+/, '');
   const parts = path.split('/').filter(Boolean);
+
+  if (parts[0] === 'guia') {
+    return { name: 'guia' };
+  }
 
   if (parts[0] === 'livros' && parts[1]) {
     return { name: 'book', bookId: decodeURIComponent(parts[1]) };
@@ -33,4 +38,8 @@ export function catalogHref(): string {
 
 export function bookHref(bookId: string): string {
   return `#/livros/${encodeURIComponent(bookId)}`;
+}
+
+export function guiaHref(): string {
+  return '#/guia';
 }
