@@ -1,0 +1,13 @@
+{
+  "id": "SAE_AT27_AI4_V1_LDIDA_MAT_AL_IMP_C03",
+  "marcaId": "SAE",
+  "titulo": "Matemática — 4º ano",
+  "disciplina": "Matemática",
+  "segmento": "AI",
+  "ano": "4",
+  "capitulo": "C03",
+  "status": "fonte-recebida",
+  "fontePdf": "fonte/SAE_AT27_AI4_V1_LDIDA_MAT_AL_IMP_C03.pdf",
+  "playerKey": "sae-at27-ai4-mat-c03",
+  "componente": "capitulos/Capitulo.tsx"
+}

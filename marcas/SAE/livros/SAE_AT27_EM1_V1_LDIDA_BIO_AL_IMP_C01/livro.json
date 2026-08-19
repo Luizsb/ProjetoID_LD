@@ -1,0 +1,13 @@
+{
+  "id": "SAE_AT27_EM1_V1_LDIDA_BIO_AL_IMP_C01",
+  "marcaId": "SAE",
+  "titulo": "Biologia — 1ª série",
+  "disciplina": "Biologia",
+  "segmento": "EM",
+  "ano": "1",
+  "capitulo": "C01",
+  "status": "fonte-recebida",
+  "fontePdf": "fonte/SAE_AT27_EM1_V1_LDIDA_BIO_AL_IMP_C01.pdf",
+  "playerKey": "sae-at27-em1-bio-c01",
+  "componente": "capitulos/Capitulo.tsx"
+}

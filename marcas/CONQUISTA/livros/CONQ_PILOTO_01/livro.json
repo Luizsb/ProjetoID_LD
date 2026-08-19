@@ -1,0 +1,8 @@
+{
+  "id": "CONQ_PILOTO_01",
+  "marcaId": "CONQUISTA",
+  "titulo": "Livro piloto Conquista",
+  "status": "aguardando",
+  "playerKey": "conq-piloto-01",
+  "componente": "capitulos/Capitulo.tsx"
+}

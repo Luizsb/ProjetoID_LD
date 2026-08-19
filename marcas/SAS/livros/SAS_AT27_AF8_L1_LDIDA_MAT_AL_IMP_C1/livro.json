@@ -1,0 +1,13 @@
+{
+  "id": "SAS_AT27_AF8_L1_LDIDA_MAT_AL_IMP_C1",
+  "marcaId": "SAS",
+  "titulo": "Matemática — 8º ano",
+  "disciplina": "Matemática",
+  "segmento": "AF",
+  "ano": "8",
+  "capitulo": "C01",
+  "status": "fonte-recebida",
+  "fontePdf": "fonte/SAS_AT27_AF8_L1_LDIDA_MAT_AL_IMP_C1_miniatura.pdf",
+  "playerKey": "sas-at27-af8-mat-c1",
+  "componente": "capitulos/Capitulo.tsx"
+}

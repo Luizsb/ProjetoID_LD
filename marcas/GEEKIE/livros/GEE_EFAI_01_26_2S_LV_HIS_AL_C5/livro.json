@@ -1,0 +1,16 @@
+{
+  "id": "GEE_EFAI_01_26_2S_LV_HIS_AL_C5",
+  "marcaId": "GEEKIE",
+  "titulo": "História — 1º ano · 2º semestre",
+  "disciplina": "História",
+  "segmento": "AI",
+  "ano": "1",
+  "colecao": "2026",
+  "volume": "2S",
+  "publico": "AL",
+  "capitulo": "C05",
+  "status": "fonte-recebida",
+  "fontePdf": "fonte/GEE_EFAI_01_26_2S_LV_HIS_AL_C5.pdf",
+  "playerKey": "gee-efai-01-his-c5",
+  "componente": "capitulos/Capitulo.tsx"
+}

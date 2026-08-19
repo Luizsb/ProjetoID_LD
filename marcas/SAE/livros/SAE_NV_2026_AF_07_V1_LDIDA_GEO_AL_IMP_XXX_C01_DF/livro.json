@@ -1,0 +1,13 @@
+{
+  "id": "SAE_NV_2026_AF_07_V1_LDIDA_GEO_AL_IMP_XXX_C01_DF",
+  "marcaId": "SAE",
+  "titulo": "Geografia — 7º ano",
+  "disciplina": "Geografia",
+  "segmento": "AF",
+  "ano": "7",
+  "capitulo": "C01",
+  "status": "fonte-recebida",
+  "fontePdf": "fonte/SAE_NV_2026_AF_07_V1_LDIDA_GEO_AL_IMP_XXX_C01_DF.pdf",
+  "playerKey": "sae-nv2026-af7-geo-c01",
+  "componente": "capitulos/Capitulo.tsx"
+}

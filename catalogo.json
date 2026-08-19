@@ -1,0 +1,141 @@
+{
+  "titulo": "Livros digitais — novo modelo",
+  "descricao": "Catálogo de testes das marcas SAE, Geekie, SAS e Conquista no player compartilhado.",
+  "playerReferencia": {
+    "id": "PLAYER_REFERENCIA",
+    "titulo": "Construção atual do player",
+    "subtitulo": "Capítulo já montado na UI — use para comparar com os PDFs piloto",
+    "playerKey": "player-referencia"
+  },
+  "marcas": [
+    {
+      "id": "SAE",
+      "nome": "SAE",
+      "cor": "#80298F",
+      "corAcento": "#F4C2FF"
+    },
+    {
+      "id": "GEEKIE",
+      "nome": "Geekie",
+      "cor": "#0F766E",
+      "corAcento": "#99F6E4"
+    },
+    {
+      "id": "SAS",
+      "nome": "SAS",
+      "cor": "#1B4B8A",
+      "corAcento": "#8EC5FF"
+    },
+    {
+      "id": "CONQUISTA",
+      "nome": "Conquista",
+      "cor": "#C2410C",
+      "corAcento": "#FDBA74"
+    }
+  ],
+  "livros": [
+    {
+      "id": "SAE_AT27_AI4_V1_LDIDA_MAT_AL_IMP_C03",
+      "marcaId": "SAE",
+      "titulo": "Matemática — 4º ano",
+      "subtitulo": "Anos iniciais · Livro do aluno · Capítulo 3",
+      "disciplina": "Matemática",
+      "segmento": "AI",
+      "ano": "4º ano",
+      "capitulo": "C03",
+      "status": "fonte-recebida",
+      "fontePdf": "fonte/SAE_AT27_AI4_V1_LDIDA_MAT_AL_IMP_C03.pdf",
+      "playerKey": "sae-at27-ai4-mat-c03"
+    },
+    {
+      "id": "SAE_NV_2026_AF_07_V1_LDIDA_GEO_AL_IMP_XXX_C01_DF",
+      "marcaId": "SAE",
+      "titulo": "Geografia — 7º ano",
+      "subtitulo": "Anos finais · Livro do aluno · Capítulo 1 (DF)",
+      "disciplina": "Geografia",
+      "segmento": "AF",
+      "ano": "7º ano",
+      "capitulo": "C01",
+      "status": "fonte-recebida",
+      "fontePdf": "fonte/SAE_NV_2026_AF_07_V1_LDIDA_GEO_AL_IMP_XXX_C01_DF.pdf",
+      "playerKey": "sae-nv2026-af7-geo-c01"
+    },
+    {
+      "id": "SAE_AT27_EM1_V1_LDIDA_BIO_AL_IMP_C01",
+      "marcaId": "SAE",
+      "titulo": "Biologia — 1ª série",
+      "subtitulo": "Ensino médio · Livro do aluno · Capítulo 1",
+      "disciplina": "Biologia",
+      "segmento": "EM",
+      "ano": "1ª série",
+      "capitulo": "C01",
+      "status": "fonte-recebida",
+      "fontePdf": "fonte/SAE_AT27_EM1_V1_LDIDA_BIO_AL_IMP_C01.pdf",
+      "playerKey": "sae-at27-em1-bio-c01"
+    },
+    {
+      "id": "GEE_EFAI_01_26_2S_LV_HIS_AL_C5",
+      "marcaId": "GEEKIE",
+      "titulo": "História — 1º ano · 2º semestre",
+      "subtitulo": "Anos iniciais · Livro do aluno · Capítulo 5",
+      "disciplina": "História",
+      "segmento": "AI",
+      "ano": "1º ano",
+      "capitulo": "C05",
+      "status": "fonte-recebida",
+      "fontePdf": "fonte/GEE_EFAI_01_26_2S_LV_HIS_AL_C5.pdf",
+      "playerKey": "gee-efai-01-his-c5"
+    },
+    {
+      "id": "SAS_PG27_AI3_L1_LDIDA_CIE_AL_IMP_C1",
+      "marcaId": "SAS",
+      "titulo": "Ciências — 3º ano",
+      "subtitulo": "Anos iniciais · Livro do aluno · Capítulo 1 (miniatura)",
+      "disciplina": "Ciências",
+      "segmento": "AI",
+      "ano": "3º ano",
+      "capitulo": "C01",
+      "status": "fonte-recebida",
+      "fontePdf": "fonte/SAS_PG27_AI3_L1_LDIDA_CIE_AL_IMP_C1_miniatura.pdf",
+      "playerKey": "sas-pg27-ai3-cie-c1"
+    },
+    {
+      "id": "SAS_AT27_AF8_L1_LDIDA_MAT_AL_IMP_C1",
+      "marcaId": "SAS",
+      "titulo": "Matemática — 8º ano",
+      "subtitulo": "Anos finais · Livro do aluno · Capítulo 1 (miniatura)",
+      "disciplina": "Matemática",
+      "segmento": "AF",
+      "ano": "8º ano",
+      "capitulo": "C01",
+      "status": "fonte-recebida",
+      "fontePdf": "fonte/SAS_AT27_AF8_L1_LDIDA_MAT_AL_IMP_C1_miniatura.pdf",
+      "playerKey": "sas-at27-af8-mat-c1"
+    },
+    {
+      "id": "SAS_PG27_EM1_V1_LDIDA_LIT_AL_IMP_C1",
+      "marcaId": "SAS",
+      "titulo": "Literatura — 1ª série",
+      "subtitulo": "Ensino médio · Livro do aluno · Capítulo 1 (miniatura)",
+      "disciplina": "Literatura",
+      "segmento": "EM",
+      "ano": "1ª série",
+      "capitulo": "C01",
+      "status": "fonte-recebida",
+      "fontePdf": "fonte/SAS_PG27_EM1_V1_LDIDA_LIT_AL_IMP_C1_MINIATURA.pdf",
+      "playerKey": "sas-pg27-em1-lit-c1"
+    },
+    {
+      "id": "CONQ_PILOTO_01",
+      "marcaId": "CONQUISTA",
+      "titulo": "Livro piloto Conquista",
+      "subtitulo": "Aguardando PDF-fonte",
+      "disciplina": "A definir",
+      "segmento": "A definir",
+      "ano": "A definir",
+      "capitulo": "",
+      "status": "aguardando",
+      "playerKey": "conq-piloto-01"
+    }
+  ]
+}

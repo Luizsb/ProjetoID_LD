@@ -1,0 +1,13 @@
+{
+  "id": "MARCA_CODIGO_DO_LIVRO",
+  "marcaId": "SAE",
+  "titulo": "Título editorial",
+  "disciplina": "História",
+  "segmento": "EFAI",
+  "ano": "1",
+  "capitulo": "C01",
+  "status": "aguardando",
+  "fontePdf": "fonte/arquivo.pdf",
+  "playerKey": "marca-codigo-do-livro",
+  "componente": "capitulos/Capitulo.tsx"
+}
