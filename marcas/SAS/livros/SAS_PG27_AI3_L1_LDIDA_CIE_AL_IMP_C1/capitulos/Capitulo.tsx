@@ -309,12 +309,12 @@ function BookCap01() {
         className="mx-auto w-full overflow-visible bg-white shadow-2xl md:max-w-[63%]"
         style={{ marginLeft: 'auto', marginRight: 'auto' }}
       >
-        <Header chapterNumber={1} chapterTitle="Passo a passo da investigação" />
+        <Header marca="sas" chapterNumber={1} chapterTitle="Passo a passo da investigação" />
 
         <Pagination currentPage={START_PAGE} />
 
         <Poster
-          imageSrc={capAsset('images/page_3_img_-1_-1.png')}
+          imageSrc={capAsset('images/page_3_img_-1_-1.jpg')}
           creditLine1=""
           creditLine2=""
           alt="Imagem de abertura do capítulo"
@@ -853,7 +853,7 @@ function BookCap01() {
 
           <figure className="foto-com-credito">
             <img
-              src={capAsset('images/page_13_img_-1_120.png')}
+              src={capAsset('images/page_13_img_-1_120.jpg')}
               alt="Lagarto-cinzento"
             />
             <figcaption>Karen Bogea/Shutterstock</figcaption>

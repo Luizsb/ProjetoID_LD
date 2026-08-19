@@ -369,6 +369,10 @@ td {
 }
 
 /* Faixa de paginação: mesma largura da coluna em todas as páginas (topo e miolo) */
+.livro-header--sas {
+  min-height: 168px;
+}
+
 .marca-sas {
   --question-number-color: #ea8244;
   --list-marker-color: #ea8244;

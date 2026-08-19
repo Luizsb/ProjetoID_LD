@@ -3,32 +3,40 @@ import { publicUrl } from '../lib/publicUrl';
 interface HeaderProps {
   chapterNumber?: number | string;
   chapterTitle?: string;
+  marca?: 'sae' | 'sas';
 }
 
-function Header({ chapterNumber = 7, chapterTitle = 'Comércio' }: HeaderProps) {
+function Header({
+  chapterNumber = 7,
+  chapterTitle = 'Comércio',
+  marca = 'sae',
+}: HeaderProps) {
+  const isSas = marca === 'sas';
+  const capaSrc = publicUrl(isSas ? 'images/Capa-sas.svg' : 'images/Capa-1.svg');
+
   return (
     <header
-      className="relative w-full min-w-0 bg-[#80298F] bg-no-repeat py-8 px-8 text-white"
+      className={`livro-header relative w-full min-w-0 overflow-visible bg-no-repeat py-8 px-8 text-white ${isSas ? 'livro-header--sas' : 'livro-header--sae'}`}
       style={{
-        backgroundImage: `url('${publicUrl('images/Capa-1.svg')}')`,
+        backgroundColor: isSas ? '#1b4b8a' : '#80298F',
+        backgroundImage: `url('${capaSrc}')`,
         backgroundSize: '100% auto',
         backgroundPosition: 'top center',
       }}
     >
-      {/* Conteúdo do header */}
       <div className="relative z-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="flex flex-col" style={{ marginLeft: '90px' }}>
             <p
               className="font-inter rounded-[20px]"
               style={{
-                backgroundColor: '#F4C2FF',
-                color: '#80298F',
+                backgroundColor: isSas ? '#8ec5ff' : '#F4C2FF',
+                color: isSas ? '#1b4b8a' : '#80298F',
                 textAlign: 'center',
                 fontSize: '14px',
                 fontStyle: 'normal',
                 fontWeight: '500',
-                lineHeight: '30px', /* 428.571% */
+                lineHeight: '30px',
                 letterSpacing: '-0.5px',
                 width: '108px',
                 height: '27px',
@@ -43,15 +51,13 @@ function Header({ chapterNumber = 7, chapterTitle = 'Comércio' }: HeaderProps) 
                 fontSize: '48px',
               }}
             >
-              <span style={{ color: '#FBB733' }}>{chapterNumber}.</span> {chapterTitle}
+              <span style={{ color: isSas ? '#8ec5ff' : '#FBB733' }}>{chapterNumber}.</span> {chapterTitle}
             </h1>
-
           </div>
         </div>
       </div>
-    </header >
+    </header>
   );
 }
 
 export default Header;
-
