@@ -373,10 +373,6 @@ td {
   min-height: 168px;
 }
 
-.livro-header--unidade {
-  min-height: 0;
-}
-
 .unidade-recolhivel {
   width: 100%;
 }

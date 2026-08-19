@@ -17,29 +17,27 @@ function Header({
 }: HeaderProps) {
   const isSas = marca === 'sas';
   const isUnidade = variante === 'unidade';
-  const capaSrc = publicUrl(isSas ? 'images/Capa-sas.svg' : 'images/Capa-1.svg');
+  const capaSrc = publicUrl(
+    isUnidade ? 'images/Capa-sas-unidade.svg' : isSas ? 'images/Capa-sas.svg' : 'images/Capa-1.svg',
+  );
 
-  const badgeBg = isUnidade ? '#1b4b8a' : isSas ? '#8ec5ff' : '#F4C2FF';
-  const badgeColor = isUnidade ? '#fff' : isSas ? '#1b4b8a' : '#80298F';
-  const numberColor = isUnidade ? '#1b4b8a' : isSas ? '#8ec5ff' : '#FBB733';
-  const titleColor = isUnidade ? '#1b4b8a' : '#fff';
+  const badgeBg = isUnidade ? '#d4f1ff' : isSas ? '#8ec5ff' : '#F4C2FF';
+  const badgeColor = isUnidade ? '#0b5f8a' : isSas ? '#1b4b8a' : '#80298F';
+  const numberColor = isUnidade ? '#d4f1ff' : isSas ? '#8ec5ff' : '#FBB733';
 
   return (
     <header
-      className={`livro-header relative w-full min-w-0 overflow-visible bg-no-repeat text-white ${isSas ? 'livro-header--sas' : 'livro-header--sae'} ${isUnidade ? 'livro-header--unidade py-4 px-6' : 'py-8 px-8'}`}
+      className={`livro-header relative w-full min-w-0 overflow-visible bg-no-repeat py-8 px-8 text-white ${isSas ? 'livro-header--sas' : 'livro-header--sae'}`}
       style={{
-        backgroundColor: isUnidade ? '#8ec5ff' : isSas ? '#1b4b8a' : '#80298F',
-        backgroundImage: isUnidade ? 'none' : `url('${capaSrc}')`,
+        backgroundColor: isUnidade ? '#1689c5' : isSas ? '#1b4b8a' : '#80298F',
+        backgroundImage: `url('${capaSrc}')`,
         backgroundSize: isSas ? '100% 100%' : '100% auto',
         backgroundPosition: isSas ? 'center' : 'top center',
       }}
     >
       <div className="relative z-10">
-        <div className="flex items-center gap-3">
-          <div
-            className="flex flex-col"
-            style={{ marginLeft: isUnidade ? '8px' : isSas ? '132px' : '90px' }}
-          >
+        <div className="flex items-center gap-3 mb-4">
+          <div className="flex flex-col" style={{ marginLeft: isSas ? '132px' : '90px' }}>
             <p
               className="font-inter rounded-[20px]"
               style={{
@@ -61,9 +59,8 @@ function Header({
               className="font-inter font-bold"
               style={{
                 fontWeight: 900,
-                fontSize: isUnidade ? '28px' : '48px',
+                fontSize: '48px',
                 lineHeight: 1.15,
-                color: titleColor,
               }}
             >
               <span style={{ color: numberColor }}>{chapterNumber}.</span> {chapterTitle}
