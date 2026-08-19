@@ -17,9 +17,9 @@ function Header({
 }: HeaderProps) {
   const isSas = marca === 'sas';
   const isUnidade = variante === 'unidade';
-  const capaSrc = publicUrl(
+  const capaSrc = `${publicUrl(
     isUnidade ? 'images/Capa-sas-unidade.svg' : isSas ? 'images/Capa-sas.svg' : 'images/Capa-1.svg',
-  );
+  )}?v=3`;
 
   const badgeBg = isUnidade ? '#d4f1ff' : isSas ? '#8ec5ff' : '#F4C2FF';
   const badgeColor = isUnidade ? '#0b5f8a' : isSas ? '#1b4b8a' : '#80298F';
@@ -31,13 +31,13 @@ function Header({
       style={{
         backgroundColor: isUnidade ? '#1689c5' : isSas ? '#1b4b8a' : '#80298F',
         backgroundImage: `url('${capaSrc}')`,
-        backgroundSize: isSas ? '100% 100%' : '100% auto',
-        backgroundPosition: isSas ? 'center' : 'top center',
+        backgroundSize: isSas ? 'cover' : '100% auto',
+        backgroundPosition: isSas ? 'center center' : 'top center',
       }}
     >
       <div className="relative z-10">
         <div className="flex items-center gap-3 mb-4">
-          <div className="flex flex-col" style={{ marginLeft: isSas ? '132px' : '90px' }}>
+          <div className="flex flex-col" style={{ marginLeft: isSas ? 'clamp(6.5rem, 16%, 11rem)' : '90px' }}>
             <p
               className="font-inter rounded-[20px]"
               style={{

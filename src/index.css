@@ -371,6 +371,9 @@ td {
 /* Faixa de paginação: mesma largura da coluna em todas as páginas (topo e miolo) */
 .livro-header--sas {
   min-height: 168px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
 }
 
 .unidade-recolhivel {
