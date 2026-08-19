@@ -43,7 +43,7 @@ O catálogo e os PDFs/imagens de `marcas/` entram no `dist/conteudo` no build. O
 ---
 
 - **Biblioteca** — filtro por marca e um card por livro
-- **Ver no player** — livro digital (ou tela de slot, se o capítulo ainda não foi convertido)
+- **Abrir livro digital** — livro digital (ou tela de slot, se o capítulo ainda não foi convertido)
 - **Abrir PDF** — PDF-fonte no navegador
 - **Construção atual do player** — capítulo de referência já montado na UI
 

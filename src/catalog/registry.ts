@@ -11,3 +11,7 @@ export const bookLoaders: Record<string, () => Promise<BookModule>> = {
   'sas-pg27-ai3-cie-c1': () =>
     import('../../marcas/SAS/livros/SAS_PG27_AI3_L1_LDIDA_CIE_AL_IMP_C1/capitulos/Capitulo.tsx'),
 };
+
+export function livroEstaPronto(playerKey: string): boolean {
+  return Object.prototype.hasOwnProperty.call(bookLoaders, playerKey);
+}

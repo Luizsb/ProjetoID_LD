@@ -4,54 +4,69 @@ interface HeaderProps {
   chapterNumber?: number | string;
   chapterTitle?: string;
   marca?: 'sae' | 'sas';
+  badge?: string;
+  variante?: 'capa' | 'unidade';
 }
 
 function Header({
   chapterNumber = 7,
   chapterTitle = 'Comércio',
   marca = 'sae',
+  badge = 'LIVRO DIGITAL',
+  variante = 'capa',
 }: HeaderProps) {
   const isSas = marca === 'sas';
+  const isUnidade = variante === 'unidade';
   const capaSrc = publicUrl(isSas ? 'images/Capa-sas.svg' : 'images/Capa-1.svg');
+
+  const badgeBg = isUnidade ? '#1b4b8a' : isSas ? '#8ec5ff' : '#F4C2FF';
+  const badgeColor = isUnidade ? '#fff' : isSas ? '#1b4b8a' : '#80298F';
+  const numberColor = isUnidade ? '#1b4b8a' : isSas ? '#8ec5ff' : '#FBB733';
+  const titleColor = isUnidade ? '#1b4b8a' : '#fff';
 
   return (
     <header
-      className={`livro-header relative w-full min-w-0 overflow-visible bg-no-repeat py-8 px-8 text-white ${isSas ? 'livro-header--sas' : 'livro-header--sae'}`}
+      className={`livro-header relative w-full min-w-0 overflow-visible bg-no-repeat text-white ${isSas ? 'livro-header--sas' : 'livro-header--sae'} ${isUnidade ? 'livro-header--unidade py-4 px-6' : 'py-8 px-8'}`}
       style={{
-        backgroundColor: isSas ? '#1b4b8a' : '#80298F',
-        backgroundImage: `url('${capaSrc}')`,
-        backgroundSize: '100% auto',
-        backgroundPosition: 'top center',
+        backgroundColor: isUnidade ? '#8ec5ff' : isSas ? '#1b4b8a' : '#80298F',
+        backgroundImage: isUnidade ? 'none' : `url('${capaSrc}')`,
+        backgroundSize: isSas ? '100% 100%' : '100% auto',
+        backgroundPosition: isSas ? 'center' : 'top center',
       }}
     >
       <div className="relative z-10">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="flex flex-col" style={{ marginLeft: '90px' }}>
+        <div className="flex items-center gap-3">
+          <div
+            className="flex flex-col"
+            style={{ marginLeft: isUnidade ? '8px' : isSas ? '132px' : '90px' }}
+          >
             <p
               className="font-inter rounded-[20px]"
               style={{
-                backgroundColor: isSas ? '#8ec5ff' : '#F4C2FF',
-                color: isSas ? '#1b4b8a' : '#80298F',
+                backgroundColor: badgeBg,
+                color: badgeColor,
                 textAlign: 'center',
                 fontSize: '14px',
                 fontStyle: 'normal',
                 fontWeight: '500',
                 lineHeight: '30px',
                 letterSpacing: '-0.5px',
-                width: '108px',
+                width: badge.length > 14 ? '132px' : '108px',
                 height: '27px',
               }}
             >
-              LIVRO DIGITAL
+              {badge}
             </p>
             <h1
               className="font-inter font-bold"
               style={{
                 fontWeight: 900,
-                fontSize: '48px',
+                fontSize: isUnidade ? '28px' : '48px',
+                lineHeight: 1.15,
+                color: titleColor,
               }}
             >
-              <span style={{ color: isSas ? '#8ec5ff' : '#FBB733' }}>{chapterNumber}.</span> {chapterTitle}
+              <span style={{ color: numberColor }}>{chapterNumber}.</span> {chapterTitle}
             </h1>
           </div>
         </div>

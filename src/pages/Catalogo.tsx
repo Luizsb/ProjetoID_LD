@@ -1,14 +1,21 @@
 import { useMemo, useState } from 'react';
 import { conteudoUrl, getBrand, useCatalogo } from '../catalog/catalogo';
+import { livroEstaPronto } from '../catalog/registry';
 import { textoSobreFundo } from '../catalog/contrast';
 import { bookHref, guiaHref } from '../catalog/useHashRoute';
-import type { CatalogBook } from '../catalog/types';
 
-const STATUS_LABEL: Record<CatalogBook['status'], string> = {
-  aguardando: 'Aguardando',
-  'fonte-recebida': 'Fonte recebida',
-  pronto: 'Pronto para ver',
-};
+function StatusTag({ playerKey }: { playerKey: string }) {
+  const ok = livroEstaPronto(playerKey);
+  return (
+    <span
+      className={`rounded-full px-3 py-1 text-xs font-semibold ${
+        ok ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-900'
+      }`}
+    >
+      {ok ? 'OK' : 'Em produção'}
+    </span>
+  );
+}
 
 function Catalogo() {
   const { catalogo, error } = useCatalogo();
@@ -57,6 +64,9 @@ function Catalogo() {
             className="mb-8 block rounded-2xl bg-neutral-900 p-6 text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
           >
             <p className="text-xs font-semibold tracking-wide text-[#F4C2FF]">Player compartilhado</p>
+            <div className="mt-2">
+              <StatusTag playerKey={catalogo.playerReferencia.playerKey} />
+            </div>
             <h2 className="mt-1 text-xl font-bold">{catalogo.playerReferencia.titulo}</h2>
             {catalogo.playerReferencia.subtitulo ? (
               <p className="mt-2 text-sm text-white/75">{catalogo.playerReferencia.subtitulo}</p>
@@ -99,9 +109,7 @@ function Catalogo() {
                     >
                       {marca?.nome ?? livro.marcaId}
                     </span>
-                    <span className="text-xs font-medium text-neutral-500">
-                      {STATUS_LABEL[livro.status]}
-                    </span>
+                    <StatusTag playerKey={livro.playerKey} />
                   </div>
                   <h2 className="text-xl font-bold text-neutral-900">{livro.titulo}</h2>
                   {livro.subtitulo ? (
@@ -121,7 +129,7 @@ function Catalogo() {
                         color: textoSobreFundo(btnBg),
                       }}
                     >
-                      Ver no player
+                      Abrir livro digital
                     </a>
                     {pdfHref ? (
                       <a

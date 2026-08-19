@@ -309,7 +309,48 @@ function BookCap01() {
         className="mx-auto w-full overflow-visible bg-white shadow-2xl md:max-w-[63%]"
         style={{ marginLeft: 'auto', marginRight: 'auto' }}
       >
-        <Header marca="sas" chapterNumber={1} chapterTitle="Passo a passo da investigação" />
+        <details className="unidade-recolhivel" open>
+          <summary className="unidade-recolhivel__resumo">
+            <Header
+              marca="sas"
+              variante="unidade"
+              badge="UNIDADE"
+              chapterNumber={1}
+              chapterTitle="PERCEBENDO O AMBIENTE"
+            />
+            <div className="unidade-recolhivel__barra">
+              <span>Conteúdo da unidade</span>
+              <img src={publicUrl('images/seta.svg')} alt="" className="unidade-recolhivel__seta" />
+            </div>
+          </summary>
+          <Poster
+            imageSrc={capAsset('images/unidade.png')}
+            creditLine1="Alexandr/stock.adobe.com"
+            creditLine2=""
+            creditAlign="center"
+            alt="Unidade 1 — Percebendo o ambiente"
+          />
+          <div className="p-8 md:p-12">
+            <p className="mb-4 indent-6">
+              Você sabia que algumas raças de cachorros têm sentidos muito desenvolvidos?
+              Os beagles são um exemplo disso. Eles conseguem sentir cheiros bem fracos e
+              segui-los até encontrar a origem. Isso acontece porque os beagles têm um olfato
+              muito sensível e o formato de suas orelhas ajuda a levar o cheiro em direção ao
+              nariz.
+            </p>
+            <p className="mb-4 indent-6">
+              Assim como os beagles usam o olfato para explorar o ambiente, os humanos
+              também usam os sentidos todos os dias. Com os sentidos, percebemos cheiros,
+              sons, imagens, sabores e toques.
+            </p>
+            <p className="mb-4 indent-6">
+              Nesta unidade, você descobrirá mais sobre os cinco sentidos e a importância
+              que eles têm para a vida das pessoas. Além disso, vai entender melhor o trabalho
+              científico e como a tecnologia pode melhorar o bem-estar dos seres humanos.
+            </p>
+          </div>
+        </details>
+        <Header marca="sas" badge="CAPÍTULO" chapterNumber={1} chapterTitle="Passo a passo da investigação" />
 
         <Pagination currentPage={START_PAGE} />
 

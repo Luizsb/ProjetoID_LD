@@ -373,6 +373,64 @@ td {
   min-height: 168px;
 }
 
+.livro-header--unidade {
+  min-height: 0;
+}
+
+.unidade-recolhivel {
+  width: 100%;
+}
+
+.unidade-recolhivel__resumo {
+  cursor: pointer;
+  list-style: none;
+}
+
+.unidade-recolhivel__resumo::-webkit-details-marker {
+  display: none;
+}
+
+.unidade-recolhivel__barra {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  padding: 4px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: #d6ebff;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 14px;
+  color: #1b4b8a;
+  user-select: none;
+}
+
+.unidade-recolhivel__seta {
+  height: 0.75rem;
+  width: 0.75rem;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.unidade-recolhivel[open] .unidade-recolhivel__seta {
+  transform: rotate(180deg);
+}
+
+.marca-sas .caixa-hipotese__credito,
+.marca-sas .experimento-plantas__credito,
+.marca-sas .fique-ligado__credito,
+.marca-sas .foto-com-credito figcaption,
+.marca-sas .bloco-papel-texto__credito {
+  text-align: right;
+}
+
+.marca-sas .foto-com-credito figcaption {
+  max-width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .marca-sas {
   --question-number-color: #ea8244;
   --list-marker-color: #ea8244;
