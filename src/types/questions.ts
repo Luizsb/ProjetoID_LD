@@ -74,6 +74,12 @@ export interface TextInputQuestion {
     question: string; // Texto da subquestão
     placeholder?: string;
     correctAnswer?: string;
+    /** Sem campo de resposta (atividade só na imagem/desenho). */
+    hideAnswerField?: boolean;
+    /** Opções exclusivas com caixa X (ex.: direita / esquerda), como no impresso SAE. */
+    choices?: string[];
+    /** Se true, as opções com X ficam uma abaixo da outra. */
+    choicesStacked?: boolean;
     subItems?: Array<{
       label: string;
       placeholder?: string;
@@ -85,6 +91,21 @@ export interface TextInputQuestion {
   embeddedContent?: string; // Conteúdo a ser exibido em uma caixa (ex: versos do poema)
   embeddedContentMaxWidth?: string; // Largura máxima do conteúdo embutido (ex: '400px', '50%', 'fit-content')
   followUpQuestion?: string; // Pergunta adicional com bullet vermelho
+  /** Imagem entre o enunciado e as subquestões (ex.: cena da atividade). */
+  media?: {
+    src: string;
+    alt?: string;
+    credit?: string;
+    /** Se definido, a mídia vira área de desenho sobre a imagem. */
+    drawing?: {
+      storageKey: string;
+      width?: number;
+      height?: number;
+      hint?: string;
+      borderColor?: string;
+      maxWidth?: string;
+    };
+  };
 }
 
 export interface TableFillQuestion {

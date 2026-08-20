@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, type CSSProperties, type MouseEvent, type TouchEvent } from 'react';
 
 const COLORS = [
   '#000000',
@@ -26,6 +26,11 @@ type AreaDesenhoProps = {
   borderColor?: string;
   /** Imagem de fundo para desenhar / pintar por cima */
   backgroundImage?: string;
+  /** Malha quadriculada desenhada (CSS), para o aluno desenhar por cima */
+  showGrid?: boolean;
+  gridCols?: number;
+  gridRows?: number;
+  gridColor?: string;
   /** Largura máxima de exibição do canvas (ex.: '100%', '320px') */
   maxWidth?: string;
 };
@@ -51,6 +56,10 @@ function AreaDesenho({
   compact = false,
   borderColor = '#ea8244',
   backgroundImage,
+  showGrid = false,
+  gridCols = 7,
+  gridRows = 4,
+  gridColor = '#7eb8d4',
   maxWidth,
 }: AreaDesenhoProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -156,55 +165,113 @@ function AreaDesenho({
   }, [storageKey]);
 
   const accent = borderColor;
+  const hasOverlaySurface = Boolean(backgroundImage || showGrid);
+  const showExternalHint = hasOverlaySurface && !compact && Boolean(hint);
+
+  const canvasPointerProps = {
+    onMouseDown: (e: MouseEvent<HTMLCanvasElement>) =>
+      handlePointerDown(e.clientX, e.clientY),
+    onMouseMove: (e: MouseEvent<HTMLCanvasElement>) =>
+      handlePointerMove(e.clientX, e.clientY),
+    onMouseUp: handlePointerUp,
+    onMouseLeave: handlePointerUp,
+    onTouchStart: (e: TouchEvent<HTMLCanvasElement>) => {
+      e.preventDefault();
+      const touch = e.touches[0];
+      handlePointerDown(touch.clientX, touch.clientY);
+    },
+    onTouchMove: (e: TouchEvent<HTMLCanvasElement>) => {
+      e.preventDefault();
+      const touch = e.touches[0];
+      handlePointerMove(touch.clientX, touch.clientY);
+    },
+    onTouchEnd: (e: TouchEvent<HTMLCanvasElement>) => {
+      e.preventDefault();
+      handlePointerUp();
+    },
+  };
+
+  const canvasClassName = [
+    'area-desenho__canvas',
+    hasOverlaySurface ? 'area-desenho__canvas--com-fundo' : '',
+    isEraser ? 'area-desenho__canvas--borracha' : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
-    <div className={`area-desenho ${className}`.trim()}>
+    <div
+      className={`area-desenho ${className}`.trim()}
+      style={maxWidth ? { maxWidth, marginLeft: 'auto', marginRight: 'auto' } : undefined}
+    >
       <div className="area-desenho__layout">
         <div className="area-desenho__quadro-wrap">
+          {showExternalHint ? (
+            <p
+              className="area-desenho__hint-externo"
+              style={{ color: accent, borderColor: accent, backgroundColor: `${accent}14` }}
+            >
+              {hint}
+            </p>
+          ) : null}
           <div
-            className="area-desenho__quadro"
+            className={`area-desenho__quadro${hasOverlaySurface ? ' area-desenho__quadro--com-fundo' : ''}`}
             style={{ borderColor: accent }}
           >
-            {backgroundImage ? (
-              <img
-                src={backgroundImage}
-                alt=""
-                className="pointer-events-none absolute inset-0 h-full w-full object-contain"
-                draggable={false}
-              />
-            ) : null}
-            <canvas
-              ref={canvasRef}
-              width={width}
-              height={height}
-              className={`area-desenho__canvas${isEraser ? ' area-desenho__canvas--borracha' : ''}`}
-              onMouseDown={(e) => handlePointerDown(e.clientX, e.clientY)}
-              onMouseMove={(e) => handlePointerMove(e.clientX, e.clientY)}
-              onMouseUp={handlePointerUp}
-              onMouseLeave={handlePointerUp}
-              onTouchStart={(e) => {
-                e.preventDefault();
-                const touch = e.touches[0];
-                handlePointerDown(touch.clientX, touch.clientY);
-              }}
-              onTouchMove={(e) => {
-                e.preventDefault();
-                const touch = e.touches[0];
-                handlePointerMove(touch.clientX, touch.clientY);
-              }}
-              onTouchEnd={(e) => {
-                e.preventDefault();
-                handlePointerUp();
-              }}
-            />
-            {!compact ? (
+            {hasOverlaySurface ? (
               <div
-                className="area-desenho__hint"
-                style={{ backgroundColor: `${accent}1a`, color: accent }}
+                className={`area-desenho__superficie${showGrid ? ' area-desenho__superficie--malha' : ''}`}
+                style={showGrid ? { aspectRatio: `${width} / ${height}` } : undefined}
               >
-                {hint}
+                {backgroundImage ? (
+                  <img
+                    src={backgroundImage}
+                    alt=""
+                    className="area-desenho__fundo"
+                    draggable={false}
+                  />
+                ) : null}
+                {showGrid ? (
+                  <div
+                    className="area-desenho__malha"
+                    aria-hidden
+                    style={
+                      {
+                        '--malha-cols': gridCols,
+                        '--malha-rows': gridRows,
+                        '--malha-cor': gridColor,
+                      } as CSSProperties
+                    }
+                  />
+                ) : null}
+                <canvas
+                  ref={canvasRef}
+                  width={width}
+                  height={height}
+                  className={canvasClassName}
+                  style={{ aspectRatio: `${width} / ${height}`, minHeight: 0 }}
+                  {...canvasPointerProps}
+                />
               </div>
-            ) : null}
+            ) : (
+              <>
+                <canvas
+                  ref={canvasRef}
+                  width={width}
+                  height={height}
+                  className={canvasClassName}
+                  {...canvasPointerProps}
+                />
+                {!compact ? (
+                  <div
+                    className="area-desenho__hint"
+                    style={{ backgroundColor: `${accent}1a`, color: accent }}
+                  >
+                    {hint}
+                  </div>
+                ) : null}
+              </>
+            )}
           </div>
         </div>
 

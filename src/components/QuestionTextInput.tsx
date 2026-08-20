@@ -1,5 +1,6 @@
 import { TextInputQuestion, UserAnswers } from '../types/questions';
 import QuestionTextInputWithEmbedded from './QuestionTextInputWithEmbedded';
+import AreaDesenho from './AreaDesenho';
 
 interface QuestionTextInputProps {
   question: TextInputQuestion;
@@ -17,7 +18,8 @@ function QuestionTextInput({
   const userAnswer = (userAnswers[question.id] as string) || '';
 
   // Se tiver conteúdo embutido ou pergunta de acompanhamento, usa formato especial
-  if (question.embeddedContent || question.followUpQuestion) {
+  // (exceto listDiscLayout, que trata o destaque no layout de bullet)
+  if ((question.embeddedContent || question.followUpQuestion) && !question.listDiscLayout) {
     return (
       <QuestionTextInputWithEmbedded
         question={question}
@@ -30,31 +32,99 @@ function QuestionTextInput({
 
   // Se tiver subquestões, renderiza o formato com número e letras
   if (question.subQuestions && question.subQuestions.length > 0) {
+    const simpleTextareaClass =
+      'mt-2 block h-[31px] w-[765px] max-w-full rounded-[5px] bg-[rgba(221,221,221,0.50)] px-3 pt-1 text-left text-[14px] font-normal leading-normal text-[#000000] placeholder:text-[#BDBDBD] font-myriad-vf focus:outline-none resize-none';
+
     return (
       <div className="mb-6">
-        {/* Título principal com número */}
         <p className="mb-4">
           {question.number !== undefined && (
             <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{question.number}. </span>
           )}
           <span style={{ color: 'black' }} dangerouslySetInnerHTML={{ __html: question.question }} />
         </p>
-        
-        {/* Subquestões */}
+
+        {question.media ? (
+          <div className="mb-6 flex flex-col items-center">
+            {question.media.drawing ? (
+              <AreaDesenho
+                backgroundImage={question.media.src}
+                storageKey={question.media.drawing.storageKey}
+                width={question.media.drawing.width ?? 492}
+                height={question.media.drawing.height ?? 794}
+                hint={
+                  question.media.drawing.hint ??
+                  'Marque o X e trace o trajeto sobre a imagem'
+                }
+                borderColor={question.media.drawing.borderColor ?? '#80298F'}
+                maxWidth={question.media.drawing.maxWidth ?? '100%'}
+                className="w-full"
+              />
+            ) : (
+              <img
+                src={question.media.src}
+                alt={question.media.alt || ''}
+                className="h-auto w-full max-w-[320px] rounded-[24px] sm:max-w-[380px] md:max-w-[480px] lg:max-w-[520px]"
+              />
+            )}
+            {question.media.credit ? (
+              <p
+                className="mt-2 text-[10px] text-slate-600"
+                style={{ textAlign: 'center', fontWeight: 400 }}
+              >
+                {question.media.credit}
+              </p>
+            ) : null}
+          </div>
+        ) : null}
+
         <div className="space-y-4">
           {question.subQuestions.map((subQ) => {
             const subQuestionId = `${question.id}_${subQ.letter}`;
             const subUserAnswer = (userAnswers[subQuestionId] as string) || '';
-            
+
             return (
               <div key={subQ.letter} className="mb-4">
                 <p className="mb-2">
-                  <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{subQ.letter}) </span>
-                  <span style={{ color: 'black' }}>{subQ.question}</span>
+                  {subQ.letter ? (
+                    <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{subQ.letter}) </span>
+                  ) : null}
+                  {subQ.question ? <span style={{ color: 'black' }}>{subQ.question}</span> : null}
                 </p>
-                
-                {/* Subquestões aninhadas (com bullets) */}
-                {subQ.subItems && subQ.subItems.length > 0 ? (
+
+                {subQ.hideAnswerField ? null : subQ.choices && subQ.choices.length > 0 ? (
+                  <div
+                    className={`mt-2 flex ${
+                      subQ.choicesStacked
+                        ? 'flex-col items-start gap-y-3'
+                        : 'flex-wrap items-center gap-x-8 gap-y-2'
+                    }`}
+                  >
+                    {subQ.choices.map((choice) => {
+                      const isOn = subUserAnswer === choice;
+                      return (
+                        <label key={choice} className="flex cursor-pointer items-center gap-2 select-none">
+                          <input
+                            type="checkbox"
+                            checked={isOn}
+                            disabled={showResults}
+                            onChange={() =>
+                              onAnswerChange(subQuestionId, isOn ? '' : choice)
+                            }
+                            className="sr-only"
+                          />
+                          <span
+                            className="choice-x-box"
+                            aria-hidden
+                          >
+                            {isOn ? 'X' : ''}
+                          </span>
+                          <span className="text-[15px] text-black">{choice}</span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                ) : subQ.subItems && subQ.subItems.length > 0 ? (
                   <div className="mt-3 space-y-2">
                     {subQ.subItems.map((subItem, index) => {
                       const subItemId = `${subQuestionId}_${index}`;
@@ -106,13 +176,13 @@ function QuestionTextInput({
                     onChange={(e) => onAnswerChange(subQuestionId, e.target.value)}
                     placeholder={subQ.placeholder || 'Digite aqui...'}
                     disabled={showResults}
-                    className="mt-2 block h-[31px] w-[765px] max-w-full rounded-[5px] bg-[rgba(221,221,221,0.50)] px-3 pt-1 text-left text-[14px] font-normal leading-normal text-[#000000] placeholder:text-[#BDBDBD] font-myriad-vf focus:outline-none resize-none"
+                    className={simpleTextareaClass}
                   />
                 )}
-                
-                {showResults && subQ.correctAnswer && !subQ.subItems && (
-                  <div className="mt-2 p-2 bg-gray-100 rounded text-sm">
-                    <p className="font-semibold text-gray-700 mb-1">Resposta esperada:</p>
+
+                {showResults && subQ.correctAnswer && !subQ.subItems && !subQ.hideAnswerField && (
+                  <div className="mt-2 rounded bg-gray-100 p-2 text-sm">
+                    <p className="mb-1 font-semibold text-gray-700">Resposta esperada:</p>
                     <p className="text-gray-600">{subQ.correctAnswer}</p>
                   </div>
                 )}
@@ -137,6 +207,19 @@ function QuestionTextInput({
               <span className="question-number font-bold" style={{ color: 'var(--question-number-color, #80298F)' }}>{question.number}. </span>
             )}
             <span dangerouslySetInnerHTML={{ __html: question.question }} />
+            {question.embeddedContent ? (
+              <div
+                className="mx-auto my-4 w-fit max-w-full rounded-[20px] px-10 py-5 text-center text-black"
+                style={{
+                  backgroundColor: '#d7dcef',
+                  ...(question.embeddedContentMaxWidth
+                    ? { maxWidth: question.embeddedContentMaxWidth }
+                    : {}),
+                }}
+              >
+                {question.embeddedContent}
+              </div>
+            ) : null}
             <textarea
               value={userAnswer}
               onChange={(e) => onAnswerChange(question.id, e.target.value)}

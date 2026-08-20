@@ -6,6 +6,8 @@ interface TeacherButtonProps {
     content?: React.ReactNode;
     answers?: React.ReactNode;
     visible?: boolean;
+    /** Exibe o link do Banco de Questões (só onde fizer sentido no livro). */
+    showBancoQuestoes?: boolean;
 }
 
 function TeacherButton({
@@ -13,6 +15,7 @@ function TeacherButton({
     content,
     answers,
     visible = true,
+    showBancoQuestoes = false,
 }: TeacherButtonProps) {
     if (!visible) {
         return null;
@@ -107,6 +110,19 @@ function TeacherButton({
                         {title && (
                             <h4 className="text-xl font-semibold text-slate-700 mb-4">{title}</h4>
                         )}
+
+                        {showBancoQuestoes ? (
+                            <p className="mb-4" style={{ color: '#000000' }}>
+                                <a
+                                    href="https://go.sae.digital/wy0AP6"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="font-semibold text-[#80298F] underline underline-offset-2 hover:text-[#6a2576]"
+                                >
+                                    Acesse o Banco de Questões para criar listas extras de exercícios rapidamente.
+                                </a>
+                            </p>
+                        ) : null}
 
                         {content && (
                             <div className="mb-6">
