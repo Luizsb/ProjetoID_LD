@@ -18,6 +18,7 @@ import TestandoIdeias from '@player/components/TestandoIdeias';
 import AgoraVoceJaSabe from '@player/components/AgoraVoceJaSabe';
 import AreaDesenho from '@player/components/AreaDesenho';
 import AtividadeMapaMalha from '@player/components/AtividadeMapaMalha';
+import AtividadeMapaFiguras from '@player/components/AtividadeMapaFiguras';
 import QuestionRenderer from '@player/components/QuestionRenderer';
 import { TeacherAnswers } from '@player/components/TeacherAnswers';
 import { useUserAnswers } from '@player/hooks/useUserAnswers';
@@ -349,6 +350,107 @@ const chapterQuestions: Question[] = [
     correctAnswer:
       'Oriente os alunos a medir cantos da lousa, de murais, abertura de portas e cantos de janelas. Incentive a observação atenta e o uso da linguagem matemática. Oriente-os a verificar se o ângulo formado é reto, maior do que o reto ou menor do que o reto. Após a exploração, oriente os alunos a registrar as situações em que encontraram ângulos retos, descrevendo onde estavam e como fizeram a verificação com o medidor. Finalize com uma roda de conversa, incentivando os alunos a compartilhar suas descobertas e refletir sobre a presença dos ângulos retos no cotidiano. Reforce como essa experiência ajuda a compreender a Geometria como algo presente no mundo real, e não apenas no papel.',
   },
+  {
+    id: 'org_ruas_q1',
+    type: 'text-input',
+    number: 1,
+    question:
+      'Leandro desenhou o mapa das ruas próximas à sua casa. Nesse desenho, ele e a mãe dele estão dentro do carro vermelho, na Rua da Alegria.',
+    media: {
+      src: encodeURI(
+        withBase(
+          'conteudo/marcas/SAE/livros/SAE_AT27_AI4_V1_LDIDA_MAT_AL_IMP_C03/capitulos/images/page_16_img_70_163.png',
+        ),
+      ),
+      alt: 'Mapa desenhado por Leandro',
+      credit: 'Beto Zoellner',
+    },
+    subQuestions: [
+      {
+        letter: 'a',
+        question:
+          'A casa de Leandro fica em uma rua paralela à Rua da Alegria. Em que rua Leandro pode morar?',
+        placeholder: 'Digite aqui...',
+        correctAnswer: 'Leandro pode morar na Rua da Luz ou na Rua do Pudim.',
+      },
+      {
+        letter: 'b',
+        question: 'Copie do mapa o nome da rua',
+        subItems: [
+          {
+            label: 'perpendicular à Rua do Pudim.',
+            placeholder: 'Digite aqui...',
+            correctAnswer: 'Rua Bonita.',
+          },
+          {
+            label: 'transversal à Rua da Alegria.',
+            placeholder: 'Digite aqui...',
+            correctAnswer: 'Rua dos Sonhos.',
+          },
+        ],
+      },
+      {
+        letter: 'c',
+        question:
+          'Leandro e a mãe dele viraram à direita na Rua dos Sonhos e, depois, à esquerda na primeira rua. Então, seguiram em frente e viraram na primeira rua à direita. Em que rua eles chegaram?',
+        placeholder: 'Digite aqui...',
+        correctAnswer: 'Na Rua Bonita.',
+      },
+    ],
+  },
+  {
+    id: 'org_ruas_q3_paralelas',
+    type: 'text-input',
+    listDiscLayout: true,
+    question: 'Ruas paralelas:',
+    placeholder: 'Digite aqui...',
+    correctAnswer: 'Pessoal.',
+  },
+  {
+    id: 'org_ruas_q3_transversais',
+    type: 'text-input',
+    listDiscLayout: true,
+    question: 'Ruas transversais:',
+    placeholder: 'Digite aqui...',
+    correctAnswer: 'Pessoal.',
+  },
+  {
+    id: 'org_ruas_q3_perpendiculares',
+    type: 'text-input',
+    listDiscLayout: true,
+    question: 'Ruas perpendiculares:',
+    placeholder: 'Digite aqui...',
+    correctAnswer: 'Pessoal.',
+  },
+  {
+    id: 'ruas_q_paralelas',
+    type: 'text-input',
+    listDiscLayout: true,
+    question: 'Copie desse mapa o nome de duas ruas que não encontram a Rua Verde.',
+    placeholder: 'Digite aqui...',
+    correctAnswer:
+      'Há várias ruas que não encontram a Rua Verde, como: Rua Azul, Rua Laranja, Rua Amarela e Rua Rosa.',
+  },
+  {
+    id: 'ruas_q_perpendiculares',
+    type: 'text-input',
+    listDiscLayout: true,
+    question:
+      'Copie desse mapa o nome de duas ruas que se encontram e que formam 4 ângulos retos no ponto de encontro.',
+    placeholder: 'Digite aqui...',
+    correctAnswer:
+      'Há várias ruas que se encontram e formam 4 ângulos retos, como: Rua Amarela e Rua dos Pássaros, Rua Rosa e Rua dos Mirtilos, Rua das Flores e Rua Azul, entre outras.',
+  },
+  {
+    id: 'ruas_q_transversais',
+    type: 'text-input',
+    listDiscLayout: true,
+    question:
+      'Copie desse mapa o nome de duas ruas que se encontram e que formam ângulos menores ou maiores do que o ângulo reto no ponto de encontro.',
+    placeholder: 'Digite aqui...',
+    correctAnswer:
+      'A Rua Colorida se encontra com a Rua Verde e com a Rua dos Pássaros e forma com elas ângulos diferentes do ângulo reto.',
+  },
 ];
 function BookCap01() {
   const { userAnswers, handleAnswerChange } = useUserAnswers();
@@ -479,7 +581,7 @@ function BookCap01() {
                       src={capAsset('images/page_2_img_19_616.png')}
                       alt="Menino com boné azul e camiseta roxa aponta o dedo para cima, com um sorriso no rosto."
                     />
-                    <figcaption className="mt-1 text-center text-[10px] text-slate-600">
+                    <figcaption className="foto-com-credito-legenda">
                       Emílio B. Jourdani
                     </figcaption>
                   </figure>
@@ -545,18 +647,25 @@ function BookCap01() {
                   <p className="mb-4 indent-6">
                     No experimento, eles equiparam 27 cães de caça com coleiras de GPS e câmeras de ação, colocando-os livres em áreas florestais. Depois, analisaram as habilidades dos cães perdidos de navegar em direção a um local original através de áreas desconhecidas. [...]
                   </p>
-                  <p className="mb-4 text-sm text-gray-600">
-                    KEHL, Talita. <em>Ciência explica como cães perdidos encontram o caminho de casa.</em> Disponível em: https://ndmais.com.br/animais/pets/ciencia-explica-como-caes-perdidos-encontram-o-caminho-de-casa/. Acesso em: 5 maio 2025.
+                  <p className="bloco-leitura__referencia">
+                    KEHL, Talita. <em>Ciência explica como cães perdidos encontram o caminho de casa.</em> Disponível em:{' '}
+                    <a
+                      href="https://ndmais.com.br/animais/pets/ciencia-explica-como-caes-perdidos-encontram-o-caminho-de-casa/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      https://ndmais.com.br/animais/pets/ciencia-explica-como-caes-perdidos-encontram-o-caminho-de-casa/
+                    </a>
+                    . Acesso em: 5 maio 2025.
                   </p>
 
-                  <div className="flex flex-col items-center my-6">
+                  <figure className="foto-com-credito foto-com-credito--lg">
                     <img
                       src={capAsset('images/page_3_img_443_461.png')}
                       alt="Um cachorro beagle fareja o chão em um parque, com as pernas de uma pessoa desfocadas ao fundo."
-                      className="w-full max-w-[320px] sm:max-w-[380px] md:max-w-[480px] lg:max-w-[520px] h-auto rounded-[24px]"
                     />
-                    <p className="text-[10px] text-slate-600 mt-2">oatawa/stock.adobe.com</p>
-                  </div>
+                    <figcaption>oatawa/stock.adobe.com</figcaption>
+                  </figure>
                 </div>
 
                 <p className="mb-4 flex items-center gap-3 font-bold">
@@ -594,14 +703,13 @@ function BookCap01() {
                   </p>
                 </div>
 
-                <div className="flex flex-col items-center my-6">
+                <figure className="foto-com-credito foto-com-credito--lg">
                   <img
                     src={capAsset('images/page_4_img_173_104.png')}
                     alt="Figura em grade com um cachorro, um menino, uma tigela com osso, uma tigela vazia e uma árvore."
-                    className="w-full max-w-[320px] sm:max-w-[380px] md:max-w-[480px] lg:max-w-[520px] h-auto rounded-[24px]"
                   />
-                  <p className="text-[10px] text-slate-600 mt-2">Beto Zoellner</p>
-                </div>
+                  <figcaption>Beto Zoellner</figcaption>
+                </figure>
 
                 <p className="mb-4 indent-6">
                   Se o cãozinho andar em frente por 4 passos, sobre as linhas da malha, depois virar à direita e seguir em frente por 3 passos, ele vai encontrar a tigela com osso.
@@ -620,7 +728,7 @@ function BookCap01() {
                   showResults={showTeacherView}
                 />
 
-     
+
 
                 <div
                   className="my-6 rounded-[20px] px-6 py-5 md:px-10"
@@ -664,7 +772,7 @@ function BookCap01() {
                     content={
                       <>
                         <p className="mb-3">
-                          <strong>2.</strong> <strong>BNCC:</strong> EF04MA16
+                          <span className="question-number" style={{ fontWeight: 700 }}>2.</span> <strong>BNCC:</strong> EF04MA16
                         </p>
                         <p className="mb-4">
                           Uma malha como esta pode ser desenhada com giz escolar no pátio da escola. Os alunos podem ser incentivados a se deslocar de acordo com os trajetos da atividade e também a explorar outros trajetos criados por eles mesmos.
@@ -780,7 +888,7 @@ function BookCap01() {
                     content={
                       <>
                         <p className="mb-3">
-                          <strong>3.</strong> <strong>BNCC:</strong> EF04MA16
+                          <span className="question-number" style={{ fontWeight: 700 }}>3.</span> <strong>BNCC:</strong> EF04MA16
                         </p>
                         <TeacherAnswers questions={getQuestionById('org_q3')} />
                       </>
@@ -815,14 +923,13 @@ function BookCap01() {
                   Carolina está se divertindo no parque de diversões com os pais.
                 </p>
 
-                <div className="flex flex-col items-center my-6">
+                <figure className="foto-com-credito foto-com-credito--lg">
                   <img
                     src={capAsset('images/page_8_img_111_124.png')}
                     alt="Duas cenas em grade mostram uma menina com um balão azul perto de uma roda-gigante. Na segunda cena, a menina se move para a direita, com uma seta indicando o movimento."
-                    className="w-full max-w-[320px] sm:max-w-[380px] md:max-w-[480px] lg:max-w-[520px] h-auto rounded-[24px]"
                   />
-                  <p className="text-[10px] text-slate-600 mt-2">OpenAI/Imagem criada por IA</p>
-                </div>
+                  <figcaption>OpenAI/Imagem criada por IA</figcaption>
+                </figure>
 
                 <p className="mb-4 indent-6">
                   Carolina estava de costas para você e deu um <strong>giro</strong> para a esquerda, ficando de frente para a roda-gigante. Esse giro corresponde a um <strong>ângulo reto</strong>.
@@ -852,14 +959,13 @@ function BookCap01() {
                   <li>Carolina vai comprar pipoca.</li>
                 </ul>
 
-                <div className="flex flex-col items-center my-6">
+                <figure className="foto-com-credito foto-com-credito--lg">
                   <img
                     src={capAsset('images/page_8_img_110_536.png')}
                     alt="Duas grades 3x3 com um vendedor de pipoca e uma menina com balões em posições diferentes, indicando movimento."
-                    className="w-full max-w-[320px] sm:max-w-[380px] md:max-w-[480px] lg:max-w-[520px] h-auto rounded-[24px]"
                   />
-                  <p className="text-[10px] text-slate-600 mt-2">OpenAI/Imagem criada por IA</p>
-                </div>
+                  <figcaption>OpenAI/Imagem criada por IA</figcaption>
+                </figure>
 
                 <Pagination currentPage={65} expandToBookColumn />
 
@@ -902,14 +1008,13 @@ function BookCap01() {
                   <li>Carolina vai brincar no carrossel.</li>
                 </ul>
 
-                <div className="flex flex-col items-center my-6">
+                <figure className="foto-com-credito foto-com-credito--lg">
                   <img
                     src={capAsset('images/page_9_img_130_282.png')}
                     alt="Duas grades 3x3 com uma menina segurando um balão em cada. Na grade da direita, uma seta vermelha indica um movimento descendente. Um carrossel com cavalos aparece abaixo de cada grade."
-                    className="w-full max-w-[320px] sm:max-w-[380px] md:max-w-[480px] lg:max-w-[520px] h-auto rounded-[24px]"
                   />
-                  <p className="text-[10px] text-slate-600 mt-2">clasikka/stock.adobe.com</p>
-                </div>
+                  <figcaption>clasikka/stock.adobe.com</figcaption>
+                </figure>
 
                 <QuestionRenderer
                   question={getQuestionById('ang_q_carrossel')}
@@ -1007,9 +1112,7 @@ function BookCap01() {
                           className="h-full w-full max-w-[240px] object-contain"
                         />
                       </div>
-                      <p className="mt-2 text-[10px] text-slate-600" style={{ textAlign: 'center', fontWeight: 400 }}>
-                        Beto Zoellner
-                      </p>
+                      <figcaption className="foto-com-credito-legenda">Beto Zoellner</figcaption>
                     </div>
                     <div className="flex flex-col items-center text-center">
                       <p className="mb-3 min-h-[4.5rem] text-[15px] leading-snug text-black" style={{ textAlign: 'center', fontWeight: 400 }}>
@@ -1075,10 +1178,10 @@ function BookCap01() {
                     content={
                       <>
                         <p className="mb-3">
-                          <strong>1.</strong> <strong>BNCC:</strong> EF04MA18
+                          <span className="question-number" style={{ fontWeight: 700 }}>1.</span> <strong>BNCC:</strong> EF04MA18
                         </p>
                         <div className="mb-4 flex flex-col items-start">
-                          <p className="mb-2 font-semibold">A</p>
+                          <p className="mb-2"><span className="question-number" style={{ fontWeight: 700 }}>A</span></p>
                           <div className="relative inline-block">
                             <img
                               src={capAsset('images/page_11_img_233_161.png')}
@@ -1095,11 +1198,11 @@ function BookCap01() {
                           </div>
                         </div>
                         <p className="mb-2">
-                          <strong>2.</strong> <strong>BNCC:</strong> EF04MA18
+                          <span className="question-number" style={{ fontWeight: 700 }}>2.</span> <strong>BNCC:</strong> EF04MA18
                         </p>
                         <p className="mb-4">Ele ficará de frente para o cão.</p>
                         <p className="mb-2">
-                          <strong>3.</strong> <strong>BNCC:</strong> EF04MA18
+                          <span className="question-number" style={{ fontWeight: 700 }}>3.</span> <strong>BNCC:</strong> EF04MA18
                         </p>
                         <p className="mb-3">reto para a direita.</p>
                       </>
@@ -1167,12 +1270,7 @@ function BookCap01() {
                         );
                       })}
                     </div>
-                    <p
-                      className="mt-2 text-[10px] text-slate-600"
-                      style={{ textAlign: 'center', fontWeight: 400 }}
-                    >
-                      Imagem gerada por IA/Open WebUI
-                    </p>
+                    <figcaption className="foto-com-credito-legenda">Imagem gerada por IA/Open WebUI</figcaption>
                   </div>
                 </div>
 
@@ -1192,7 +1290,7 @@ function BookCap01() {
                       Observe um dos giros que Marina deu no volante do carro que estava dirigindo em um jogo on-line.
                     </span>
                   </p>
-                  <div className="my-6 flex flex-col items-center">
+                  <figure className="my-6 flex flex-col items-center">
                     <div className="flex justify-center gap-8">
                       <img
                         src={capAsset('images/page_11_img_190_490.png')}
@@ -1205,13 +1303,8 @@ function BookCap01() {
                         className="h-32 w-32 object-contain"
                       />
                     </div>
-                    <p
-                      className="mt-2 mb-4 text-[10px] text-slate-600"
-                      style={{ textAlign: 'center', fontWeight: 400 }}
-                    >
-                      Imagem gerada por IA/Open WebUI
-                    </p>
-                  </div>
+                    <figcaption className="foto-com-credito-legenda">Imagem gerada por IA/Open WebUI</figcaption>
+                  </figure>
                   <ul className="mb-2 ml-6 list-disc">
                     <li className="text-black">Marina deu um giro que corresponde a um ângulo</li>
                   </ul>
@@ -1236,12 +1329,12 @@ function BookCap01() {
                     content={
                       <>
                         <p className="mb-2">
-                          <strong>4.</strong> <strong>BNCC:</strong> EF04MA18
+                          <span className="question-number" style={{ fontWeight: 700 }}>4.</span> <strong>BNCC:</strong> EF04MA18
                         </p>
                         <p className="mb-4">maior do que o ângulo reto.</p>
 
                         <p className="mb-2">
-                          <strong>5.</strong> <strong>BNCC:</strong> EF04MA18
+                          <span className="question-number" style={{ fontWeight: 700 }}>5.</span> <strong>BNCC:</strong> EF04MA18
                         </p>
                         <p className="mb-4">
                           Oriente os alunos a observar que os ângulos correspondem aos giros realizados pelo robô. A cada mudança de direção, o robô parte da direção em que estava e realiza um giro para seguir um novo caminho. Assim, o ângulo deve ser identificado considerando a direção anterior e a nova direção do movimento, conforme destacado em laranja.
@@ -1298,19 +1391,13 @@ function BookCap01() {
                       O relógio a seguir mostra o horário em que Elisa chegou em casa.
                     </span>
                   </p>
-                  <div className="my-6 flex flex-col items-center">
+                  <figure className="foto-com-credito foto-com-credito--sm">
                     <img
                       src={capAsset('images/page_12_img_107_94.png')}
                       alt="Relógio de brinquedo feito de massa de modelar, com ponteiros indicando 4:30."
-                      className="h-auto w-full max-w-[200px]"
                     />
-                    <p
-                      className="mt-2 text-[10px] text-slate-600"
-                      style={{ textAlign: 'center', fontWeight: 400 }}
-                    >
-                      Imagem gerada por IA/Open WebUI
-                    </p>
-                  </div>
+                    <figcaption>Imagem gerada por IA/Open WebUI</figcaption>
+                  </figure>
                   <ul className="mb-2 ml-6 list-disc">
                     <li className="text-black">O ângulo formado entre os ponteiros do relógio é</li>
                   </ul>
@@ -1398,7 +1485,7 @@ function BookCap01() {
                     content={
                       <>
                         <p className="mb-2">
-                          <strong>6.</strong> <strong>BNCC:</strong> EF04MA18
+                          <span className="question-number" style={{ fontWeight: 700 }}>6.</span> <strong>BNCC:</strong> EF04MA18
                         </p>
                         <p className="mb-3">
                           O objetivo dessa atividade é explorar a ideia de que triângulos podem apresentar diferentes medidas de ângulos internos. Posteriormente, os alunos vão compreender que triângulos podem ser classificados de acordo com essas medidas.
@@ -1406,7 +1493,7 @@ function BookCap01() {
                         <TeacherAnswers questions={getQuestionById('ti_q6')} />
 
                         <p className="mb-2 mt-4">
-                          <strong>7.</strong> <strong>BNCC:</strong> EF04MA18
+                          <span className="question-number" style={{ fontWeight: 700 }}>7.</span> <strong>BNCC:</strong> EF04MA18
                         </p>
                         <ul className="mb-4 ml-6 list-disc">
                           <li className="text-black">
@@ -1415,7 +1502,7 @@ function BookCap01() {
                         </ul>
 
                         <p className="mb-2">
-                          <strong>8.</strong> <strong>BNCC:</strong> EF04MA18
+                          <span className="question-number" style={{ fontWeight: 700 }}>8.</span> <strong>BNCC:</strong> EF04MA18
                         </p>
                         <p className="mb-3">
                           Oriente os alunos a medir cantos da lousa, de murais, abertura de portas e cantos de janelas. Incentive a observação atenta e o uso da linguagem matemática. Oriente-os a verificar se o ângulo formado é reto, maior do que o reto ou menor do que o reto.
@@ -1470,7 +1557,7 @@ function BookCap01() {
                   showResults={showTeacherView}
                 />
 
-                <Pagination currentPage={14} expandToBookColumn />
+                <Pagination currentPage={70} expandToBookColumn />
 
                 <div className="my-6">
                   <TeacherButton
@@ -1490,180 +1577,260 @@ function BookCap01() {
                   Observe o mapa das ruas próximas à escola onde Guto estuda.
                 </p>
 
-                <div className="flex flex-col items-center my-6">
+                <figure className="foto-com-credito foto-com-credito--lg">
                   <img
-                    src={capAsset('images/page_14_img_-1_155.png')}
+                    src={capAsset('images/mapa1.png')}
                     alt="um bairro com casas, escola, posto de gasolina e carros em um cruzamento de ruas."
-                    className="w-full max-w-[320px] sm:max-w-[380px] md:max-w-[480px] lg:max-w-[520px] h-auto rounded-[24px]"
+                  />
+                  <figcaption>Beto Zoellner</figcaption>
+                </figure>
+
+                <Pagination currentPage={71} expandToBookColumn />
+
+                <div className="my-6">
+                  <TeacherButton
+                    visible={SHOW_TEACHER_BUTTON}
+                    content={
+                      <TeacherAnswers
+                        questions={[
+                          getQuestionById('ruas_q_paralelas'),
+                          getQuestionById('ruas_q_perpendiculares'),
+                          getQuestionById('ruas_q_transversais'),
+                        ]}
+                      />
+                    }
                   />
                 </div>
 
-                <Pagination currentPage={15} expandToBookColumn />
-
-                <div className="flex flex-col items-center my-6">
-                  <img
-                    src={capAsset('images/page_15_img_91_43.png')}
-                    alt="Menino com óculos e cabelo loiro, vestindo camiseta verde, segurando algo com as mãos."
-                    className="w-full max-w-[150px] h-auto rounded-[24px]"
-                  />
-                  <p className="text-[10px] text-slate-600 mt-2">Beto Zoellner</p>
+                <QuestionRenderer
+                  question={getQuestionById('ruas_q_paralelas')}
+                  userAnswers={userAnswers}
+                  onAnswerChange={handleAnswerChange}
+                  showResults={showTeacherView}
+                />
+                <div
+                  className="my-6 rounded-[20px] px-6 py-5 md:px-10"
+                  style={{ backgroundColor: '#d7dcef' }}
+                >
+                  <p className="mb-0">
+                    Ruas que não se encontram e que mantêm a mesma distância entre si são chamadas de{' '}
+                    <strong>ruas paralelas</strong>.
+                  </p>
                 </div>
 
-                <ul className="list-disc marker:text-[#80298F] ml-6 mb-4">
-                  <li>Copie desse mapa o nome de duas ruas que não encontram a Rua Verde.</li>
-                </ul>
-                <p className="mb-4 indent-6 text-gray-600 italic">
-                  Há várias ruas que não encontram a Rua Verde, como: Rua Azul, Rua Laranja, Rua Amarela e Rua Rosa.
-                </p>
+                <QuestionRenderer
+                  question={getQuestionById('ruas_q_perpendiculares')}
+                  userAnswers={userAnswers}
+                  onAnswerChange={handleAnswerChange}
+                  showResults={showTeacherView}
+                />
+                <div
+                  className="my-6 rounded-[20px] px-6 py-5 md:px-10"
+                  style={{ backgroundColor: '#d7dcef' }}
+                >
+                  <p className="mb-0">
+                    Ruas que se encontram e formam 4 ângulos retos no ponto de encontro são chamadas de{' '}
+                    <strong>ruas perpendiculares</strong>.
+                  </p>
+                </div>
 
-                <p className="mb-4 indent-6 font-bold text-[#80298F]">
-                  Ruas que não se encontram e que mantêm a mesma distância entre si são chamadas de ruas paralelas.
-                </p>
+                <QuestionRenderer
+                  question={getQuestionById('ruas_q_transversais')}
+                  userAnswers={userAnswers}
+                  onAnswerChange={handleAnswerChange}
+                  showResults={showTeacherView}
+                />
+                <div
+                  className="my-6 rounded-[20px] px-6 py-5 md:px-10"
+                  style={{ backgroundColor: '#d7dcef' }}
+                >
+                  <p className="mb-0">
+                    Ruas que se encontram e formam ângulos diferentes do reto no ponto de encontro são chamadas de{' '}
+                    <strong>ruas transversais</strong>.
+                  </p>
+                </div>
 
-                <ul className="list-disc marker:text-[#80298F] ml-6 mb-4">
-                  <li>Copie desse mapa o nome de duas ruas que se encontram e que formam 4 ângulos retos no ponto de encontro.</li>
-                </ul>
-                <p className="mb-4 indent-6 text-gray-600 italic">
-                  Há várias ruas que se encontram e formam 4 ângulos retos, como: Rua Amarela e Rua dos Pássaros, Rua Rosa e Rua dos Mirtilos, Rua das Flores e Rua Azul, entre outras.
-                </p>
-
-                <p className="mb-4 indent-6 font-bold text-[#80298F]">
-                  Ruas que se encontram e formam 4 ângulos retos no ponto de encontro são chamadas de ruas perpendiculares.
-                </p>
-
-                <ul className="list-disc marker:text-[#80298F] ml-6 mb-4">
-                  <li>Copie desse mapa o nome de duas ruas que se encontram e que formam ângulos menores ou maiores do que o ângulo reto no ponto de encontro.</li>
-                </ul>
-                <p className="mb-4 indent-6 text-gray-600 italic">
-                  A Rua Colorida se encontra com a Rua Verde e com a Rua dos Pássaros e forma com elas ângulos diferentes do ângulo reto.
-                </p>
-
-                <p className="mb-4 indent-6 font-bold text-[#80298F]">
-                  Ruas que se encontram e formam ângulos diferentes do reto no ponto de encontro são chamadas de ruas transversais.
-                </p>
-
-                <Pagination currentPage={16} expandToBookColumn />
+                <Pagination currentPage={72} expandToBookColumn />
 
                 <OrganizandoConhecimentos />
-                <p className="mb-4 indent-6 font-bold">
-                  1 Leandro desenhou o mapa das ruas próximas à sua casa. Nesse desenho, ele e a mãe dele estão dentro do carro vermelho, na Rua da Alegria.
-                </p>
-
-                <div className="flex flex-col items-center my-6">
-                  <img
-                    src={capAsset('images/page_16_img_70_163.png')}
-                    alt="Mapa desenhado por Leandro"
-                    className="w-full max-w-[320px] sm:max-w-[380px] md:max-w-[480px] lg:max-w-[520px] h-auto rounded-[24px]"
-                  />
-                  <p className="text-[10px] text-slate-600 mt-2">Beto Zoellner</p>
-                </div>
-
-                <p className="mb-2"><strong>a)</strong> A casa de Leandro fica em uma rua paralela à Rua da Alegria. Em que rua Leandro pode morar?</p>
-                <p className="mb-4 text-gray-600 italic">Leandro pode morar na Rua da Luz ou na Rua do Pudim.</p>
-
-                <p className="mb-2"><strong>b)</strong> Copie do mapa o nome da rua</p>
-                <ul className="list-disc marker:text-[#80298F] ml-12 mb-4">
-                  <li>perpendicular à Rua do Pudim.</li>
-                </ul>
-                <p className="mb-4 ml-12 text-gray-600 italic">Rua Bonita.</p>
-                <ul className="list-disc marker:text-[#80298F] ml-12 mb-4">
-                  <li>transversal à Rua da Alegria.</li>
-                </ul>
-                <p className="mb-4 ml-12 text-gray-600 italic">Rua dos Sonhos.</p>
-
-                <p className="mb-2"><strong>c)</strong> Leandro e a mãe dele viraram à direita na Rua dos Sonhos e, depois, à esquerda na primeira rua. Então, seguiram em frente e viraram na primeira rua à direita. Em que rua eles chegaram?</p>
-                <p className="mb-4 text-gray-600 italic">Na Rua Bonita.</p>
-
-                <Pagination currentPage={17} expandToBookColumn />
-
-                <p className="mb-4 indent-6 font-bold">
-                  2 O mapa a seguir mostra ruas de um bairro. Recorte as figuras da aba e cole-as no mapa de acordo com as dicas de localização. EF04MA16.
-                </p>
-
-                <div className="flex flex-col items-center my-6">
-                  <img
-                    src={capAsset('images/page_17_img_0_109.png')}
-                    alt="Mapa de ruas de um bairro"
-                    className="w-full max-w-[320px] sm:max-w-[380px] md:max-w-[480px] lg:max-w-[520px] h-auto rounded-[24px]"
-                  />
-                  <p className="text-[10px] text-slate-600 mt-2">Beto Zoellner</p>
-                </div>
-
-                <ul className="list-disc marker:text-[#80298F] ml-6 mb-4">
-                  <li>Cole a figura da pessoa caminhando em uma rua perpendicular à Rua Rosada.</li>
-                </ul>
-                <p className="mb-4 indent-6 text-gray-600 italic">
-                  Os alunos podem colar a pessoa na Rua da Paz.
-                </p>
-
-                <ul className="list-disc marker:text-[#80298F] ml-6 mb-4">
-                  <li>Cole a figura do carro em uma rua paralela à Rua Bacana.</li>
-                </ul>
-                <p className="mb-4 indent-6 text-gray-600 italic">
-                  Os alunos podem colar o carro na Rua Rosada ou na Rua do Encontro.
-                </p>
-
-                <ul className="list-disc marker:text-[#80298F] ml-6 mb-4">
-                  <li>Cole a figura do motociclista na esquina de uma rua transversal à Rua da Amizade.</li>
-                </ul>
-                <p className="mb-4 indent-6 text-gray-600 italic">
-                  Os alunos podem colar o motociclista na Rua do Encontro ou na Rua Bacana.
-                </p>
-
-                <div className="flex justify-center gap-8 my-6">
-                  <img src={capAsset('images/page_17_img_221_684.png')} alt="Pessoa caminhando" className="w-16 h-auto object-contain" />
-                  <img src={capAsset('images/page_17_img_293_684.png')} alt="Motociclista" className="w-16 h-auto object-contain" />
-                  <img src={capAsset('images/page_17_img_358_686.png')} alt="Carro vermelho" className="w-16 h-auto object-contain" />
-                </div>
-
-                <Pagination currentPage={18} expandToBookColumn />
 
                 <div className="my-6">
                   <TeacherButton
                     visible={SHOW_TEACHER_BUTTON}
                     content={
-                      <p className="mb-3">
-                        Dê início à atividade organizando os alunos em duplas ou trios e incentive-os a conversar sobre o entorno da escola. Pergunte: Quais ruas existem ao redor? Onde ficam a entrada principal, o ponto de ônibus, a padaria ou a praça mais próxima? Estimule a troca de lembranças e observações do caminho que fazem todos os dias. Se possível, com o auxílio de outro adulto, dê a volta na quadra da escola com a turma e faça com que os alunos observem as quatro (ou mais) ruas do entorno e alguns pontos de referência. Peça a eles que desenhem um esboço do mapa das ruas no espaço indicado, representando a escola e suas redondezas. Oriente-os a usar linhas retas para representar as ruas e a pensar na disposição espacial delas: quais são paralelas, quais se cruzam formando ângulos retos e quais cortam outras em diagonal. Depois do desenho, oriente os alunos a identificar e escrever os nomes de <strong>um par de ruas paralelas</strong>, <strong>um par de ruas perpendiculares</strong> e <strong>um par de ruas transversais</strong>. Reforce o uso correto dos termos geométricos e circule pela sala para apoiar a análise dos mapas. Finalize a atividade com uma conversa coletiva: pergunte quais foram as dificuldades, o que descobriram sobre o entorno da escola e como foi utilizar os termos <strong>paralelas</strong>, <strong>perpendiculares</strong> e <strong>transversais</strong> na prática. Estimule os alunos a perceber que a Matemática está presente em cada trajeto que eles percorrem.
-                      </p>
+                      <>
+                        <p className="mb-3">
+                          <span className="question-number" style={{ fontWeight: 700 }}>1.</span> <strong>BNCC:</strong> EF04MA16
+                        </p>
+                        <p className="mb-2">
+                          <span className="question-number" style={{ fontWeight: 700 }}>a)</span> Leandro pode morar na Rua da Luz ou na Rua do Pudim.
+                        </p>
+                        <p className="mb-1">
+                          <span className="question-number" style={{ fontWeight: 700 }}>b)</span>
+                        </p>
+                        <ul className="mb-3 ml-6 list-disc">
+                          <li>Rua Bonita.</li>
+                          <li>Rua dos Sonhos.</li>
+                        </ul>
+                        <p className="mb-2">
+                          <span className="question-number" style={{ fontWeight: 700 }}>c)</span> Na Rua Bonita.
+                        </p>
+                      </>
                     }
                   />
                 </div>
 
-                <p className="mb-4 indent-6 font-bold">
-                  3 Desenhe no espaço a seguir um esboço do mapa das ruas no entorno da sua escola. Depois, escreva os nomes de pares de ruas que sejam paralelas, transversais e perpendiculares entre si.
-                </p>
+                <QuestionRenderer
+                  question={getQuestionById('org_ruas_q1')}
+                  userAnswers={userAnswers}
+                  onAnswerChange={handleAnswerChange}
+                  showResults={showTeacherView}
+                />
 
-                <div className="flex flex-col items-center my-6">
-                  <img
-                    src={capAsset('images/page_18_img_99_125.png')}
-                    alt="Espaço para desenho"
-                    className="w-full max-w-[320px] sm:max-w-[380px] md:max-w-[480px] lg:max-w-[520px] h-auto rounded-[24px]"
-                  />
-                </div>
-
-                <ul className="list-disc marker:text-[#80298F] ml-6 mb-4">
-                  <li>Ruas paralelas: Pessoal.</li>
-                  <li>Ruas transversais: Pessoal.</li>
-                  <li>Ruas perpendiculares: Pessoal.</li>
-                </ul>
-
-                <Pagination currentPage={19} expandToBookColumn />
+                <Pagination currentPage={73} expandToBookColumn />
 
                 <div className="my-6">
                   <TeacherButton
                     visible={SHOW_TEACHER_BUTTON}
                     content={
-                      <p className="mb-3">
-                        A atividade proposta nesta seção é a construção de um origami para que os alunos reconheçam e diferenciem tipos de ângulos formados durante as dobras. Ao utilizar uma abordagem prática e visual, os estudantes desenvolvem a percepção espacial, a compreensão geométrica e a coordenação motora, ao mesmo tempo em que exploram conceitos matemáticos em um contexto artístico e lúdico. Antes de iniciar a atividade, converse com a turma sobre o que é origami e apresente exemplos visuais. Explore a origem cultural da prática, incentivando a curiosidade dos alunos.
-                      </p>
+                      <>
+                        <p className="mb-3">
+                          <span className="question-number" style={{ fontWeight: 700 }}>2.</span>{' '}
+                          <strong>BNCC:</strong> EF04MA16
+                        </p>
+                        <ul className="list-disc ml-6 space-y-2">
+                          <li>Os alunos podem colar a pessoa na Rua da Paz.</li>
+                          <li>Os alunos podem colar o carro na Rua Rosada ou na Rua do Encontro.</li>
+                          <li>Os alunos podem colar o motociclista na Rua do Encontro ou na Rua Bacana.</li>
+                        </ul>
+                      </>
                     }
                   />
                 </div>
 
-                <ParaSaberMais />
-                <h3 style={{ marginBottom: '2.0rem', marginTop: '2.0rem', color: '#80298F', fontWeight: 'bold', fontSize: '1.25rem' }}>
+                <p className="mb-4">
+                  <span className="question-number" style={{ fontWeight: 700 }}>
+                    2.{' '}
+                  </span>
+                  <span style={{ color: 'black' }}>
+                    O mapa a seguir mostra ruas de um bairro. Arraste as figuras e cole-as no mapa de acordo com as dicas de localização.
+                  </span>
+                </p>
+
+                <AtividadeMapaFiguras
+                  storageKey="sae-at27-ai4-mat-c03-mapa-ruas-q2"
+                  mapaSrc={capAsset('images/page_17_img_0_109.png')}
+                  mapaAlt="Mapa de ruas de um bairro"
+                  credito="Beto Zoellner"
+                  dicas={[
+                    'Cole a figura da pessoa caminhando em uma rua perpendicular à Rua Rosada.',
+                    'Cole a figura do carro em uma rua paralela à Rua Bacana.',
+                    'Cole a figura do motociclista na esquina de uma rua transversal à Rua da Amizade.',
+                  ]}
+                  figuras={[
+                    {
+                      id: 'pessoa',
+                      alt: 'Pessoa caminhando',
+                      src: capAsset('images/page_17_img_221_684.png'),
+                    },
+                    {
+                      id: 'motociclista',
+                      alt: 'Motociclista',
+                      src: capAsset('images/page_17_img_293_684.png'),
+                    },
+                    {
+                      id: 'carro',
+                      alt: 'Carro vermelho',
+                      src: capAsset('images/page_17_img_358_686.png'),
+                    },
+                  ]}
+                />
+
+                <Pagination currentPage={74} expandToBookColumn />
+
+                <div className="my-6">
+                  <TeacherButton
+                    visible={SHOW_TEACHER_BUTTON}
+                    content={
+                      <>
+                        <p className="mb-3">
+                          <span className="question-number" style={{ fontWeight: 700 }}>3.</span>{' '}
+                          <strong>BNCC:</strong> EF04MA16
+                        </p>
+                        <p className="mb-3">
+                          Dê início à atividade organizando os alunos em duplas ou trios e incentive-os a conversar sobre o entorno da escola. Pergunte: Quais ruas existem ao redor? Onde ficam a entrada principal, o ponto de ônibus, a padaria ou a praça mais próxima? Estimule a troca de lembranças e observações do caminho que fazem todos os dias. Se possível, com o auxílio de outro adulto, dê a volta na quadra da escola com a turma e faça com que os alunos observem as quatro (ou mais) ruas do entorno e alguns pontos de referência. Peça a eles que desenhem um esboço do mapa das ruas no espaço indicado, representando a escola e suas redondezas. Oriente-os a usar linhas retas para representar as ruas e a pensar na disposição espacial delas: quais são paralelas, quais se cruzam formando ângulos retos e quais cortam outras em diagonal. Depois do desenho, oriente os alunos a identificar e escrever os nomes de <strong>um par de ruas paralelas</strong>, <strong>um par de ruas perpendiculares</strong> e <strong>um par de ruas transversais</strong>. Reforce o uso correto dos termos geométricos e circule pela sala para apoiar a análise dos mapas. Finalize a atividade com uma conversa coletiva: pergunte quais foram as dificuldades, o que descobriram sobre o entorno da escola e como foi utilizar os termos <strong>paralelas</strong>, <strong>perpendiculares</strong> e <strong>transversais</strong> na prática. Estimule os alunos a perceber que a Matemática está presente em cada trajeto que eles percorrem.
+                        </p>
+                      </>
+                    }
+                  />
+                </div>
+
+                <p className="mb-4">
+                  <span className="question-number" style={{ fontWeight: 700 }}>
+                    3.{' '}
+                  </span>
+                  <span style={{ color: 'black' }}>
+                    Desenhe no espaço a seguir um esboço do mapa das ruas no entorno da sua escola. Depois, escreva os nomes de pares de ruas que sejam paralelas, transversais e perpendiculares entre si.
+                  </span>
+                </p>
+
+                <AreaDesenho
+                  storageKey="sae-at27-ai4-mat-c03-mapa-escola-q3"
+                  backgroundImage={capAsset('images/page_18_img_99_125.png')}
+                  width={560}
+                  height={403}
+                  borderColor="#ea8244"
+                  hint="Desenhe o mapa das ruas no entorno da escola"
+                  maxWidth="520px"
+                />
+
+                <QuestionRenderer
+                  question={getQuestionById('org_ruas_q3_paralelas')}
+                  userAnswers={userAnswers}
+                  onAnswerChange={handleAnswerChange}
+                  showResults={showTeacherView}
+                />
+                <QuestionRenderer
+                  question={getQuestionById('org_ruas_q3_transversais')}
+                  userAnswers={userAnswers}
+                  onAnswerChange={handleAnswerChange}
+                  showResults={showTeacherView}
+                />
+                <QuestionRenderer
+                  question={getQuestionById('org_ruas_q3_perpendiculares')}
+                  userAnswers={userAnswers}
+                  onAnswerChange={handleAnswerChange}
+                  showResults={showTeacherView}
+                />
+
+                <Pagination currentPage={75} expandToBookColumn />
+
+                <div className="my-6">
+                  <TeacherButton
+                    visible={SHOW_TEACHER_BUTTON}
+                    content={
+                      <>
+                        <p className="mb-3">
+                          A atividade proposta nesta seção é a construção de um origami para que os alunos reconheçam e diferenciem tipos de ângulos formados durante as dobras. Ao utilizar uma abordagem prática e visual, os estudantes desenvolvem a percepção espacial, a compreensão geométrica e a coordenação motora, ao mesmo tempo em que exploram conceitos matemáticos em um contexto artístico e lúdico. Antes de iniciar a atividade, converse com a turma sobre o que é origami e apresente exemplos visuais. Explore a origem cultural da prática, incentivando a curiosidade dos alunos.
+                        </p>
+                        <p className="mb-3">
+                          No <b>Material de apoio</b>, disponibilizamos duas folhas quadrangulares para essa atividade. As folhas têm estampas que remetem à pelagem de um cachorro. Os alunos podem usar a folha com a estampa que preferirem.
+                        </p>
+                        <p className="mb-3">
+                          Durante o passo a passo, conduza os alunos com tranquilidade, realizando as dobras junto com eles e destacando os momentos em que os ângulos se formam. Utilize termos como “canto”, “abertura” ou “ponto de encontro” para facilitar a compreensão. Se algum aluno tiver mais dificuldade, ofereça a eles dobraduras pré-marcadas ou acompanhe-os de forma mais aproximada nos momentos das dobras e da pintura.
+                        </p>
+                      </>
+                    }
+                  />
+                </div>
+
+
+                <SaberesAcao />
+                <p>
                   Você já fez um origami?
-                </h3>
+                </p>
+                <ParaSaberMais />
+
 
                 <p className="mb-4 indent-6">
                   O origami é a arte de dobrar papel. O termo deriva do japonês e junta as palavras “ori”, que significa “dobrar”, e “kami”, que é traduzido como “papel”.
@@ -1674,60 +1841,70 @@ function BookCap01() {
                 <p className="mb-4 indent-6">
                   As possibilidades para este tipo de técnica são várias e depende da criatividade e das habilidades de cada pessoa.
                 </p>
-                <p className="mb-4 text-sm text-gray-600">
-                  NÓBREGA, Ana. Origami: o que é, origens e aplicações. Disponível em: https://www.ecycle.com.br/origami/. Acesso em: 5 abr. 2025.
+
+                <p className="bloco-leitura__referencia">
+                  NÓBREGA, Ana. Origami: o que é, origens e aplicações. Disponível em:{' '}
+                  <a href="https://www.ecycle.com.br/origami/" target="_blank" rel="noopener noreferrer">
+                    https://www.ecycle.com.br/origami/
+                  </a>
+                  . Acesso em: 5 abr. 2025.
                 </p>
 
-                <div className="flex flex-col items-center my-6">
+                <figure className="foto-com-credito foto-com-credito--lg">
                   <img
                     src={capAsset('images/page_19_img_340_261.png')}
                     alt="Crianças criam pássaros de origami com papéis coloridos, demonstrando a arte de dobrar papel."
-                    className="w-full max-w-[320px] sm:max-w-[380px] md:max-w-[480px] lg:max-w-[520px] h-auto rounded-[24px]"
                   />
-                  <p className="text-[10px] text-slate-600 mt-2">Anastasiia/stock.adobe.com</p>
-                </div>
+                  <figcaption>Anastasiia/stock.adobe.com</figcaption>
+                </figure>
 
-                <SaberesAcao />
                 <p className="mb-4 indent-6">
                   Agora, vamos fazer o origami de um cachorro e observar, durante o processo, como surgem diferentes tipos de ângulos com as dobras do papel.
                 </p>
 
-                <div className="my-6">
-                  <TeacherButton
-                    visible={SHOW_TEACHER_BUTTON}
-                    content={
-                      <>
-                        <p className="mb-3">
-                          No <strong>Material de apoio,</strong> disponibilizamos duas folhas quadrangulares para essa atividade. As folhas têm estampas que remetem à pelagem de um cachorro. Os alunos podem usar a folha com a estampa que preferirem.
-                        </p>
-                        <p className="mb-3">
-                          Durante o passo a passo, conduza os alunos com tranquilidade, realizando as dobras junto com eles e destacando os momentos em que os ângulos se formam. Utilize termos como “canto”, “abertura” ou “ponto de encontro” para facilitar a compreensão. Se algum aluno tiver mais dificuldade, ofereça a eles dobraduras pré-marcadas ou acompanhe-os de forma mais aproximada nos momentos das dobras e da pintura.
-                        </p>
-                      </>
-                    }
-                  />
-                </div>
+           
 
-                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 mb-6">
+             
                   <h4 className="font-bold text-[#80298F] mb-2">Materiais</h4>
                   <ul className="list-disc ml-6 mb-4">
                     <li>Folhas do <strong>Material de apoio</strong>.</li>
                     <li>Lápis de cor.</li>
                   </ul>
                   <h4 className="font-bold text-[#80298F] mb-2">Como fazer</h4>
-                  <ol className="list-decimal ml-6 mb-4">
-                    <li className="mb-2">Dobre a folha ao meio.</li>
-                    <li className="mb-2">Dobre novamente a folha ao meio para marcar o centro.</li>
-                  </ol>
-                </div>
 
-                <div className="flex flex-col items-center my-6">
-                  <img
-                    src={capAsset('images/page_19_img_106_593.png')}
-                    alt="Um quadrado laranja em formato de losango, com uma linha pontilhada horizontal no meio e uma seta curva indicando um movimento de dobra."
-                    className="w-full max-w-[200px] h-auto rounded-[24px]"
-                  />
-                </div>
+                  <div className="mb-6">
+                    <p className="mb-3">
+                      <span className="question-number" style={{ fontWeight: 700 }}>
+                        1.{' '}
+                      </span>
+                      <span style={{ color: 'black' }}>Dobre a folha ao meio.</span>
+                    </p>
+                    <div className="flex flex-col items-center">
+                      <img
+                        src={capAsset('images/page_19_img_106_593.png')}
+                        alt="Um quadrado laranja em formato de losango, com uma linha pontilhada horizontal no meio e uma seta curva indicando um movimento de dobra."
+                        className="h-auto w-full max-w-[200px]"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="mb-6">
+                    <p className="mb-3">
+                      <span className="question-number" style={{ fontWeight: 700 }}>
+                        2.{' '}
+                      </span>
+                      <span style={{ color: 'black' }}>
+                        Dobre novamente a folha ao meio para marcar o centro.
+                      </span>
+                    </p>
+                    <div className="flex flex-col items-center">
+                      <img
+                        src={capAsset('images/page_19_img_341_614.png')}
+                        alt="Triângulo laranja com linha pontilhada vertical no centro e seta curva indicando dobra para marcar o meio."
+                        className="h-auto w-full max-w-[200px]"
+                      />
+                    </div>
+                  </div>
 
                 <Pagination currentPage={20} expandToBookColumn />
 
@@ -1795,13 +1972,13 @@ function BookCap01() {
                   1 Beto, Elisa e Maria combinaram de se encontrar para brincar. Observe a localização de cada um deles na malha quadriculada a seguir.
                 </p>
 
-                <p className="mb-2"><strong>a)</strong> Sabendo que eles caminharam sobre os quadradinhos da malha, pinte de <strong>azul</strong> o ponto de encontro de Beto e Elisa, de acordo com os trajetos descritos a seguir:</p>
+                <p className="mb-2"><span className="question-number" style={{ fontWeight: 700 }}>a)</span> Sabendo que eles caminharam sobre os quadradinhos da malha, pinte de <strong>azul</strong> o ponto de encontro de Beto e Elisa, de acordo com os trajetos descritos a seguir:</p>
                 <ul className="list-disc ml-12 mb-4">
                   <li>Elisa seguiu em frente por 7 quadradinhos e virou à direita. Em seguida, andou 3 quadradinhos.</li>
                   <li>Beto seguiu em frente por 3 quadradinhos e virou à direita. Depois, andou 3 quadradinhos e virou à esquerda. Em seguida, andou mais 3 quadradinhos, virou à direita e andou 2 quadradinhos.</li>
                 </ul>
 
-                <p className="mb-2"><strong>b)</strong> Considerando a localização de partida de Maria e o ponto em que as crianças se encontraram, descreva em seu caderno um trajeto que Maria possa ter percorrido.</p>
+                <p className="mb-2"><span className="question-number" style={{ fontWeight: 700 }}>b)</span> Considerando a localização de partida de Maria e o ponto em que as crianças se encontraram, descreva em seu caderno um trajeto que Maria possa ter percorrido.</p>
                 <p className="mb-4 text-gray-600 italic">
                   Possibilidade de resposta: Maria caminhou por 3 quadradinhos e virou à direita, depois caminhou por 2 quadradinhos e virou à esquerda. Em seguida, caminhou por 2 quadradinhos e virou à direita. Então, caminhou por 2 quadradinhos.
                 </p>
@@ -1812,17 +1989,16 @@ function BookCap01() {
                   2 Denise e sua avó chamaram um carro em um aplicativo de carona para ir ao dentista. Observe na tela do celular da avó de Denise o trajeto percorrido por esse motorista.
                 </p>
 
-                <div className="flex flex-col items-center my-6">
+                <figure className="foto-com-credito foto-com-credito--sm">
                   <img
                     src={capAsset('images/page_22_img_353_68.png')}
                     alt="Mapa em um celular mostrando a rota de um carro laranja com um pino de localização vermelho."
-                    className="w-full max-w-[200px] h-auto rounded-[24px]"
                   />
-                  <p className="text-[10px] text-slate-600 mt-2">Gabrielli Masi</p>
-                </div>
+                  <figcaption>Gabrielli Masi</figcaption>
+                </figure>
 
-                <p className="mb-2"><strong>a)</strong> Quantos dos giros que o carro deu correspondem a um ângulo reto?</p>
-                <p className="mb-2"><strong>b)</strong> Quantos dos giros que o carro deu correspondem a um ângulo menor do que o ângulo reto?</p>
+                <p className="mb-2"><span className="question-number" style={{ fontWeight: 700 }}>a)</span> Quantos dos giros que o carro deu correspondem a um ângulo reto?</p>
+                <p className="mb-2"><span className="question-number" style={{ fontWeight: 700 }}>b)</span> Quantos dos giros que o carro deu correspondem a um ângulo menor do que o ângulo reto?</p>
 
                 <p className="mb-4 indent-6 font-bold mt-8">
                   3 Júlia está dando giros com seu skate. Ela começou posicionada de frente para você. Em seguida, ela deu o giro 1 e, na sequência, deu o giro 2. Observe a posição de Júlia após cada giro. Descreva os giros dados por Júlia.
@@ -1900,25 +2076,23 @@ function BookCap01() {
                   5 O <strong>X</strong> em vermelho neste mapa de ruas mostra a localização de Cassiano. Observe o mapa e resolva o item.
                 </p>
 
-                <div className="flex flex-col items-center my-6">
+                <figure className="foto-com-credito foto-com-credito--lg">
                   <img
                     src={capAsset('images/page_23_img_167_452.png')}
                     alt="Mapa de ruas"
-                    className="w-full max-w-[320px] sm:max-w-[380px] md:max-w-[480px] lg:max-w-[520px] h-auto rounded-[24px]"
                   />
-                  <p className="text-[10px] text-slate-600 mt-2">Beto Zoellner</p>
-                </div>
+                  <figcaption>Beto Zoellner</figcaption>
+                </figure>
 
                 <Pagination currentPage={24} expandToBookColumn />
 
-                <div className="flex flex-col items-center my-6">
+                <figure className="foto-com-credito foto-com-credito--lg">
                   <img
                     src={capAsset('images/page_24_img_0_-1.png')}
                     alt="Um menino de pele escura e cabelo cacheado caminha em uma calçada, passando por casas coloridas e árvores com folhas de outono."
-                    className="w-full max-w-[320px] sm:max-w-[380px] md:max-w-[480px] lg:max-w-[520px] h-auto rounded-[24px]"
                   />
-                  <p className="text-[10px] text-slate-600 mt-2">Composição gerada por Adobe Firefly</p>
-                </div>
+                  <figcaption>Composição gerada por Adobe Firefly</figcaption>
+                </figure>
 
                 <ul className="list-disc marker:text-[#80298F] ml-6 mb-4">
                   <li>Que caminho Cassiano pode percorrer para chegar à rua do Riacho?</li>

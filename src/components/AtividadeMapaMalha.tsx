@@ -207,12 +207,7 @@ function AtividadeMapaMalha({ figuras, storageKey, credito }: AtividadeMapaMalha
       </div>
 
       {credito ? (
-        <p
-          className="atividade-mapa-p62__credito"
-          style={{ textAlign: 'center', fontWeight: 400 }}
-        >
-          {credito}
-        </p>
+        <figcaption className="atividade-mapa-p62__credito">{credito}</figcaption>
       ) : null}
 
       <div className="mapa-grid-p62">

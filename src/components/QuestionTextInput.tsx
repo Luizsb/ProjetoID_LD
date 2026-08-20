@@ -39,7 +39,7 @@ function QuestionTextInput({
       <div className="mb-6">
         <p className="mb-4">
           {question.number !== undefined && (
-            <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{question.number}. </span>
+            <span className="question-number" style={{ color: 'var(--question-number-color, #ea8244)', fontWeight: 'bold' }}>{question.number}. </span>
           )}
           <span style={{ color: 'black' }} dangerouslySetInnerHTML={{ __html: question.question }} />
         </p>
@@ -61,19 +61,20 @@ function QuestionTextInput({
                 className="w-full"
               />
             ) : (
-              <img
-                src={question.media.src}
-                alt={question.media.alt || ''}
-                className="h-auto w-full max-w-[320px] rounded-[24px] sm:max-w-[380px] md:max-w-[480px] lg:max-w-[520px]"
-              />
+              <figure className="foto-com-credito foto-com-credito--lg">
+                <img
+                  src={question.media.src}
+                  alt={question.media.alt || ''}
+                />
+                {question.media.credit ? (
+                  <figcaption>{question.media.credit}</figcaption>
+                ) : null}
+              </figure>
             )}
-            {question.media.credit ? (
-              <p
-                className="mt-2 text-[10px] text-slate-600"
-                style={{ textAlign: 'center', fontWeight: 400 }}
-              >
+            {question.media.drawing && question.media.credit ? (
+              <figcaption className="foto-com-credito-legenda mb-4">
                 {question.media.credit}
-              </p>
+              </figcaption>
             ) : null}
           </div>
         ) : null}
@@ -87,7 +88,7 @@ function QuestionTextInput({
               <div key={subQ.letter} className="mb-4">
                 <p className="mb-2">
                   {subQ.letter ? (
-                    <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{subQ.letter}) </span>
+                    <span className="question-number" style={{ color: 'var(--question-number-color, #ea8244)', fontWeight: 'bold' }}>{subQ.letter}) </span>
                   ) : null}
                   {subQ.question ? <span style={{ color: 'black' }}>{subQ.question}</span> : null}
                 </p>
@@ -150,15 +151,15 @@ function QuestionTextInput({
 
                       return (
                         <div key={index} className="mb-3">
-                          <p className="mb-2" style={{ color: 'black' }}>
-                            {subItem.label}
-                          </p>
+                          <ul className="mb-2 ml-6 list-disc">
+                            <li className="text-black">{subItem.label}</li>
+                          </ul>
                           <textarea
                             value={subItemAnswer}
                             onChange={(e) => onAnswerChange(subItemId, e.target.value)}
                             placeholder={subItem.placeholder || 'Digite aqui...'}
                             disabled={showResults}
-                            className="min-h-[60px] w-full resize-y rounded-lg border border-gray-300 p-3 font-myriad-vf text-black focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className={simpleTextareaClass}
                           />
                           {showResults && subItem.correctAnswer && (
                             <div className="mt-2 rounded bg-gray-100 p-2 text-sm">
@@ -204,7 +205,7 @@ function QuestionTextInput({
         <ul className="list-disc ml-6">
           <li className="text-black">
             {question.number !== undefined && (
-              <span className="question-number font-bold" style={{ color: 'var(--question-number-color, #80298F)' }}>{question.number}. </span>
+              <span className="question-number font-bold" style={{ color: 'var(--question-number-color, #ea8244)' }}>{question.number}. </span>
             )}
             <span dangerouslySetInnerHTML={{ __html: question.question }} />
             {question.embeddedContent ? (
@@ -243,7 +244,7 @@ function QuestionTextInput({
     <div className="mb-6 rounded-lg">
       <p className="mb-4">
         {question.number !== undefined && (
-          <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{question.number}. </span>
+          <span className="question-number" style={{ color: 'var(--question-number-color, #ea8244)', fontWeight: 'bold' }}>{question.number}. </span>
         )}
         <span style={{ color: 'black' }} dangerouslySetInnerHTML={{ __html: question.question }} />
       </p>

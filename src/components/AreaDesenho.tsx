@@ -221,7 +221,10 @@ function AreaDesenho({
             {hasOverlaySurface ? (
               <div
                 className={`area-desenho__superficie${showGrid ? ' area-desenho__superficie--malha' : ''}`}
-                style={showGrid ? { aspectRatio: `${width} / ${height}` } : undefined}
+                style={{
+                  ...(showGrid ? { aspectRatio: `${width} / ${height}` } : {}),
+                  ...(maxWidth && !showGrid ? { maxWidth } : {}),
+                }}
               >
                 {backgroundImage ? (
                   <img
