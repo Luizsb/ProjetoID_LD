@@ -369,12 +369,27 @@ td {
 }
 
 /* Faixa de paginação: mesma largura da coluna em todas as páginas (topo e miolo) */
+/* Faixa de abertura do capítulo / unidade */
+.livro-header {
+  position: relative;
+}
+
+.livro-header__arte {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  pointer-events: none;
+  user-select: none;
+}
+
 .livro-header--sas {
   min-height: 168px;
-  overflow: visible;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
+  overflow: hidden;
 }
 
 .livro-header--sae .livro-header__texto {
@@ -393,16 +408,15 @@ td {
   max-width: 100%;
 }
 
-@media (max-width: 639px) {
-  .livro-header {
-    padding: 1.75rem 1.25rem 1.5rem !important;
-    overflow: hidden;
-    background-image: none !important;
-    min-height: 0;
+/* Telemóvel: só cor de fundo */
+@media (max-width: 640px) {
+  .livro-header__arte {
+    display: none;
   }
 
-  .livro-header--sas,
-  .livro-header--sae {
+  .livro-header.livro-header--sas,
+  .livro-header.livro-header--sae {
+    padding: 1.75rem 1.25rem 1.5rem !important;
     min-height: 0;
   }
 
@@ -423,6 +437,29 @@ td {
 
   .livro-header__conteudo .mb-4 {
     margin-bottom: 0;
+  }
+}
+
+@media (min-width: 641px) {
+  .livro-header__arte {
+    display: block;
+  }
+
+  .livro-header--sas {
+    min-height: 168px;
+  }
+
+  .livro-header--sae .livro-header__texto {
+    margin-left: 90px;
+  }
+
+  .livro-header--sas .livro-header__texto {
+    margin-left: clamp(6.5rem, 16%, 11rem);
+  }
+
+  .livro-header__titulo {
+    font-size: 48px;
+    line-height: 1.15;
   }
 }
 

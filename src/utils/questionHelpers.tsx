@@ -201,16 +201,23 @@ export function renderQuestionAnswer(question: Question): React.ReactNode {
           <span dangerouslySetInnerHTML={{ __html: question.question }} />
         </p>
         <ul className="list-none ml-0 space-y-2">
-          {question.items.map((item) => (
-            <li key={item.letter}>
-              <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>{item.letter}) </span>
-              {item.correctAnswers?.length ? (
-                <span>{item.correctAnswers.join(' | ')}</span>
-              ) : (
-                <span>Sem resposta esperada cadastrada.</span>
-              )}
-            </li>
-          ))}
+          {question.items.map((item) => {
+            const promptIsLetter = item.letter.trim().length === 1;
+            const answers = item.correctAnswers?.filter(Boolean) ?? [];
+            return (
+              <li key={item.letter}>
+                <span className="question-number" style={{ color: 'var(--question-number-color, #80298F)', fontWeight: 'bold' }}>
+                  {promptIsLetter ? `${item.letter})` : item.letter}
+                </span>
+                {promptIsLetter ? ' ' : ' → '}
+                {answers.length ? (
+                  <span>{answers.join(' | ')}</span>
+                ) : (
+                  <span>Sem resposta esperada cadastrada.</span>
+                )}
+              </li>
+            );
+          })}
         </ul>
       </div>
     );

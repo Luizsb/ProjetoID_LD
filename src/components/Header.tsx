@@ -17,9 +17,9 @@ function Header({
 }: HeaderProps) {
   const isSas = marca === 'sas';
   const isUnidade = variante === 'unidade';
-  const capaSrc = `${publicUrl(
+  const capaSrc = publicUrl(
     isUnidade ? 'images/Capa-sas-unidade.svg' : isSas ? 'images/Capa-sas.svg' : 'images/Capa-1.svg',
-  )}?v=3`;
+  );
 
   const badgeBg = isUnidade ? '#d4f1ff' : isSas ? '#8ec5ff' : '#F4C2FF';
   const badgeColor = isUnidade ? '#0b5f8a' : isSas ? '#1b4b8a' : '#80298F';
@@ -27,14 +27,18 @@ function Header({
 
   return (
     <header
-      className={`livro-header relative w-full min-w-0 bg-no-repeat py-8 px-8 text-white ${isSas ? 'livro-header--sas' : 'livro-header--sae'} ${isUnidade ? 'livro-header--unidade' : ''}`}
+      className={`livro-header relative w-full min-w-0 overflow-hidden py-8 px-8 text-white ${isSas ? 'livro-header--sas' : 'livro-header--sae'} ${isUnidade ? 'livro-header--unidade' : ''}`}
       style={{
         backgroundColor: isUnidade ? '#1689c5' : isSas ? '#1b4b8a' : '#80298F',
-        backgroundImage: `url('${capaSrc}')`,
-        backgroundSize: isSas ? 'cover' : '100% auto',
-        backgroundPosition: isSas ? 'center center' : 'top center',
       }}
     >
+      <img
+        className="livro-header__arte"
+        src={`${capaSrc}?v=5`}
+        alt=""
+        aria-hidden
+        decoding="async"
+      />
       <div className="livro-header__conteudo relative z-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="livro-header__texto flex min-w-0 flex-col">
