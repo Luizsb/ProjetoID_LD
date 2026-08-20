@@ -21,8 +21,9 @@ export interface MultipleChoiceQuestion {
     a: string;
     b: string;
     c: string;
+    d?: string;
   };
-  correctAnswer: 'a' | 'b' | 'c';
+  correctAnswer: 'a' | 'b' | 'c' | 'd';
 }
 
 export interface TrueFalseQuestion {

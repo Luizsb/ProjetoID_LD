@@ -7,6 +7,8 @@ interface QuestionTextInputProps {
   userAnswers: UserAnswers;
   onAnswerChange: (questionId: string, answer: string) => void;
   showResults?: boolean;
+  hidePrompt?: boolean;
+  hideInput?: boolean;
 }
 
 function QuestionTextInput({
@@ -14,6 +16,8 @@ function QuestionTextInput({
   userAnswers,
   onAnswerChange,
   showResults = false,
+  hidePrompt = false,
+  hideInput = false,
 }: QuestionTextInputProps) {
   const userAnswer = (userAnswers[question.id] as string) || '';
 
@@ -88,7 +92,7 @@ function QuestionTextInput({
               <div key={subQ.letter} className="mb-4">
                 <p className="mb-2">
                   {subQ.letter ? (
-                    <span className="question-number" style={{ color: 'var(--question-number-color, #ea8244)', fontWeight: 'bold' }}>{subQ.letter}) </span>
+                    <span className="question-letter">{subQ.letter}) </span>
                   ) : null}
                   {subQ.question ? <span style={{ color: 'black' }}>{subQ.question}</span> : null}
                 </p>
@@ -241,25 +245,31 @@ function QuestionTextInput({
   }
 
   return (
-    <div className="mb-6 rounded-lg">
-      <p className="mb-4">
-        {question.number !== undefined && (
-          <span className="question-number" style={{ color: 'var(--question-number-color, #ea8244)', fontWeight: 'bold' }}>{question.number}. </span>
-        )}
-        <span style={{ color: 'black' }} dangerouslySetInnerHTML={{ __html: question.question }} />
-      </p>
-      <textarea
-        value={userAnswer}
-        onChange={(e) => onAnswerChange(question.id, e.target.value)}
-        placeholder={question.placeholder || 'Digite aqui...'}
-        disabled={showResults}
-        className="h-[31px] w-[765px] max-w-full rounded-[5px] bg-[rgba(221,221,221,0.50)] px-3 pt-1 text-left text-[14px] font-normal leading-normal text-[#000000] placeholder:text-[#BDBDBD] font-myriad-vf focus:outline-none resize-none"
-      />
-      {showResults && question.correctAnswer && (
-        <div className="mt-3 p-3 bg-gray-100 rounded">
-          <p className="text-sm font-semibold text-gray-700 mb-1">Resposta esperada:</p>
-          <p className="text-sm text-gray-600">{question.correctAnswer}</p>
-        </div>
+    <div className={hidePrompt || hideInput ? 'mb-2 rounded-lg' : 'mb-6 rounded-lg'}>
+      {!hidePrompt && (
+        <p className="mb-4">
+          {question.number !== undefined && (
+            <span className="question-number" style={{ color: 'var(--question-number-color, #ea8244)', fontWeight: 'bold' }}>{question.number}. </span>
+          )}
+          <span style={{ color: 'black' }} dangerouslySetInnerHTML={{ __html: question.question }} />
+        </p>
+      )}
+      {!hideInput && (
+        <>
+          <textarea
+            value={userAnswer}
+            onChange={(e) => onAnswerChange(question.id, e.target.value)}
+            placeholder={question.placeholder || 'Digite aqui...'}
+            disabled={showResults}
+            className="h-[31px] w-[765px] max-w-full rounded-[5px] bg-[rgba(221,221,221,0.50)] px-3 pt-1 text-left text-[14px] font-normal leading-normal text-[#000000] placeholder:text-[#BDBDBD] font-myriad-vf focus:outline-none resize-none"
+          />
+          {showResults && question.correctAnswer && (
+            <div className="mt-3 p-3 bg-gray-100 rounded">
+              <p className="text-sm font-semibold text-gray-700 mb-1">Resposta esperada:</p>
+              <p className="text-sm text-gray-600">{question.correctAnswer}</p>
+            </div>
+          )}
+        </>
       )}
     </div>
   );

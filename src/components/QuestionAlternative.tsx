@@ -22,6 +22,7 @@ function QuestionAlternative({
     <QuestionWrapper
       number={question.number}
       question={question.question}
+      useHTML
       className="p-4 rounded-lg"
     >
       <div className="space-y-3">

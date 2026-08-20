@@ -17,7 +17,7 @@ function QuestionOrdering({
     <div className="mb-6">
       <p className="mb-4 text-black">
         {question.number !== undefined && (
-          <span className="mr-2 font-bold text-[#80298F] align-top">
+          <span className="question-number mr-2 font-bold align-top" style={{ color: 'var(--question-number-color, #80298F)' }}>
             {question.number}.
           </span>
         )}

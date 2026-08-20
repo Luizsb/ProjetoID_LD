@@ -13,6 +13,8 @@ interface QuestionRendererProps {
   userAnswers: UserAnswers;
   onAnswerChange: (questionId: string, answer: any) => void;
   showResults?: boolean;
+  hidePrompt?: boolean;
+  hideInput?: boolean;
 }
 
 function QuestionRenderer({
@@ -20,6 +22,8 @@ function QuestionRenderer({
   userAnswers,
   onAnswerChange,
   showResults = false,
+  hidePrompt = false,
+  hideInput = false,
 }: QuestionRendererProps) {
   if (!question) {
     return null;
@@ -69,6 +73,8 @@ function QuestionRenderer({
           userAnswers={userAnswers}
           onAnswerChange={onAnswerChange}
           showResults={showResults}
+          hidePrompt={hidePrompt}
+          hideInput={hideInput}
         />
       );
     case 'table-fill':

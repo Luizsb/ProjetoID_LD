@@ -18,7 +18,7 @@ export function QuestionNumber({ number, letter, className = '' }: QuestionNumbe
 
   if (letter) {
     return (
-      <span className={`question-number ${className}`} style={{ color: 'var(--question-number-color, #00776E)', fontWeight: 'bold' }}>
+      <span className={`question-letter ${className}`} style={{ color: 'var(--question-number-color, #00776E)', fontWeight: 'bold' }}>
         {letter}){' '}
       </span>
     );

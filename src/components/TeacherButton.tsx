@@ -28,52 +28,11 @@ function TeacherButton({
                 onClick={() => setIsOpen(true)}
                 className="professor-button"
                 style={{
-                    position: 'relative',
-                    padding: '10px 30px 10px 45px',
-                    backgroundColor: '#80298F',
-                    boxShadow: '0px 4px 0px rgb(106, 37, 118)',
-                    borderRadius: '0 30px 30px 0',
-                    color: 'white',
-                    fontFamily: "'Ubuntu', sans-serif",
-                    fontSize: '12px',
-                    fontWeight: 700,
-                    lineHeight: '1.4em',
-                    textTransform: 'uppercase',
-                    textDecoration: 'none',
-                    margin: '1em 0.4em 1.4em 1.4em',
-                    border: 'none',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}
-                onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = 'rgb(106, 37, 118)';
-                    e.currentTarget.style.boxShadow = '0px 2px 0px rgb(106, 37, 118)';
-                }}
-                onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = '#80298F';
-                    e.currentTarget.style.boxShadow = '0px 4px 0px rgb(106, 37, 118)';
+                    ['--professor-icon' as string]: `url("${publicUrl('images/iconTeacher.svg')}")`,
+                    ['--professor-icon-sas' as string]: `url("${publicUrl('images/iconTeacher-sas.svg')}")`,
                 }}
             >
-                <div
-                    style={{
-                        position: 'absolute',
-                        left: '-15px',
-                        top: '54%',
-                        transform: 'translateY(-50%)',
-                        width: '45px',
-                        height: '45px',
-                        borderRadius: '50%',
-                        backgroundColor: '#80298F',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        zIndex: 1,
-                        background: `transparent url("${publicUrl('images/iconTeacher.svg')}") no-repeat center`,
-                        backgroundSize: '100%',
-                    }}
-                />
+                <span className="professor-button__icone" />
                 PARA O PROFESSOR
             </button>
 
@@ -87,16 +46,7 @@ function TeacherButton({
                         onClick={(e) => e.stopPropagation()}
                     >
                         <div className="flex justify-between items-center mb-6">
-                            <p 
-                                className="text-2xl font-bold"
-                                style={{ 
-                                    color: '#80298F',
-                                    fontFamily: "'myriad-vf', sans-serif",
-                                    fontSize: '26px',
-                                    lineHeight: 'normal',
-                                    fontWeight: 700,
-                                }}
-                            >
+                            <p className="professor-button__titulo">
                                 PARA O PROFESSOR
                             </p>
                             <button

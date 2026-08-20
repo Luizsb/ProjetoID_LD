@@ -1,9 +1,9 @@
 import { MultipleChoiceQuestion, UserAnswers } from '../types/questions';
 import { QuestionWrapper } from './shared/QuestionWrapper';
 
-type ChoiceKey = 'a' | 'b' | 'c';
+type ChoiceKey = 'a' | 'b' | 'c' | 'd';
 
-const KEYS: ChoiceKey[] = ['a', 'b', 'c'];
+const KEYS: ChoiceKey[] = ['a', 'b', 'c', 'd'];
 const MARK = '#ea8244';
 const RING = '#2aa3a0';
 

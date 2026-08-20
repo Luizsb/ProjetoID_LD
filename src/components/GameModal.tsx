@@ -46,7 +46,11 @@ function GameModal({
 
   const thumbResolved =
     thumbnailSrc &&
-    (thumbnailSrc.startsWith('http:') || thumbnailSrc.startsWith('https:') || thumbnailSrc.startsWith('data:'))
+    (thumbnailSrc.startsWith('http:') ||
+      thumbnailSrc.startsWith('https:') ||
+      thumbnailSrc.startsWith('data:') ||
+      thumbnailSrc.startsWith('/') ||
+      thumbnailSrc.startsWith(import.meta.env.BASE_URL || '/'))
       ? thumbnailSrc
       : thumbnailSrc
         ? publicUrl(thumbnailSrc.replace(/^\//, ''))
