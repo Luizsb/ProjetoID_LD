@@ -8,7 +8,6 @@ import Pagination from '@player/components/Pagination';
 import Footer from '@player/components/Footer';
 import { usePagination } from '@player/hooks/usePagination';
 import { useScrollPosition } from '@player/hooks/useScrollPosition';
-import EscolaDigital from '@player/components/EscolaDigital';
 import ConversaVai from '@player/components/ConversaVai';
 import ConversaVem from '@player/components/ConversaVem';
 import ParaSaberMais from '@player/components/ParaSaberMais';
@@ -19,6 +18,7 @@ import AgoraVoceJaSabe from '@player/components/AgoraVoceJaSabe';
 import AreaDesenho from '@player/components/AreaDesenho';
 import AtividadeMapaMalha from '@player/components/AtividadeMapaMalha';
 import AtividadeMapaFiguras from '@player/components/AtividadeMapaFiguras';
+import GameModal from '@player/components/GameModal';
 import QuestionRenderer from '@player/components/QuestionRenderer';
 import { TeacherAnswers } from '@player/components/TeacherAnswers';
 import { useUserAnswers } from '@player/hooks/useUserAnswers';
@@ -160,7 +160,7 @@ const chapterQuestions: Question[] = [
         height: 794,
         hint: 'Use as cores e o pincel para marcar o X (item a) e traçar o trajeto (item c).',
         borderColor: '#80298F',
-        maxWidth: '100%',
+        maxWidth: '320px',
       },
     },
     subQuestions: [
@@ -421,6 +421,29 @@ const chapterQuestions: Question[] = [
     question: 'Ruas perpendiculares:',
     placeholder: 'Digite aqui...',
     correctAnswer: 'Pessoal.',
+  },
+  {
+    id: 'ti77_q1',
+    type: 'text-input',
+    number: 1,
+    question:
+      'Beto, Elisa e Maria combinaram de se encontrar para brincar. Observe a localização de cada um deles na malha quadriculada a seguir.',
+    subQuestions: [
+      {
+        letter: 'a',
+        question:
+          'Sabendo que eles caminharam sobre os quadradinhos da malha, pinte de azul o ponto de encontro de Beto e Elisa, de acordo com os trajetos descritos.',
+        correctAnswer:
+          'O ponto de encontro é o quadradinho em que os trajetos de Beto e de Elisa se encontram (pintado de azul na malha-resposta).',
+      },
+      {
+        letter: 'b',
+        question:
+          'Considerando a localização de partida de Maria e o ponto em que as crianças se encontraram, descreva em seu caderno um trajeto que Maria possa ter percorrido.',
+        correctAnswer:
+          'Possibilidade de resposta: Maria caminhou por 3 quadradinhos e virou à direita, depois caminhou por 2 quadradinhos e virou à esquerda. Em seguida, caminhou por 2 quadradinhos e virou à direita. Então, caminhou por 2 quadradinhos.',
+      },
+    ],
   },
   {
     id: 'ruas_q_paralelas',
@@ -1872,32 +1895,30 @@ function BookCap01() {
                   </ul>
                   <h4 className="font-bold text-[#80298F] mb-2">Como fazer</h4>
 
-                  <div className="mb-6">
-                    <p className="mb-3">
-                      <span className="question-number" style={{ fontWeight: 700 }}>
-                        1.{' '}
-                      </span>
-                      <span style={{ color: 'black' }}>Dobre a folha ao meio.</span>
-                    </p>
-                    <div className="flex flex-col items-center">
+                  <div className="mb-6 flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-center sm:gap-8">
+                    <div className="flex flex-1 flex-col items-center text-center">
+                      <p className="mb-3">
+                        <span className="question-number" style={{ fontWeight: 700 }}>
+                          1.{' '}
+                        </span>
+                        <span style={{ color: 'black' }}>Dobre a folha ao meio.</span>
+                      </p>
                       <img
                         src={capAsset('images/page_19_img_106_593.png')}
                         alt="Um quadrado laranja em formato de losango, com uma linha pontilhada horizontal no meio e uma seta curva indicando um movimento de dobra."
                         className="h-auto w-full max-w-[200px]"
                       />
                     </div>
-                  </div>
 
-                  <div className="mb-6">
-                    <p className="mb-3">
-                      <span className="question-number" style={{ fontWeight: 700 }}>
-                        2.{' '}
-                      </span>
-                      <span style={{ color: 'black' }}>
-                        Dobre novamente a folha ao meio para marcar o centro.
-                      </span>
-                    </p>
-                    <div className="flex flex-col items-center">
+                    <div className="flex flex-1 flex-col items-center text-center">
+                      <p className="mb-3">
+                        <span className="question-number" style={{ fontWeight: 700 }}>
+                          2.{' '}
+                        </span>
+                        <span style={{ color: 'black' }}>
+                          Dobre novamente a folha ao meio para marcar o centro.
+                        </span>
+                      </p>
                       <img
                         src={capAsset('images/page_19_img_341_614.png')}
                         alt="Triângulo laranja com linha pontilhada vertical no centro e seta curva indicando dobra para marcar o meio."
@@ -1906,84 +1927,243 @@ function BookCap01() {
                     </div>
                   </div>
 
-                <Pagination currentPage={20} expandToBookColumn />
+                <Pagination currentPage={76} expandToBookColumn />
 
-                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 mb-6">
-                  <ol className="list-decimal ml-6 mb-4" start={3}>
-                    <li className="mb-2">Desdobre a folha e dobre nas linhas pontilhadas.</li>
-                    <li className="mb-2">Pegue uma das pontas da folha e dobre na linha pontilhada.</li>
-                    <li className="mb-2">Decore o rosto do cachorro com olhos, orelhas e focinho!</li>
-                  </ol>
-                </div>
-
-                <div className="flex flex-col items-center my-6">
-                  <img
-                    src={capAsset('images/page_20_img_241_187.png')}
-                    alt="Duas etapas de dobradura de papel para criar um rosto de cachorro, mostrando a dobra de uma aba para baixo e depois a dobra de um triângulo para cima."
-                    className="w-full max-w-[320px] sm:max-w-[380px] md:max-w-[480px] lg:max-w-[520px] h-auto rounded-[24px]"
+                <div className="my-6">
+                  <TeacherButton
+                    visible={SHOW_TEACHER_BUTTON}
+                    content={
+                      <p className="mb-3">
+                        Essa atividade é uma excelente estratégia para introduzir de forma concreta e significativa o conceito de ângulo. Por meio da dobradura da folha, os alunos conseguem visualizar e construir um ângulo reto com as próprias mãos, o que facilita o seu reconhecimento e a compreensão de que ele é formado por dois segmentos de reta perpendiculares. Essa vivência prática ajuda a tornar um conteúdo, muitas vezes abstrato, em algo palpável e acessível, além de desenvolver a percepção espacial, a coordenação motora fina e o raciocínio geométrico. As dobraduras feitas pelos alunos podem ser expostas em um painel na sala de aula.
+                      </p>
+                    }
                   />
                 </div>
 
-                <p className="mb-4 text-center font-bold text-[#80298F]">
-                  OBSERVE QUE, AO DOBRAR O PAPEL, FORMAMOS DIFERENTES TIPOS DE ÂNGULOS.
-                </p>
+                <div className="mb-6">
+                  <p className="mb-3">
+                    <span className="question-number" style={{ fontWeight: 700 }}>
+                      3.{' '}
+                    </span>
+                    <span style={{ color: 'black' }}>Desdobre a folha e dobre nas linhas pontilhadas.</span>
+                  </p>
+                  <div className="flex flex-col items-center">
+                    <img
+                      src={capAsset('images/page_20_img_376_82.png')}
+                      alt="Folha desdobrada com linhas pontilhadas indicando as dobras."
+                      className="h-auto w-full max-w-[280px]"
+                    />
+                  </div>
+                </div>
 
-                <div className="flex flex-col items-center my-6">
-                  <img
-                    src={capAsset('images/page_20_img_96_356.png')}
-                    alt="Figura de um cachorro feito de origami em cor laranja, com olhos redondos pretos e um nariz triangular preto."
-                    className="w-full max-w-[200px] h-auto rounded-[24px]"
-                  />
+                <div className="mb-6">
+                  <p className="mb-3">
+                    <span className="question-number" style={{ fontWeight: 700 }}>
+                      4.{' '}
+                    </span>
+                    <span style={{ color: 'black' }}>
+                      Pegue uma das pontas da folha e dobre na linha pontilhada.
+                    </span>
+                  </p>
+                  <div className="flex flex-col items-center">
+                    <img
+                      src={capAsset('images/page_20_img_241_187.png')}
+                      alt="Duas etapas de dobradura de papel para criar um rosto de cachorro, mostrando a dobra de uma aba para baixo e depois a dobra de um triângulo para cima."
+                      className="h-auto w-full max-w-[400px]"
+                    />
+                  </div>
+                </div>
+
+                <div className="mb-6">
+                  <p className="mb-3">
+                    <span className="question-number" style={{ fontWeight: 700 }}>
+                      5.{' '}
+                    </span>
+                    <span style={{ color: 'black' }}>
+                      Decore o rosto do cachorro com olhos, orelhas e focinho!
+                    </span>
+                  </p>
+                  <div className="flex flex-col items-center">
+                    <img
+                      src={capAsset('images/page_20_img_96_356.png')}
+                      alt="Figura de um cachorro feito de origami em cor laranja, com olhos redondos pretos e um nariz triangular preto."
+                      className="h-auto w-full max-w-[260px]"
+                    />
+                  </div>
+                </div>
+
+                <div className="balao-fala my-6">
+                  <div className="balao-fala__nuvem balao-fala__nuvem--longo">
+                    <strong>
+                      OBSERVE QUE, AO DOBRAR O PAPEL, FORMAMOS DIFERENTES TIPOS DE ÂNGULOS.
+                    </strong>
+                  </div>
+                  <figure className="flex flex-col items-center">
+                    <img
+                      className="balao-fala__personagem"
+                      src={capAsset('images/page_20_img_360_386.png')}
+                      alt="Personagem destacando a observação sobre os ângulos formados na dobradura."
+                    />
+                    <figcaption className="foto-com-credito-legenda">
+                      Emílio Barros Jourdani
+                    </figcaption>
+                  </figure>
                 </div>
 
                 <ul className="list-disc marker:text-[#80298F] ml-6 mb-4">
                   <li>Agora, pinte no seu origami os ângulos de acordo com a legenda a seguir.</li>
                 </ul>
 
-                <div className="overflow-x-auto mb-6">
-                  <table className="w-full max-w-md mx-auto border-collapse border border-gray-300">
+                <div className="mb-6 overflow-x-auto">
+                  <table className="mx-auto w-full max-w-md border-collapse">
                     <thead>
-                      <tr className="bg-gray-100">
-                        <th className="border border-gray-300 p-2 text-center">Cor</th>
-                        <th className="border border-gray-300 p-2 text-center">Ângulo</th>
+                      <tr style={{ backgroundColor: '#e86b6b' }}>
+                        <th className="border border-[#e86b6b] px-4 py-2 text-center font-bold text-white">
+                          Cor
+                        </th>
+                        <th className="border border-[#e86b6b] px-4 py-2 text-center font-bold text-white">
+                          Ângulo
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td className="border border-gray-300 p-2 text-center font-bold text-green-600">Verde</td>
-                        <td className="border border-gray-300 p-2 text-center">Reto</td>
+                        <td
+                          className="border border-[#e86b6b] px-4 py-2 text-center font-bold"
+                          style={{ color: '#2e7d32' }}
+                        >
+                          Verde
+                        </td>
+                        <td className="border border-[#e86b6b] px-4 py-2 text-center text-black">
+                          Reto
+                        </td>
                       </tr>
                       <tr>
-                        <td className="border border-gray-300 p-2 text-center font-bold text-red-600">Vermelho</td>
-                        <td className="border border-gray-300 p-2 text-center">Menor que o reto</td>
+                        <td
+                          className="border border-[#e86b6b] px-4 py-2 text-center font-bold"
+                          style={{ color: '#d32f2f' }}
+                        >
+                          Vermelho
+                        </td>
+                        <td className="border border-[#e86b6b] px-4 py-2 text-center text-black">
+                          Menor que o reto
+                        </td>
                       </tr>
                       <tr>
-                        <td className="border border-gray-300 p-2 text-center font-bold text-blue-600">Azul</td>
-                        <td className="border border-gray-300 p-2 text-center">Maior que o reto</td>
+                        <td
+                          className="border border-[#e86b6b] px-4 py-2 text-center font-bold"
+                          style={{ color: '#1565c0' }}
+                        >
+                          Azul
+                        </td>
+                        <td className="border border-[#e86b6b] px-4 py-2 text-center text-black">
+                          Maior que o reto
+                        </td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
 
-                <Pagination currentPage={21} expandToBookColumn />
+              
+                <h3 className="atividade-digital-heading">ATIVIDADE DIGITAL</h3>
+                <p className="mb-4 indent-6">
+                  Acesse para descobrir os ângulos em outras dobraduras.
+                </p>
+                <div className="my-4 flex justify-center">
+                  <GameModal
+                    thumbnailSrc="images/thumb_descobrindo_angulos.png"
+                    introTitle="Descobrindo ângulos em dobraduras."
+                    introHint="Clique para jogar"
+                    thumbnailAlt="Descobrindo ângulos em dobraduras"
+                  >
+                    <iframe
+                      src="https://go.sae.digital/TMITzO"
+                      title="Descobrindo ângulos em dobraduras"
+                      className="h-full w-full border-0 bg-black"
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </GameModal>
+                </div>
+
+                <Pagination currentPage={77} expandToBookColumn />
 
                 <TestandoIdeias />
-                <p className="mb-4 indent-6 font-bold">
-                  1 Beto, Elisa e Maria combinaram de se encontrar para brincar. Observe a localização de cada um deles na malha quadriculada a seguir.
+
+                <div className="my-6">
+                  <TeacherButton
+                    visible={SHOW_TEACHER_BUTTON}
+                    content={
+                      <>
+                        <p className="mb-3">
+                          <span className="question-number" style={{ fontWeight: 700 }}>1.</span>{' '}
+                          <strong>BNCC:</strong> EF04MA16
+                        </p>
+                        <TeacherAnswers questions={getQuestionById('ti77_q1')} />
+                        <p className="mb-2 mt-4 font-bold">Malha-resposta (item a):</p>
+                        <img
+                          src={capAsset('images/malha_beto_elisa_maria_resposta.png')}
+                          alt="Malha com o ponto de encontro de Beto e Elisa pintado de azul"
+                          className="w-full max-w-[420px] h-auto mx-auto rounded-lg"
+                        />
+                      </>
+                    }
+                  />
+                </div>
+
+                <p className="mb-4">
+                  <span className="question-number" style={{ fontWeight: 700 }}>
+                    1.{' '}
+                  </span>
+                  <span style={{ color: 'black' }}>
+                    Beto, Elisa e Maria combinaram de se encontrar para brincar. Observe a localização de cada um deles na malha quadriculada a seguir.
+                  </span>
                 </p>
 
-                <p className="mb-2"><span className="question-number" style={{ fontWeight: 700 }}>a)</span> Sabendo que eles caminharam sobre os quadradinhos da malha, pinte de <strong>azul</strong> o ponto de encontro de Beto e Elisa, de acordo com os trajetos descritos a seguir:</p>
-                <ul className="list-disc ml-12 mb-4">
-                  <li>Elisa seguiu em frente por 7 quadradinhos e virou à direita. Em seguida, andou 3 quadradinhos.</li>
-                  <li>Beto seguiu em frente por 3 quadradinhos e virou à direita. Depois, andou 3 quadradinhos e virou à esquerda. Em seguida, andou mais 3 quadradinhos, virou à direita e andou 2 quadradinhos.</li>
-                </ul>
-
-                <p className="mb-2"><span className="question-number" style={{ fontWeight: 700 }}>b)</span> Considerando a localização de partida de Maria e o ponto em que as crianças se encontraram, descreva em seu caderno um trajeto que Maria possa ter percorrido.</p>
-                <p className="mb-4 text-gray-600 italic">
-                  Possibilidade de resposta: Maria caminhou por 3 quadradinhos e virou à direita, depois caminhou por 2 quadradinhos e virou à esquerda. Em seguida, caminhou por 2 quadradinhos e virou à direita. Então, caminhou por 2 quadradinhos.
+                <p className="mb-2">
+                  <span className="question-number" style={{ fontWeight: 700 }}>a)</span>{' '}
+                  Sabendo que eles caminharam sobre os quadradinhos da malha, pinte de{' '}
+                  <strong style={{ color: '#0073b1' }}>azul</strong> o ponto de encontro de Beto e Elisa, de acordo com os trajetos descritos a seguir:
                 </p>
 
-                <Pagination currentPage={22} expandToBookColumn />
+                <div
+                  className="my-4 rounded-[20px] px-6 py-5 md:px-8"
+                  style={{ backgroundColor: '#f8d4d8' }}
+                >
+                  <ul className="list-disc ml-5 mb-0 space-y-2">
+                    <li>
+                      Elisa seguiu em frente por 7 quadradinhos e virou à direita. Em seguida, andou 3 quadradinhos.
+                    </li>
+                    <li>
+                      Beto seguiu em frente por 3 quadradinhos e virou à direita. Depois, andou 3 quadradinhos e virou à esquerda. Em seguida, andou mais 3 quadradinhos, virou à direita e andou 2 quadradinhos.
+                    </li>
+                  </ul>
+                </div>
+
+                <AreaDesenho
+                  storageKey="sae-at27-ai4-mat-c03-malha-ti77-q1a"
+                  backgroundImage={capAsset('images/malha_beto_elisa_maria.png')}
+                  width={720}
+                  height={780}
+                  borderColor="#ea8244"
+                  hint="Pinte de azul o ponto de encontro de Beto e Elisa"
+                  maxWidth="480px"
+                />
+
+                <p className="mb-4 mt-6 flex items-start gap-3">
+                  <img
+                    src={publicUrl('images/iconeCaderno.png')}
+                    alt=""
+                    className="h-10 w-10 object-contain flex-shrink-0 mt-0.5"
+                  />
+                  <span>
+                    <span className="question-number" style={{ fontWeight: 700 }}>b)</span>{' '}
+                    Considerando a localização de partida de Maria e o ponto em que as crianças se encontraram,
+                    descreva em seu caderno um trajeto que Maria possa ter percorrido.
+                  </span>
+                </p>
+
+                <Pagination currentPage={78} expandToBookColumn />
 
                 <p className="mb-4 indent-6 font-bold">
                   2 Denise e sua avó chamaram um carro em um aplicativo de carona para ir ao dentista. Observe na tela do celular da avó de Denise o trajeto percorrido por esse motorista.
