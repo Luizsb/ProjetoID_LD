@@ -441,6 +441,7 @@ const chapterQuestions: Question[] = [
         question:
           'Considerando a localização de partida de Maria e o ponto em que as crianças se encontraram, descreva em seu caderno um trajeto que Maria possa ter percorrido.',
         correctAnswer:
+        
           'Possibilidade de resposta: Maria caminhou por 3 quadradinhos e virou à direita, depois caminhou por 2 quadradinhos e virou à esquerda. Em seguida, caminhou por 2 quadradinhos e virou à direita. Então, caminhou por 2 quadradinhos.',
       },
     ],
@@ -2099,13 +2100,28 @@ function BookCap01() {
                           <span className="question-number" style={{ fontWeight: 700 }}>1.</span>{' '}
                           <strong>BNCC:</strong> EF04MA16
                         </p>
-                        <TeacherAnswers questions={getQuestionById('ti77_q1')} />
-                        <p className="mb-2 mt-4 font-bold">Malha-resposta (item a):</p>
+                        <p className="mb-3 font-semibold">Respostas:</p>
+                        <p className="mb-2">
+                          <span className="question-number" style={{ fontWeight: 700 }}>1. </span>
+                          <span className="question-number" style={{ fontWeight: 700 }}>a) </span>
+                          O ponto de encontro é o quadradinho em que os trajetos de Beto e de Elisa se encontram (pintado de azul na malha a seguir).
+                        </p>
                         <img
                           src={capAsset('images/malha_beto_elisa_maria_resposta.png')}
                           alt="Malha com o ponto de encontro de Beto e Elisa pintado de azul"
-                          className="w-full max-w-[420px] h-auto mx-auto rounded-lg"
+                          className="mb-4 w-full max-w-[420px] h-auto mx-auto rounded-lg"
                         />
+                        <p className="mb-3 flex items-start gap-2">
+                          <img
+                            src={publicUrl('images/iconeCaderno.png')}
+                            alt=""
+                            className="h-8 w-8 object-contain flex-shrink-0 mt-0.5"
+                          />
+                          <span>
+                            <span className="question-number" style={{ fontWeight: 700 }}>b) </span>
+                            Possibilidade de resposta: Maria caminhou por 3 quadradinhos e virou à direita, depois caminhou por 2 quadradinhos e virou à esquerda. Em seguida, caminhou por 2 quadradinhos e virou à direita. Então, caminhou por 2 quadradinhos.
+                          </span>
+                        </p>
                       </>
                     }
                   />
@@ -2154,7 +2170,7 @@ function BookCap01() {
                   <img
                     src={publicUrl('images/iconeCaderno.png')}
                     alt=""
-                    className="h-10 w-10 object-contain flex-shrink-0 mt-0.5"
+                    className="h-10 w-8 object-contain flex-shrink-0 mt-0.5"
                   />
                   <span>
                     <span className="question-number" style={{ fontWeight: 700 }}>b)</span>{' '}
