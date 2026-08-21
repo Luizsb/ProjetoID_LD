@@ -10,7 +10,8 @@ function Glossario({ termo, definicao }: GlossarioProps) {
         <span className="glossario-caixa__seta" aria-hidden>
           ▶
         </span>{' '}
-        <strong className="glossario-caixa__termo">{termo}:</strong> {definicao}
+        <strong className="glossario-caixa__termo">{termo}</strong>
+        <span className="glossario-caixa__sep">:</span> {definicao}
       </p>
     </aside>
   );

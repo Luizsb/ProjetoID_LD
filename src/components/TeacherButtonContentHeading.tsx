@@ -8,7 +8,7 @@ function TeacherButtonContentHeading({ children }: TeacherButtonContentHeadingPr
   return (
     <h4
       className="mb-3 mt-4 text-lg font-bold"
-      style={{ color: '#80298F', fontFamily: 'myriad-vf, sans-serif' }}
+      style={{ color: 'var(--professor-bg, #80298F)', fontFamily: 'myriad-vf, sans-serif' }}
     >
       {children}
     </h4>

@@ -17,7 +17,7 @@ function QuestionFillBlanks({
     <div className="mb-6">
       <p className="mb-4 text-black">
         {question.number !== undefined && (
-          <span className="font-bold text-[#80298F]">{question.number}. </span>
+          <span className="question-number font-bold" style={{ color: 'var(--question-number-color, #80298F)' }}>{question.number}. </span>
         )}
         <span dangerouslySetInnerHTML={{ __html: question.question }} />
       </p>
@@ -25,7 +25,7 @@ function QuestionFillBlanks({
       <ul className="ml-0 list-none space-y-4">
         {question.items.map((item) => (
           <li key={item.letter} className="text-black">
-            <span className="mr-2 font-bold text-[#80298F]">{item.letter})</span>
+            <span className="question-letter mr-2">{item.letter})</span>
             {item.fragments.map((fragment, index) => {
               const blankId = `${question.id}_${item.letter}_${index}`;
               const typedValue = (userAnswers[blankId] as string) || '';
@@ -36,7 +36,7 @@ function QuestionFillBlanks({
 
               return (
                 <span key={`${item.letter}_${index}`}>
-                  <span>{fragment}</span>
+                  <span dangerouslySetInnerHTML={{ __html: fragment }} />
                   {!isLastFragment && (
                     <input
                       type="text"
