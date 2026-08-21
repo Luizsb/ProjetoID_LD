@@ -1011,6 +1011,169 @@ td {
   }
 }
 
+.atividade-malha-encontro__wrap {
+  width: min(100%, 380px);
+  box-sizing: border-box;
+  padding: 2.1rem 2.8rem 2.3rem;
+}
+
+.atividade-malha-encontro__board {
+  position: relative;
+  width: 100%;
+}
+
+.atividade-malha-encontro__grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(11, 1fr);
+  aspect-ratio: 10 / 11;
+  width: 100%;
+  border: 2px solid #333;
+  background: #fff;
+}
+
+.atividade-malha-encontro__cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  background: #fff;
+  color: #fff;
+  font-size: clamp(0.75rem, 2.4vw, 1.1rem);
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 0.15s ease;
+}
+
+.atividade-malha-encontro__cell:nth-child(10n) {
+  border-right: none;
+}
+
+.atividade-malha-encontro__cell:nth-child(n + 101) {
+  border-bottom: none;
+}
+
+.atividade-malha-encontro__cell.is-beto {
+  background-color: #f39c12;
+}
+
+.atividade-malha-encontro__cell.is-maria {
+  background-color: #e74c3c;
+}
+
+.atividade-malha-encontro__cell.is-elisa {
+  background-color: #9b59b6;
+}
+
+.atividade-malha-encontro__cell.is-ponto {
+  background-color: #5dade2 !important;
+}
+
+.atividade-malha-encontro__label {
+  position: absolute;
+  z-index: 2;
+  color: #c0392b;
+  font-weight: 700;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  line-height: 1.1;
+  text-align: center;
+  pointer-events: none;
+}
+
+.atividade-malha-encontro__label--elisa {
+  top: -1.9rem;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05rem;
+}
+
+.atividade-malha-encontro__label--beto {
+  left: -2.75rem;
+  transform: translateY(-50%);
+}
+
+.atividade-malha-encontro__label--maria {
+  bottom: -1.9rem;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05rem;
+}
+
+.atividade-malha-encontro__seta {
+  display: block;
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+@media (max-width: 640px) {
+  .atividade-malha-encontro__wrap {
+    width: min(100%, 320px);
+    padding: 1.9rem 2.3rem 2.1rem;
+  }
+
+  .atividade-malha-encontro__label {
+    font-size: 0.75rem;
+  }
+
+  .atividade-malha-encontro__label--beto {
+    left: -2.3rem;
+  }
+}
+
+.atividade-malha-cores__grid {
+  display: grid;
+  width: min(100%, 520px);
+  aspect-ratio: 18 / 7;
+  border: 2px solid #7eb8d4;
+  background: #fff;
+  gap: 0;
+}
+
+.atividade-malha-cores__cell {
+  min-height: 0;
+  border: 1px solid #b7d7ea;
+  background: #fff;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.08s ease, background-color 0.08s ease;
+}
+
+.atividade-malha-cores__cell:hover {
+  border-color: #333;
+  transform: scale(1.08);
+  z-index: 1;
+}
+
+.atividade-malha-cores__cell.is-laranja {
+  background-color: #e39026;
+}
+
+.atividade-malha-cores__cell.is-verde {
+  background-color: #008a4b;
+}
+
+.atividade-malha-cores__cell.is-azul {
+  background-color: #0073ae;
+}
+
+.atividade-malha-cores__cell.is-vermelho {
+  background-color: #ed1c24;
+}
+
+.atividade-marcar-x__x {
+  font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+  transform: translate(-50%, -55%);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
 .balao-fala {
   display: flex;
   flex-direction: column;

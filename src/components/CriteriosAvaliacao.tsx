@@ -78,7 +78,7 @@ function CriteriosAvaliacao({
           const answer = userAnswers[uniqueId] as string | boolean | undefined;
 
           return (
-            <div key={criterio.id} className="grid grid-cols-[auto_1fr] items-start gap-4 md:gap-6">
+            <div key={criterio.id} className="grid grid-cols-[auto_1fr] items-center gap-4 md:gap-6">
               <div className="grid grid-cols-3 gap-3 md:gap-5">
                 {options.map((option) => (
                   <label key={option.id} className="flex items-center justify-center gap-2">
@@ -99,7 +99,7 @@ function CriteriosAvaliacao({
                 ))}
               </div>
 
-              <p className="criterio-pergunta">{criterio.pergunta}</p>
+              <p className="criterio-pergunta m-0 flex items-center">{criterio.pergunta}</p>
             </div>
           );
         })}

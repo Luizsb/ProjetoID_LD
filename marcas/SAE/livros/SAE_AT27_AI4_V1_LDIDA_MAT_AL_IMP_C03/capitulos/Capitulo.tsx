@@ -15,9 +15,13 @@ import OrganizandoConhecimentos from '@player/components/OrganizandoConhecimento
 import SaberesAcao from '@player/components/SaberesAcao';
 import TestandoIdeias from '@player/components/TestandoIdeias';
 import AgoraVoceJaSabe from '@player/components/AgoraVoceJaSabe';
+import CriteriosAvaliacao from '@player/components/CriteriosAvaliacao';
 import AreaDesenho from '@player/components/AreaDesenho';
 import AtividadeMapaMalha from '@player/components/AtividadeMapaMalha';
 import AtividadeMapaFiguras from '@player/components/AtividadeMapaFiguras';
+import AtividadeMalhaEncontro from '@player/components/AtividadeMalhaEncontro';
+import AtividadeMalhaCores from '@player/components/AtividadeMalhaCores';
+import AtividadeMarcarX from '@player/components/AtividadeMarcarX';
 import GameModal from '@player/components/GameModal';
 import QuestionRenderer from '@player/components/QuestionRenderer';
 import { TeacherAnswers } from '@player/components/TeacherAnswers';
@@ -441,10 +445,59 @@ const chapterQuestions: Question[] = [
         question:
           'Considerando a localização de partida de Maria e o ponto em que as crianças se encontraram, descreva em seu caderno um trajeto que Maria possa ter percorrido.',
         correctAnswer:
-        
           'Possibilidade de resposta: Maria caminhou por 3 quadradinhos e virou à direita, depois caminhou por 2 quadradinhos e virou à esquerda. Em seguida, caminhou por 2 quadradinhos e virou à direita. Então, caminhou por 2 quadradinhos.',
       },
     ],
+  },
+  {
+    id: 'ti78_q2',
+    type: 'text-input',
+    number: 2,
+    question:
+      'Denise e sua avó chamaram um carro em um aplicativo de carona para ir ao dentista. Observe na tela do celular da avó de Denise o trajeto percorrido por esse motorista.',
+    subQuestions: [
+      {
+        letter: 'a',
+        question: 'Quantos dos giros que o carro deu correspondem a um ângulo reto?',
+        placeholder: 'Digite aqui...',
+        correctAnswer: '5 giros.',
+      },
+      {
+        letter: 'b',
+        question: 'Quantos dos giros que o carro deu correspondem a um ângulo menor do que o ângulo reto?',
+        placeholder: 'Digite aqui...',
+        correctAnswer: '1 giro.',
+      },
+    ],
+  },
+  {
+    id: 'ti78_q3',
+    type: 'text-input',
+    number: 3,
+    question:
+      'Júlia está dando giros com seu skate. Ela começou posicionada de frente para você. Em seguida, ela deu o giro 1 e, na sequência, deu o giro 2. Observe a posição de Júlia após cada giro. Descreva os giros dados por Júlia.',
+    subQuestions: [
+      {
+        letter: 'a',
+        question: 'Giro 1',
+        correctAnswer: 'Júlia deu um giro formando um ângulo reto para a esquerda.',
+      },
+      {
+        letter: 'b',
+        question: 'Giro 2',
+        correctAnswer: 'Júlia deu um giro formando um ângulo reto para a esquerda.',
+      },
+    ],
+  },
+  {
+    id: 'ti80_cassiano_caminho',
+    type: 'text-input',
+    listDiscLayout: true,
+    question:
+      'Que caminho Cassiano pode percorrer para chegar à rua do Riacho? Descreva cada movimento nas linhas a seguir.',
+    placeholder: 'Digite aqui...',
+    correctAnswer:
+      'Para chegar a essa rua, Cassiano pode percorrer diferentes trajetos: Cassiano pode seguir pela Rua Encantada, virar à esquerda na Rua das Amoras. Então, seguir em frente e virar à direita na Rua Azul e depois à direita na Rua do Riacho. Ele também pode seguir em frente na Rua do Arvoredo e virar à direita na Rua Azul. Então, seguir em frente até a Rua do Riacho, virando à direita ao chegar nela.',
   },
   {
     id: 'ruas_q_paralelas',
@@ -2109,7 +2162,7 @@ function BookCap01() {
                         <img
                           src={capAsset('images/malha_beto_elisa_maria_resposta.png')}
                           alt="Malha com o ponto de encontro de Beto e Elisa pintado de azul"
-                          className="mb-4 w-full max-w-[420px] h-auto mx-auto rounded-lg"
+                          className="mb-4 w-full max-w-[320px] h-auto mx-auto rounded-lg"
                         />
                         <p className="mb-3 flex items-start gap-2">
                           <img
@@ -2156,14 +2209,11 @@ function BookCap01() {
                   </ul>
                 </div>
 
-                <AreaDesenho
+                <AtividadeMalhaEncontro
                   storageKey="sae-at27-ai4-mat-c03-malha-ti77-q1a"
-                  backgroundImage={capAsset('images/malha_beto_elisa_maria.png')}
-                  width={720}
-                  height={780}
-                  borderColor="#ea8244"
-                  hint="Pinte de azul o ponto de encontro de Beto e Elisa"
-                  maxWidth="480px"
+                  elisaCol={9}
+                  betoRow={2}
+                  mariaCol={2}
                 />
 
                 <p className="mb-4 mt-6 flex items-start gap-3">
@@ -2181,8 +2231,67 @@ function BookCap01() {
 
                 <Pagination currentPage={78} expandToBookColumn />
 
-                <p className="mb-4 indent-6 font-bold">
-                  2 Denise e sua avó chamaram um carro em um aplicativo de carona para ir ao dentista. Observe na tela do celular da avó de Denise o trajeto percorrido por esse motorista.
+                <div className="my-6">
+                  <TeacherButton
+                    visible={SHOW_TEACHER_BUTTON}
+                    content={
+                      <>
+                        <p className="mb-2">
+                          <span className="question-number" style={{ fontWeight: 700 }}>2.</span>{' '}
+                          <strong>BNCC:</strong> EF04MA18
+                        </p>
+                        <TeacherAnswers questions={getQuestionById('ti78_q2')} />
+
+                        <p className="mb-2 mt-4">
+                          <span className="question-number" style={{ fontWeight: 700 }}>3.</span>{' '}
+                          <strong>BNCC:</strong> EF04MA18
+                        </p>
+                        <div className="mb-4 overflow-x-auto">
+                          <table className="mx-auto w-full max-w-xl border-collapse text-sm">
+                            <tbody>
+                              {[
+                                {
+                                  label: 'Giro 1',
+                                  answer: 'Júlia deu um giro formando um ângulo reto para a esquerda.',
+                                },
+                                {
+                                  label: 'Giro 2',
+                                  answer: 'Júlia deu um giro formando um ângulo reto para a esquerda.',
+                                },
+                              ].map((row) => (
+                                <tr key={row.label}>
+                                  <td
+                                    className="w-[88px] border border-[#f0a8a0] px-3 py-3 text-center font-bold text-white"
+                                    style={{ backgroundColor: '#f08080' }}
+                                  >
+                                    {row.label}
+                                  </td>
+                                  <td
+                                    className="border border-[#f0a8a0] px-3 py-3"
+                                    style={{ color: '#00aed9' }}
+                                  >
+                                    {row.answer}
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                        <p className="mb-3">
+                          Observe se os alunos compreenderam que o giro 2 foi dado a partir da posição final do giro 1. Mostre aos alunos que, depois desses dois giros, Júlia ficou em orientação contrária à inicial (frente e costas).
+                        </p>
+                      </>
+                    }
+                  />
+                </div>
+
+                <p className="mb-4">
+                  <span className="question-number" style={{ fontWeight: 700 }}>
+                    2.{' '}
+                  </span>
+                  <span style={{ color: 'black' }}>
+                    Denise e sua avó chamaram um carro em um aplicativo de carona para ir ao dentista. Observe na tela do celular da avó de Denise o trajeto percorrido por esse motorista.
+                  </span>
                 </p>
 
                 <figure className="foto-com-credito foto-com-credito--sm">
@@ -2193,11 +2302,44 @@ function BookCap01() {
                   <figcaption>Gabrielli Masi</figcaption>
                 </figure>
 
-                <p className="mb-2"><span className="question-number" style={{ fontWeight: 700 }}>a)</span> Quantos dos giros que o carro deu correspondem a um ângulo reto?</p>
-                <p className="mb-2"><span className="question-number" style={{ fontWeight: 700 }}>b)</span> Quantos dos giros que o carro deu correspondem a um ângulo menor do que o ângulo reto?</p>
+                <div className="my-4 space-y-4">
+                  {[
+                    {
+                      id: 'ti78_q2_a',
+                      letter: 'a',
+                      text: 'Quantos dos giros que o carro deu correspondem a um ângulo reto?',
+                    },
+                    {
+                      id: 'ti78_q2_b',
+                      letter: 'b',
+                      text: 'Quantos dos giros que o carro deu correspondem a um ângulo menor do que o ângulo reto?',
+                    },
+                  ].map((item) => (
+                    <div key={item.id}>
+                      <p className="mb-2">
+                        <span className="question-number" style={{ fontWeight: 700 }}>
+                          {item.letter})
+                        </span>{' '}
+                        {item.text}
+                      </p>
+                      <input
+                        type="text"
+                        value={(userAnswers[item.id] as string) || ''}
+                        onChange={(e) => handleAnswerChange(item.id, e.target.value)}
+                        placeholder="Digite aqui..."
+                        className="h-[31px] w-full max-w-full rounded-[5px] bg-[rgba(221,221,221,0.50)] px-3 text-[14px] text-black placeholder:text-[#BDBDBD] focus:outline-none"
+                      />
+                    </div>
+                  ))}
+                </div>
 
-                <p className="mb-4 indent-6 font-bold mt-8">
-                  3 Júlia está dando giros com seu skate. Ela começou posicionada de frente para você. Em seguida, ela deu o giro 1 e, na sequência, deu o giro 2. Observe a posição de Júlia após cada giro. Descreva os giros dados por Júlia.
+                <p className="mb-4 mt-8">
+                  <span className="question-number" style={{ fontWeight: 700 }}>
+                    3.{' '}
+                  </span>
+                  <span style={{ color: 'black' }}>
+                    Júlia está dando giros com seu <em>skate</em>. Ela começou posicionada de frente para você. Em seguida, ela deu o giro 1 e, na sequência, deu o giro 2. Observe a posição de Júlia após cada giro. Descreva os giros dados por Júlia.
+                  </span>
                 </p>
 
                 <div className="flex flex-col items-center my-6">
@@ -2208,79 +2350,168 @@ function BookCap01() {
                   />
                 </div>
 
-                <p className="mb-2"><strong>Giro 1</strong> Júlia deu um giro formando um ângulo reto para a esquerda.</p>
-                <p className="mb-4"><strong>Giro 2</strong> Júlia deu um giro formando um ângulo reto para a esquerda.</p>
+                <div className="mb-6 overflow-x-auto">
+                  <table className="mx-auto w-full max-w-xl border-collapse text-sm">
+                    <tbody>
+                      {[
+                        { id: 'ti78_q3_giro_1', label: 'Giro 1' },
+                        { id: 'ti78_q3_giro_2', label: 'Giro 2' },
+                      ].map((row) => (
+                        <tr key={row.id}>
+                          <td
+                            className="w-[88px] border border-[#f0a8a0] px-3 py-3 text-center font-bold text-white align-middle"
+                            style={{ backgroundColor: '#f08080' }}
+                          >
+                            {row.label}
+                          </td>
+                          <td className="border border-[#f0a8a0] px-2 py-2 align-middle">
+                            <input
+                              type="text"
+                              value={(userAnswers[row.id] as string) || ''}
+                              onChange={(e) => handleAnswerChange(row.id, e.target.value)}
+                              placeholder="Digite aqui..."
+                              className="h-[36px] w-full rounded-[5px] bg-[rgba(221,221,221,0.50)] px-3 text-[14px] text-black placeholder:text-[#BDBDBD] focus:outline-none"
+                            />
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                <Pagination currentPage={79} expandToBookColumn />
 
                 <div className="my-6">
                   <TeacherButton
                     visible={SHOW_TEACHER_BUTTON}
                     content={
-                      <p className="mb-3">
-                        Observe se os alunos compreenderam que o giro 2 foi dado a partir da posição final do giro 1. Mostre aos alunos que, depois desses dois giros, Júlia ficou em orientação contrária à inicial (frente e costas).
-                      </p>
+                      <>
+                        <p className="mb-2">
+                          <span className="question-number" style={{ fontWeight: 700 }}>4.</span>{' '}
+                          <strong>BNCC:</strong> EF04MA18
+                        </p>
+                        <p className="mb-4">
+                          Os alunos devem desenhar um retângulo ou um quadrado laranja, um quadrado verde, um triângulo acutângulo azul e um triângulo retângulo vermelho.
+                        </p>
+
+                        <p className="mb-2">
+                          <span className="question-number" style={{ fontWeight: 700 }}>5.</span>{' '}
+                          <strong>BNCC:</strong> EF04MA16
+                        </p>
+                        <p className="mb-2">Localização de Cassiano (marque o <strong>X</strong> vermelho):</p>
+                        <img
+                          src={capAsset('images/mapa_cassiano_resposta.png')}
+                          alt="Mapa com o X vermelho indicando a localização de Cassiano"
+                          className="mb-3 w-full max-w-[420px] h-auto mx-auto rounded-lg"
+                        />
+                      </>
                     }
                   />
                 </div>
 
-                <Pagination currentPage={23} expandToBookColumn />
-
-                <p className="mb-4 indent-6 font-bold">
-                  4 Com uma régua, desenhe na malha quadriculada a seguir figuras geométricas planas de acordo com a legenda de cores.
+                <p className="mb-4">
+                  <span className="question-number" style={{ fontWeight: 700 }}>
+                    4.{' '}
+                  </span>
+                  <span style={{ color: 'black' }}>
+                    Com uma régua, desenhe na malha quadriculada a seguir figuras geométricas planas de acordo com a legenda de cores.
+                  </span>
                 </p>
 
-                <div className="overflow-x-auto mb-6">
-                  <table className="w-full max-w-md mx-auto border-collapse border border-gray-300">
+                <div className="mb-6 overflow-x-auto">
+                  <table className="mx-auto w-full max-w-lg border-collapse text-sm">
                     <thead>
-                      <tr className="bg-gray-100">
-                        <th className="border border-gray-300 p-2 text-left">Cor</th>
-                        <th className="border border-gray-300 p-2 text-left">Figura formada por</th>
+                      <tr style={{ backgroundColor: '#e86b6b' }}>
+                        <th className="border border-[#e0cfcf] px-3 py-2 text-left font-bold text-white">Cor</th>
+                        <th className="border border-[#e0cfcf] px-3 py-2 text-left font-bold text-white">
+                          Figura formada por
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td className="border border-gray-300 p-2 font-bold text-orange-500">Laranja</td>
-                        <td className="border border-gray-300 p-2">4 lados e 4 ângulos retos.</td>
+                        <td className="border border-[#e8d5d5] px-3 py-2 font-bold" style={{ color: '#e39026' }}>
+                          Laranja
+                        </td>
+                        <td className="border border-[#e8d5d5] px-3 py-2">4 lados e 4 ângulos retos.</td>
                       </tr>
                       <tr>
-                        <td className="border border-gray-300 p-2 font-bold text-green-600">Verde</td>
-                        <td className="border border-gray-300 p-2">4 lados de mesma medida e 4 ângulos retos.</td>
+                        <td className="border border-[#e8d5d5] px-3 py-2 font-bold" style={{ color: '#008a4b' }}>
+                          Verde
+                        </td>
+                        <td className="border border-[#e8d5d5] px-3 py-2">
+                          4 lados de mesma medida e 4 ângulos retos.
+                        </td>
                       </tr>
                       <tr>
-                        <td className="border border-gray-300 p-2 font-bold text-red-600">Vermelho</td>
-                        <td className="border border-gray-300 p-2">3 lados e 1 ângulo reto.</td>
+                        <td className="border border-[#e8d5d5] px-3 py-2 font-bold" style={{ color: '#0073ae' }}>
+                          Azul
+                        </td>
+                        <td className="border border-[#e8d5d5] px-3 py-2">
+                          3 lados e 3 ângulos menores do que o reto.
+                        </td>
                       </tr>
                       <tr>
-                        <td className="border border-gray-300 p-2 font-bold text-blue-600">Azul</td>
-                        <td className="border border-gray-300 p-2">3 lados e 3 ângulos menores do que o reto.</td>
+                        <td className="border border-[#e8d5d5] px-3 py-2 font-bold" style={{ color: '#ed1c24' }}>
+                          Vermelho
+                        </td>
+                        <td className="border border-[#e8d5d5] px-3 py-2">3 lados e 1 ângulo reto.</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
 
+                <AtividadeMalhaCores
+                  storageKey="sae-at27-ai4-mat-c03-malha-cores-ti79-q4"
+                  cols={18}
+                  rows={7}
+                />
+
+                <p className="mb-4 mt-8">
+                  <span className="question-number" style={{ fontWeight: 700 }}>
+                    5.{' '}
+                  </span>
+                  <span style={{ color: 'black' }}>
+                    O <strong>X</strong> em vermelho neste mapa de ruas mostra a localização de Cassiano. Observe o mapa e
+                    resolva o item.
+                  </span>
+                </p>
+
+                <AtividadeMarcarX
+                  imageSrc={capAsset('images/page_23_img_167_452.png')}
+                  imageAlt="Mapa de ruas com casas, hospital, posto e veículos"
+                  credit="Beto Zoellner"
+                  storageKey="sae-at27-ai4-mat-c03-mapa-cassiano-ti79-q5"
+                />
+
+                <Pagination currentPage={80} expandToBookColumn />
+
                 <div className="my-6">
                   <TeacherButton
                     visible={SHOW_TEACHER_BUTTON}
                     content={
-                      <p className="mb-3">
-                        Os alunos devem desenhar um retângulo ou um quadrado laranja, um quadrado verde, um triângulo acutângulo azul e um triângulo retângulo vermelho.
-                      </p>
+                      <>
+                        <p className="mb-2">
+                          <span className="question-number" style={{ fontWeight: 700 }}>5.</span>{' '}
+                          <strong>BNCC:</strong> EF04MA16
+                        </p>
+                        <TeacherAnswers questions={getQuestionById('ti80_cassiano_caminho')} />
+                        <p className="mb-2 mt-4 font-semibold">Agora você já sabe</p>
+                        <p className="mb-3">
+                          <a
+                            href="https://go.sae.digital/dCDxaP"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-semibold text-[#80298F] underline underline-offset-2 hover:text-[#6a2576]"
+                          >
+                            Acesse o QR Code para agendar a Trilha Digital deste capítulo e avaliar o progresso dos
+                            estudantes.
+                          </a>
+                        </p>
+                      </>
                     }
                   />
                 </div>
-
-                <p className="mb-4 indent-6 font-bold mt-8">
-                  5 O <strong>X</strong> em vermelho neste mapa de ruas mostra a localização de Cassiano. Observe o mapa e resolva o item.
-                </p>
-
-                <figure className="foto-com-credito foto-com-credito--lg">
-                  <img
-                    src={capAsset('images/page_23_img_167_452.png')}
-                    alt="Mapa de ruas"
-                  />
-                  <figcaption>Beto Zoellner</figcaption>
-                </figure>
-
-                <Pagination currentPage={24} expandToBookColumn />
 
                 <figure className="foto-com-credito foto-com-credito--lg">
                   <img
@@ -2290,29 +2521,63 @@ function BookCap01() {
                   <figcaption>Composição gerada por Adobe Firefly</figcaption>
                 </figure>
 
-                <ul className="list-disc marker:text-[#80298F] ml-6 mb-4">
-                  <li>Que caminho Cassiano pode percorrer para chegar à rua do Riacho?</li>
+                <ul className="mb-3 ml-6 list-disc marker:text-[#80298F]">
+                  <li className="text-black">
+                    Que caminho Cassiano pode percorrer para chegar à rua do Riacho? Descreva cada movimento nas linhas a
+                    seguir.
+                  </li>
                 </ul>
-                <p className="mb-4 indent-6">
-                  Descreva cada movimento nas linhas a seguir.
-                </p>
-                <p className="mb-4 indent-6 text-gray-600 italic">
-                  Para chegar a essa rua, Cassiano pode percorrer diferentes trajetos: Cassiano pode seguir pela Rua Encantada, virar à esquerda na Rua das Amoras. Então, seguir em frente e virar à direita na Rua Azul e depois à direita na Rua do Riacho. Ele também pode seguir em frente na Rua do Arvoredo e virar à direita na Rua Azul. Então, seguir em frente até a Rua do Riacho, virando à direita ao chegar nela.
-                </p>
+                <textarea
+                  value={(userAnswers.ti80_cassiano_caminho as string) || ''}
+                  onChange={(e) => {
+                    handleAnswerChange('ti80_cassiano_caminho', e.target.value);
+                    const el = e.target;
+                    el.style.height = 'auto';
+                    el.style.height = `${Math.max(31, el.scrollHeight)}px`;
+                  }}
+                  onInput={(e) => {
+                    const el = e.currentTarget;
+                    el.style.height = 'auto';
+                    el.style.height = `${Math.max(31, el.scrollHeight)}px`;
+                  }}
+                  placeholder="Digite aqui..."
+                  rows={1}
+                  className="mb-6 block h-[31px] w-full max-w-full resize-none overflow-hidden rounded-[5px] bg-[rgba(221,221,221,0.50)] px-3 py-1.5 text-left text-[14px] font-normal leading-normal text-[#000000] placeholder:text-[#BDBDBD] focus:outline-none"
+                />
 
                 <AgoraVoceJaSabe />
-                {/* Aqui você pode acrescentar CriteriosAvaliacao / lista do que o aluno já sabe */}
-
-                <div className="flex flex-col items-center my-6">
-                  <img
-                    src={capAsset('images/page_24_img_455_387.png')}
-                    alt="QR Code"
-                    className="w-32 h-32 object-contain"
-                  />
-                  <p className="text-[10px] text-slate-600 mt-2 text-center">
-                    Acesse o QR Code para agendar a Trilha Digital deste capítulo e avaliar o progresso dos estudantes.
-                  </p>
-                </div>
+                <CriteriosAvaliacao
+                  instanceId="sae_mat_c03_agora_voce_ja_sabe"
+                  criterios={[
+                    {
+                      id: 'direita_esquerda',
+                      nome: '',
+                      pergunta: 'Reconhecer direita e esquerda.',
+                    },
+                    {
+                      id: 'deslocamentos',
+                      nome: '',
+                      pergunta: 'Descrever deslocamentos e localização de pessoas e objetos no espaço.',
+                    },
+                    {
+                      id: 'giros_angulos',
+                      nome: '',
+                      pergunta: 'Entender que giros podem ser representados por ângulos.',
+                    },
+                    {
+                      id: 'angulos_figuras',
+                      nome: '',
+                      pergunta: 'Identificar ângulos retos e não retos em figuras planas.',
+                    },
+                    {
+                      id: 'ruas',
+                      nome: '',
+                      pergunta: 'Reconhecer ruas paralelas, transversais e perpendiculares.',
+                    },
+                  ]}
+                  userAnswers={userAnswers}
+                  onAnswerChange={handleAnswerChange}
+                />
 
               </>
             }
