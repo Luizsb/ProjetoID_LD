@@ -72,8 +72,58 @@ function GameModal({
             <img
               src={thumbResolved}
               alt={altText}
-              className="h-auto w-full max-w-[320px] rounded-[5px] sm:max-w-[380px] md:max-w-[480px] lg:max-w-[520px]"
+              className="h-auto w-full max-w-[320px] rounded-[24px] brightness-[0.72] sm:max-w-[380px] md:max-w-[480px] lg:max-w-[520px]"
             />
+            <span
+              className="pointer-events-none absolute inset-0 rounded-[24px] bg-black/35 transition group-hover:bg-black/40"
+              aria-hidden
+            />
+            <span
+              className="pointer-events-none absolute left-1/2 top-1/2 z-10 flex h-[76px] w-[76px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-[2.5px] border-white bg-[#7B2D8E] shadow-[0_6px_16px_rgba(0,0,0,0.35)] transition group-hover:scale-105 sm:h-[88px] sm:w-[88px]"
+              aria-hidden
+            >
+              {/* Padrão BET: play + anel em 3 arcos com sombra longa */}
+              <svg
+                viewBox="0 0 100 100"
+                className="h-[58px] w-[58px] sm:h-[66px] sm:w-[66px]"
+                aria-hidden
+              >
+                <defs>
+                  <g id="oda-play-ring">
+                    {/* gaps em ~12h, 4h e 8h */}
+                    <path
+                      d="M56.7 18.7 A32 32 0 0 1 80.4 59.9"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="5.5"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M73.7 73.7 A32 32 0 0 1 26.3 73.7"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="5.5"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M19.6 59.9 A32 32 0 0 1 43.3 18.7"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="5.5"
+                      strokeLinecap="round"
+                    />
+                  </g>
+                </defs>
+                <g transform="translate(3.2 3.2)" color="#4A1560" opacity="0.5">
+                  <use href="#oda-play-ring" />
+                  <path d="M41 35 L41 65 L66 50 Z" fill="currentColor" />
+                </g>
+                <g color="white">
+                  <use href="#oda-play-ring" />
+                  <path d="M41 35 L41 65 L66 50 Z" fill="currentColor" />
+                </g>
+              </svg>
+            </span>
           </button>
           {introHint && (
             <p className="mt-2 text-[10px] text-slate-600" style={{ fontSize: '10px' }}>{introHint}</p>
