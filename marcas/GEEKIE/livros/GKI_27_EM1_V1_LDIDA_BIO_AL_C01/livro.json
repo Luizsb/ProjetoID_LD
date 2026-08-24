@@ -1,0 +1,16 @@
+{
+  "id": "GKI_27_EM1_V1_LDIDA_BIO_AL_C01",
+  "marcaId": "GEEKIE",
+  "titulo": "Biologia — 1ª série",
+  "disciplina": "Biologia",
+  "segmento": "EM",
+  "ano": "1",
+  "colecao": "2027",
+  "volume": "V1",
+  "publico": "AL",
+  "capitulo": "C01",
+  "status": "fonte-recebida",
+  "fontePdf": "fonte/GKI_27_EM1_V1_LDIDA_BIO_AL_C01.pdf",
+  "playerKey": "gki-27-em1-bio-c01",
+  "componente": "capitulos/GKI_27_EM1_V1_LDIDA_BIO_AL_C01.tsx"
+}

@@ -37,6 +37,8 @@ function QuestionRenderer({
           userAnswers={userAnswers}
           onAnswerChange={onAnswerChange}
           showResults={showResults}
+          hidePrompt={hidePrompt}
+          hideInput={hideInput}
         />
       );
     case 'true-false':

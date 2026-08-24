@@ -688,7 +688,7 @@ e radiciação" />
             showResults={showTeacherView}
           />
 
-       
+
           <p className="mb-4 indent-6">
             Ser cientista é uma profissão, assim como ser vendedor, motorista de ônibus e bombeiro. Leia, abaixo, um texto sobre a cientista Aline Ghilardi e veja um pouco do seu trabalho.
           </p>
@@ -708,7 +708,7 @@ e radiciação" />
             </p>
           </BlocoPapelTexto>
 
-          
+
 
           <AgoraEComVoce iconSrc={capAsset('images/selo-agora-e-com-voce.png')}>
             <QuestionRenderer
@@ -757,7 +757,7 @@ e radiciação" />
             </p>
           </div>
 
-          
+
 
 
           <Pagination currentPage={8} expandToBookColumn />
@@ -833,7 +833,7 @@ e radiciação" />
             </div>
           </AgoraEComVoce>
 
-         
+
 
           <Pagination currentPage={11} expandToBookColumn />
 
@@ -997,7 +997,7 @@ e radiciação" />
           </Observacao>
 
 
-          
+
 
 
           <Pagination currentPage={17} expandToBookColumn />
@@ -1097,7 +1097,7 @@ e radiciação" />
 
           <Pagination currentPage={18} expandToBookColumn />
 
-        
+
 
           <NesteCapituloVoceEstudou iconSrc={capAsset('images/selo-neste-capitulo-voce-estudou.png')}>
             <ul className="neste-capitulo__lista">

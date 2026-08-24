@@ -16,6 +16,10 @@ export const bookLoaders: Record<string, () => Promise<BookModule>> = {
     import('../../marcas/SAS/livros/SAS_AT27_AF8_L1_LDIDA_MAT_AL_IMP_C1/capitulos/Capitulo.tsx'),
   'sas-at27-af8-mat-c1-agoravai': () =>
     import('../../marcas/SAS/livros/SAS_AT27_AF8_L1_LDIDA_MAT_AL_IMP_C1-agoravai/capitulos/Capitulo.tsx'),
+  'gki-27-em1-bio-c01': () =>
+    import('../../marcas/GEEKIE/livros/GKI_27_EM1_V1_LDIDA_BIO_AL_C01/capitulos/GKI_27_EM1_V1_LDIDA_BIO_AL_C01.tsx'),
+  'gee-efai-01-his-c5': () =>
+    import('../../marcas/GEEKIE/livros/GEE_EFAI_01_26_2S_LV_HIS_AL_C5/capitulos/GEE_EFAI_01_26_2S_LV_HIS_AL_C01.tsx'),
 };
 
 export function livroEstaPronto(playerKey: string): boolean {

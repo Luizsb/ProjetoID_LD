@@ -30,6 +30,7 @@ function TeacherButton({
                 style={{
                     ['--professor-icon' as string]: `url("${publicUrl('images/iconTeacher.svg')}")`,
                     ['--professor-icon-sas' as string]: `url("${publicUrl('images/iconTeacher-sas.svg')}")`,
+                    ['--professor-icon-geekie' as string]: `url("${publicUrl('images/iconTeacher-geekie.svg')}")`,
                 }}
             >
                 <span className="professor-button__icone" />
