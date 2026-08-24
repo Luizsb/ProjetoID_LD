@@ -63,7 +63,11 @@ function CriteriosAvaliacao({
         {options.map((option) => (
           <div key={option.id} className="flex flex-col items-center gap-2 text-center">
             <img
-              src={publicUrl(option.emoji)}
+              src={
+                /^(https?:)?\/\//.test(option.emoji) || option.emoji.startsWith('/')
+                  ? option.emoji
+                  : publicUrl(option.emoji)
+              }
               alt={option.label}
               className="h-10 w-10 object-contain md:h-12 md:w-12"
             />
@@ -91,7 +95,11 @@ function CriteriosAvaliacao({
                       style={{ accentColor: '#80298F' }}
                     />
                     <img
-                      src={publicUrl(option.emoji)}
+                      src={
+                        /^(https?:)?\/\//.test(option.emoji) || option.emoji.startsWith('/')
+                          ? option.emoji
+                          : publicUrl(option.emoji)
+                      }
                       alt={option.label}
                       className="h-8 w-8 object-contain md:h-10 md:w-10"
                     />

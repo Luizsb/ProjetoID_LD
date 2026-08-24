@@ -3,7 +3,7 @@ import { publicUrl } from '../lib/publicUrl';
 interface HeaderProps {
   chapterNumber?: number | string;
   chapterTitle?: string;
-  marca?: 'sae' | 'sas';
+  marca?: 'sae' | 'sas' | 'geekie';
   badge?: string;
   variante?: 'capa' | 'unidade';
 }
@@ -16,29 +16,39 @@ function Header({
   variante = 'capa',
 }: HeaderProps) {
   const isSas = marca === 'sas';
+  const isGeekie = marca === 'geekie';
   const isUnidade = variante === 'unidade';
-  const capaSrc = publicUrl(
-    isUnidade ? 'images/Capa-sas-unidade.svg' : isSas ? 'images/Capa-sas.svg' : 'images/Capa-1.svg',
-  );
+  const capaSrc = isGeekie
+    ? null
+    : publicUrl(
+        isUnidade ? 'images/Capa-sas-unidade.svg' : isSas ? 'images/Capa-sas.svg' : 'images/Capa-1.svg',
+      );
 
-  const badgeBg = isUnidade ? '#d4f1ff' : isSas ? '#8ec5ff' : '#F4C2FF';
-  const badgeColor = isUnidade ? '#0b5f8a' : isSas ? '#1b4b8a' : '#80298F';
-  const numberColor = isUnidade ? '#d4f1ff' : isSas ? '#8ec5ff' : '#FBB733';
+  const badgeBg = isUnidade ? '#d4f1ff' : isSas ? '#8ec5ff' : isGeekie ? '#ffd6db' : '#F4C2FF';
+  const badgeColor = isUnidade ? '#0b5f8a' : isSas ? '#1b4b8a' : isGeekie ? '#e9394d' : '#80298F';
+  const numberColor = isUnidade ? '#d4f1ff' : isSas ? '#8ec5ff' : isGeekie ? '#ffd6db' : '#FBB733';
+  const headerClass = isGeekie
+    ? 'livro-header--geekie'
+    : isSas
+      ? 'livro-header--sas'
+      : 'livro-header--sae';
 
   return (
     <header
-      className={`livro-header relative w-full min-w-0 overflow-hidden py-8 px-8 text-white ${isSas ? 'livro-header--sas' : 'livro-header--sae'} ${isUnidade ? 'livro-header--unidade' : ''}`}
+      className={`livro-header relative w-full min-w-0 overflow-hidden py-8 px-8 text-white ${headerClass} ${isUnidade ? 'livro-header--unidade' : ''}`}
       style={{
-        backgroundColor: isUnidade ? '#1689c5' : isSas ? '#1b4b8a' : '#80298F',
+        backgroundColor: isUnidade ? '#1689c5' : isSas ? '#1b4b8a' : isGeekie ? '#e9394d' : '#80298F',
       }}
     >
-      <img
-        className="livro-header__arte"
-        src={`${capaSrc}?v=5`}
-        alt=""
-        aria-hidden
-        decoding="async"
-      />
+      {capaSrc && (
+        <img
+          className="livro-header__arte"
+          src={`${capaSrc}?v=5`}
+          alt=""
+          aria-hidden
+          decoding="async"
+        />
+      )}
       <div className="livro-header__conteudo relative z-10">
         <div className="flex items-center gap-3 mb-4">
           <div className="livro-header__texto flex min-w-0 flex-col">

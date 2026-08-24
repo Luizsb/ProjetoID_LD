@@ -34,6 +34,11 @@ function Footer() {
         src={publicUrl('images/SASLogo.png')}
         alt="SAS Educação"
       />
+      <img
+        className="livro-footer__logo livro-footer__logo--geekie"
+        src={publicUrl('images/logo-geekie.png')}
+        alt="Geekie Educação"
+      />
       <p
         className="font-myriad-vf"
         style={{

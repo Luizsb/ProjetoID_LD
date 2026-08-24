@@ -12,5 +12,5 @@
   "status": "fonte-recebida",
   "fontePdf": "fonte/GEE_EFAI_01_26_2S_LV_HIS_AL_C5.pdf",
   "playerKey": "gee-efai-01-his-c5",
-  "componente": "capitulos/Capitulo.tsx"
+  "componente": "capitulos/GEE_EFAI_01_26_2S_LV_HIS_AL_C01.tsx"
 }

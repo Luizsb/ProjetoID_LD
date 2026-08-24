@@ -82,10 +82,24 @@
       "segmento": "AI",
       "ano": "1º ano",
       "capitulo": "C05",
-      "status": "fonte-recebida",
+      "status": "pronto",
       "fontePdf": "fonte/GEE_EFAI_01_26_2S_LV_HIS_AL_C5.pdf",
       "playerKey": "gee-efai-01-his-c5"
     },
+    {
+      "id": "GKI_27_EM1_V1_LDIDA_BIO_AL_C01",
+      "marcaId": "GEEKIE",
+      "titulo": "Biologia — 1ª série",
+      "subtitulo": "Ensino médio · Livro do aluno · Capítulo 1",
+      "disciplina": "Biologia",
+      "segmento": "EM",
+      "ano": "1ª série",
+      "capitulo": "C01",
+      "status": "pronto",
+      "fontePdf": "fonte/GKI_27_EM1_V1_LDIDA_BIO_AL_C01.pdf",
+      "playerKey": "gki-27-em1-bio-c01"
+    },
+
     {
       "id": "SAS_PG27_AI3_L1_LDIDA_CIE_AL_IMP_C1",
       "marcaId": "SAS",

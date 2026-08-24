@@ -1,17 +1,17 @@
 import { MultipleChoiceQuestion, UserAnswers } from '../types/questions';
 import { QuestionWrapper } from './shared/QuestionWrapper';
 
-type ChoiceKey = 'a' | 'b' | 'c' | 'd';
+type ChoiceKey = 'a' | 'b' | 'c' | 'd' | 'e';
 
-const KEYS: ChoiceKey[] = ['a', 'b', 'c', 'd'];
-const MARK = '#ea8244';
-const RING = '#2aa3a0';
+const KEYS: ChoiceKey[] = ['a', 'b', 'c', 'd', 'e'];
 
 interface QuestionMultipleChoiceProps {
   question: MultipleChoiceQuestion;
   userAnswers: UserAnswers;
   onAnswerChange: (questionId: string, answer: ChoiceKey) => void;
   showResults?: boolean;
+  hidePrompt?: boolean;
+  hideInput?: boolean;
 }
 
 function QuestionMultipleChoice({
@@ -19,16 +19,13 @@ function QuestionMultipleChoice({
   userAnswers,
   onAnswerChange,
   showResults = false,
+  hidePrompt = false,
+  hideInput = false,
 }: QuestionMultipleChoiceProps) {
   const selectedAnswer = userAnswers[question.id] as ChoiceKey | undefined;
 
-  return (
-    <QuestionWrapper
-      number={question.number}
-      question={question.question}
-      useHTML
-      className="px-0"
-    >
+  const options = hideInput ? null : (
+    <>
       <div className="space-y-2.5">
         {KEYS.filter((key) => question.options[key]).map((key) => {
           const isOn = selectedAnswer === key;
@@ -44,11 +41,15 @@ function QuestionMultipleChoice({
                 disabled={showResults}
               />
               <span
-                className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-[1.5px] bg-white text-[13px] font-bold leading-none"
-                style={{ borderColor: RING, color: MARK }}
+                className={`mc-choice-mark mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-[1.5px] bg-white text-[13px] font-bold leading-none ${isOn ? 'is-on' : ''}`}
+                style={{
+                  borderColor: 'var(--mc-choice-ring, #2aa3a0)',
+                  color: 'var(--mc-choice-mark, #ea8244)',
+                }}
                 aria-hidden
               >
-                {isOn ? 'X' : ''}
+                <span className="mc-choice-mark__x">{isOn ? 'X' : ''}</span>
+                <span className="mc-choice-mark__letter">{key})</span>
               </span>
               <span className="text-[16px] leading-[150%] text-neutral-800">{question.options[key]}</span>
             </label>
@@ -60,6 +61,21 @@ function QuestionMultipleChoice({
           Resposta correta: <strong>{question.options[question.correctAnswer]}</strong>
         </p>
       ) : null}
+    </>
+  );
+
+  if (hidePrompt) {
+    return <div className="mb-6">{options}</div>;
+  }
+
+  return (
+    <QuestionWrapper
+      number={question.number}
+      question={question.question}
+      useHTML
+      className={hideInput ? 'mb-2 px-0' : 'px-0'}
+    >
+      {options}
     </QuestionWrapper>
   );
 }

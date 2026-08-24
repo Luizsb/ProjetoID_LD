@@ -335,6 +335,11 @@
 
 }
 
+.chapter-content p.text-center {
+  text-align: center;
+  text-indent: 0;
+}
+
 
 
 /* Estilo para bullets coloridos nas subquestões */
@@ -400,6 +405,10 @@ td {
   margin-left: clamp(6.5rem, 16%, 11rem);
 }
 
+.livro-header--geekie .livro-header__texto {
+  margin-left: 0;
+}
+
 .livro-header__titulo {
   font-weight: 900;
   font-size: 48px;
@@ -415,13 +424,15 @@ td {
   }
 
   .livro-header.livro-header--sas,
-  .livro-header.livro-header--sae {
+  .livro-header.livro-header--sae,
+  .livro-header.livro-header--geekie {
     padding: 1.75rem 1.25rem 1.5rem !important;
     min-height: 0;
   }
 
   .livro-header--sae .livro-header__texto,
-  .livro-header--sas .livro-header__texto {
+  .livro-header--sas .livro-header__texto,
+  .livro-header--geekie .livro-header__texto {
     margin-left: 0;
     max-width: 100%;
   }
@@ -622,6 +633,36 @@ td {
   margin-right: auto;
 }
 
+.marca-geekie {
+  --professor-bg: #e9394d;
+  --professor-shadow: #c12f40;
+  --list-marker-color: #f27060;
+}
+
+.mc-choice-mark__letter {
+  display: none;
+}
+
+.marca-geekie .mc-choice-mark {
+  --mc-choice-ring: transparent;
+  --mc-choice-mark: #3d4c53;
+  width: 1.75rem !important;
+  height: 1.75rem !important;
+}
+
+.marca-geekie .mc-choice-mark.is-on {
+  --mc-choice-ring: #f27060;
+  --mc-choice-mark: #f27060;
+}
+
+.marca-geekie .mc-choice-mark__x {
+  display: none;
+}
+
+.marca-geekie .mc-choice-mark__letter {
+  display: inline;
+}
+
 .marca-sas {
   --question-number-color: #ee4b83;
   --list-marker-color: #ea8244;
@@ -634,7 +675,11 @@ td {
 }
 
 .marca-sas h2.titulo-sas,
-.marca-sas h3.titulo-sas {
+.marca-sas h3.titulo-sas,
+.marca-geekie h2.titulo-sas,
+.marca-geekie h3.titulo-sas,
+.marca-geekie h4.titulo-sas,
+.marca-geekie h5.titulo-sas {
   border: none;
   padding-left: 0;
   margin-top: 1.5rem;
@@ -645,16 +690,244 @@ td {
   line-height: normal;
 }
 
-.marca-sas h2.titulo-sas {
+.marca-sas h2.titulo-sas,
+.marca-geekie h2.titulo-sas {
   font-size: 32px;
 }
 
-.marca-sas h3.titulo-sas {
+.marca-sas h3.titulo-sas,
+.marca-geekie h3.titulo-sas {
   font-size: 22px;
 }
 
 .marca-sas h2.titulo-sas--laranja {
   color: #f7912f;
+}
+
+.marca-geekie h2.titulo-sas {
+  color: #e9394d;
+}
+
+.marca-geekie h4.titulo-sas,
+.marca-geekie .chapter-content h4.titulo-sas {
+  color: #009b80;
+  font-size: 22px;
+  padding: 0;
+}
+
+.marca-geekie h5.titulo-sas,
+.marca-geekie .chapter-content h5.titulo-sas {
+  color: #f27060;
+  font-size: 22px;
+}
+
+.marca-geekie .caixa-glossario {
+  background-color: #dee6eb;
+  padding: 1.15rem 1.35rem;
+  margin: 1.5rem 0;
+}
+
+.marca-geekie .caixa-glossario__titulo {
+  margin: 0 0 0.65rem;
+  color: #3d4c53;
+  font-family: 'Filson Soft', 'Filson Pro', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.marca-geekie .caixa-glossario__texto {
+  margin: 0;
+  color: #3d4c53;
+  text-indent: 0;
+}
+
+.marca-geekie .retratos-lado {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+  align-items: start;
+}
+
+.marca-geekie .retrato-cientista {
+  display: flex;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.marca-geekie .retrato-cientista__credito {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  margin: 0;
+  color: #64748b;
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  text-align: left;
+  text-indent: 0;
+  text-transform: uppercase;
+}
+
+.marca-geekie .retrato-cientista__midia {
+  flex: 1;
+  min-width: 0;
+}
+
+.marca-geekie .retrato-cientista__midia img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.marca-geekie .retrato-cientista__legenda {
+  margin: 0.4rem 0 0;
+  color: #475569;
+  font-size: 10px;
+  line-height: 1.3;
+  text-align: left;
+  text-indent: 0;
+}
+
+.marca-geekie .retrato-cientista__legenda::before,
+.marca-geekie .legenda-imagem::before {
+  content: '▲';
+  color: #009b80;
+  font-size: 7px;
+  margin-right: 0.35rem;
+}
+
+.marca-geekie .legenda-imagem {
+  text-indent: 0;
+}
+
+.imagem-zoom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.5rem 0;
+}
+
+.imagem-zoom__abrir {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.imagem-zoom__abrir img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.imagem-zoom__abrir:hover,
+.imagem-zoom__abrir:focus-visible {
+  outline: 2px solid var(--professor-bg, #80298f);
+  outline-offset: 3px;
+}
+
+.imagem-zoom .legenda-imagem {
+  margin-top: 0.5rem;
+  color: #475569;
+  font-size: 10px;
+  text-align: center;
+}
+
+.imagem-zoom__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.imagem-zoom__fundo {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(0, 0, 0, 0.72);
+  cursor: default;
+}
+
+.imagem-zoom__dialog {
+  position: relative;
+  z-index: 81;
+  display: flex;
+  flex-direction: column;
+  width: min(96vw, 1100px);
+  max-height: 92dvh;
+  padding: 2.75rem 1rem 1rem;
+  border-radius: 16px;
+  background: #111;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+
+.imagem-zoom__fechar {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  z-index: 82;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: var(--professor-bg, #80298f);
+  color: #fff;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.imagem-zoom__palco {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imagem-zoom__ampliada {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.imagem-zoom__ampliada img {
+  display: block;
+  max-width: min(90vw, 1000px);
+  max-height: 78dvh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  transform-origin: center center;
+  transition: transform 0.2s ease;
+}
+
+.imagem-zoom__caption {
+  margin: 0.75rem 0 0;
+  color: #e2e8f0;
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: center;
+  text-indent: 0;
+}
+
+@media (max-width: 640px) {
+  .marca-geekie .retratos-lado {
+    grid-template-columns: 1fr;
+  }
 }
 
 .marca-sas h3.titulo-sas--azul {
@@ -678,6 +951,222 @@ td {
 
 .marca-sas ul.list-disc li::marker {
   color: var(--list-marker-color, #ea8244);
+}
+
+.marca-geekie ul.list-disc li::marker {
+  color: var(--list-marker-color, #f27060);
+}
+
+.marca-geekie ol.lista-numerada li::marker {
+  color: #4e6eb5;
+  font-weight: 700;
+}
+
+.marca-geekie ol.lista-letras {
+  list-style-type: lower-alpha;
+}
+
+.marca-geekie ol.lista-letras li::marker {
+  color: var(--list-marker-color, #f27060);
+  font-weight: 700;
+}
+
+.marca-geekie .ficha-comparativa-wrap {
+  width: 100%;
+  overflow-x: auto;
+  margin: 0.75rem 0 1.25rem;
+}
+
+.marca-geekie .ficha-comparativa {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.marca-geekie .ficha-comparativa th,
+.marca-geekie .ficha-comparativa td {
+  border: 1px solid #5a5a5a;
+}
+
+.marca-geekie .ficha-comparativa th {
+  background: #fbb016;
+  color: #000;
+  font-weight: 700;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 11px;
+  line-height: 1.25;
+  padding: 0.45rem 0.3rem;
+}
+
+.marca-geekie .ficha-comparativa td {
+  background: #fff;
+  height: 3.6rem;
+  padding: 0.15rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.marca-geekie .ficha-comparativa textarea {
+  display: block;
+  width: 100%;
+  height: 3.3rem;
+  resize: none;
+  border: none;
+  background: transparent;
+  padding: 0.25rem;
+  font-size: 12px;
+  font-family: 'Myriad VF', sans-serif;
+  color: #000;
+}
+
+.marca-geekie .ficha-comparativa textarea:focus {
+  outline: none;
+}
+
+.marca-geekie .bloco-anotacoes {
+  margin: 1.5rem 0 2rem;
+  padding: 1rem 1.25rem 1.25rem;
+  border: 1.5px solid #f27060;
+  border-radius: 16px;
+  background: #fff4ef;
+}
+
+.marca-geekie .bloco-anotacoes__titulo {
+  margin: 0 0 0.75rem;
+  color: #e9394d;
+  font-family: 'Filson Soft', 'Myriad VF', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-indent: 0;
+  text-align: left;
+}
+
+.marca-geekie .bloco-anotacoes__campo {
+  display: block;
+  width: 100%;
+  min-height: 196px;
+  padding: 0 0.35rem;
+  border: none;
+  background-color: transparent;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 27px,
+    #f0c4b8 27px,
+    #f0c4b8 28px
+  );
+  background-attachment: local;
+  line-height: 28px;
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 14px;
+  color: #000;
+  resize: vertical;
+}
+
+.marca-geekie .bloco-anotacoes__campo:focus {
+  outline: none;
+}
+
+.marca-geekie .bloco-anotacoes__campo::placeholder {
+  color: #bdbdbd;
+}
+
+.marca-geekie .autoavaliacao-geekie {
+  margin: 0.5rem 0 2rem;
+}
+
+.marca-geekie .autoavaliacao-geekie__legenda {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-bottom: 1.75rem;
+}
+
+.marca-geekie .autoavaliacao-geekie__item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.marca-geekie .barra-progresso {
+  display: inline-grid;
+  grid-template-columns: repeat(3, 1fr);
+  flex-shrink: 0;
+  width: 4.6rem;
+  height: 1.4rem;
+  overflow: hidden;
+  border: 2.5px solid #2f8f4e;
+  border-radius: 2px;
+  background: #fff;
+}
+
+.marca-geekie .barra-progresso--clicavel .barra-progresso__celula {
+  appearance: none;
+  padding: 0;
+  border: 0;
+  border-right: 2px solid #2f8f4e;
+  cursor: pointer;
+}
+
+.marca-geekie .barra-progresso__celula {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-right: 2px solid #2f8f4e;
+  background: #fff;
+}
+
+.marca-geekie .barra-progresso__celula:last-child {
+  border-right: none;
+}
+
+.marca-geekie .barra-progresso__celula.is-on {
+  background: #3cb371;
+}
+
+.marca-geekie .autoavaliacao-geekie__texto {
+  margin: 0;
+  color: #000;
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: left;
+  text-indent: 0;
+}
+
+.marca-geekie .objetivo-avaliacao {
+  margin-top: 0.5rem;
+}
+
+.marca-geekie .objetivo-avaliacao__aba {
+  display: inline-block;
+  max-width: 100%;
+  padding: 0.4rem 2rem 0.4rem 1rem;
+  background: #009b80;
+  color: #fff;
+  font-family: 'Filson Soft', 'Myriad VF', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 100%, 0 100%);
+}
+
+.marca-geekie .objetivo-avaliacao__caixa {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0;
+  padding: 1rem 1.15rem;
+  background: #f9ef61;
+  border-radius: 0 0 16px 16px;
+}
+
+.marca-geekie .objetivo-avaliacao__caixa .autoavaliacao-geekie__texto {
+  flex: 1;
 }
 
 .marca-sas ul.list-disc {
@@ -3717,6 +4206,10 @@ p.bloco-leitura__referencia {
   background: #d6ebff;
 }
 
+.marca-geekie .pagination-bar-spec {
+  background: #ffc6b4;
+}
+
 .escola-digital__nome--sas {
   display: none;
 }
@@ -3744,13 +4237,28 @@ p.bloco-leitura__referencia {
   background: transparent;
 }
 
+.livro-footer__logo--geekie {
+  display: none;
+  width: auto;
+  height: 52px;
+  max-width: 220px;
+  object-fit: contain;
+}
+
 .marca-sas .livro-footer__logo--sae,
-.livro-footer[data-marca='SAS'] .livro-footer__logo--sae {
+.livro-footer[data-marca='SAS'] .livro-footer__logo--sae,
+.marca-geekie .livro-footer__logo--sae,
+.livro-footer[data-marca='GEEKIE'] .livro-footer__logo--sae {
   display: none;
 }
 
 .marca-sas .livro-footer__logo--sas,
 .livro-footer[data-marca='SAS'] .livro-footer__logo--sas {
+  display: block;
+}
+
+.marca-geekie .livro-footer__logo--geekie,
+.livro-footer[data-marca='GEEKIE'] .livro-footer__logo--geekie {
   display: block;
 }
 
@@ -3800,8 +4308,17 @@ p.bloco-leitura__referencia {
   --professor-shadow: #f27239;
 }
 
+.marca-geekie .professor-button {
+  --professor-bg: #e9394d;
+  --professor-shadow: #c12f40;
+}
+
 .marca-sas .professor-button__icone {
   background-image: var(--professor-icon-sas);
+}
+
+.marca-geekie .professor-button__icone {
+  background-image: var(--professor-icon-geekie);
 }
 
 .professor-button__titulo {
