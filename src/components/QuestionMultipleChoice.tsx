@@ -23,14 +23,24 @@ function QuestionMultipleChoice({
   hideInput = false,
 }: QuestionMultipleChoiceProps) {
   const selectedAnswer = userAnswers[question.id] as ChoiceKey | undefined;
+  const answered = Boolean(selectedAnswer);
+  const isCorrect = answered && selectedAnswer === question.correctAnswer;
 
   const options = hideInput ? null : (
     <>
-      <div className="space-y-2.5">
+      <div className="mc-choice-list">
         {KEYS.filter((key) => question.options[key]).map((key) => {
           const isOn = selectedAnswer === key;
+          const isGabaritoCerta = showResults && key === question.correctAnswer;
+          const isGabaritoErrada = showResults && isOn && key !== question.correctAnswer;
+
           return (
-            <label key={key} className="flex cursor-pointer items-start gap-2.5 select-none">
+            <label
+              key={key}
+              className={`mc-choice${isOn && !showResults ? ' is-on' : ''}${
+                isGabaritoCerta ? ' is-gabarito-certa' : ''
+              }${isGabaritoErrada ? ' is-gabarito-errada' : ''}`}
+            >
               <input
                 type="radio"
                 name={question.id}
@@ -40,29 +50,32 @@ function QuestionMultipleChoice({
                 className="sr-only"
                 disabled={showResults}
               />
-              <span
-                className={`mc-choice-mark mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-[1.5px] bg-white text-[13px] font-bold leading-none ${isOn ? 'is-on' : ''}`}
-                style={{
-                  borderColor: 'var(--mc-choice-ring, #2aa3a0)',
-                  color: 'var(--mc-choice-mark, #ea8244)',
-                }}
-                aria-hidden
-              >
-                <span className="mc-choice-mark__x">{isOn ? 'X' : ''}</span>
-                <span className="mc-choice-mark__letter">{key})</span>
+              <span className="mc-choice__letra">{key})</span>
+              <span className="mc-choice__select" aria-hidden="true">
+                <span className="mc-choice__x">{isOn ? 'X' : ''}</span>
               </span>
               <span
-                className="text-[16px] leading-[150%] text-neutral-800"
+                className="mc-choice__texto"
                 dangerouslySetInnerHTML={{ __html: question.options[key] || '' }}
               />
+              {isGabaritoCerta ? (
+                <span className="mc-choice__badge mc-choice__badge--certa">Gabarito</span>
+              ) : null}
+              {isGabaritoErrada ? (
+                <span className="mc-choice__badge mc-choice__badge--errada">Sua resposta</span>
+              ) : null}
             </label>
           );
         })}
       </div>
-      {showResults && selectedAnswer !== question.correctAnswer ? (
-        <p className="mt-3 text-sm text-red-600">
-          Resposta correta:{' '}
-          <strong dangerouslySetInnerHTML={{ __html: question.options[question.correctAnswer] || '' }} />
+      {showResults && !answered ? (
+        <p className="gabarito-texto">
+          Em branco — gabarito destacado em verde acima.
+        </p>
+      ) : null}
+      {showResults && answered && !isCorrect ? (
+        <p className="gabarito-texto">
+          Alternativa marcada em vermelho; gabarito em verde.
         </p>
       ) : null}
     </>
@@ -79,6 +92,23 @@ function QuestionMultipleChoice({
       useHTML
       className={hideInput ? 'mb-2 px-0' : 'px-0'}
     >
+      {question.media?.src ? (
+        <figure className="mc-choice-media">
+          <img
+            src={question.media.src}
+            alt={question.media.alt || ''}
+          />
+          {question.media.credit ? (
+            <figcaption className="foto-com-credito-legenda">{question.media.credit}</figcaption>
+          ) : null}
+        </figure>
+      ) : null}
+      {question.questionAfterMedia ? (
+        <p
+          className="mc-choice-after-media"
+          dangerouslySetInnerHTML={{ __html: question.questionAfterMedia }}
+        />
+      ) : null}
       {options}
     </QuestionWrapper>
   );

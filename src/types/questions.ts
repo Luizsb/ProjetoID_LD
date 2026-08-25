@@ -6,7 +6,8 @@ export type QuestionType =
   | 'text-input'
   | 'table-fill'
   | 'fill-blanks'
-  | 'ordering';
+  | 'ordering'
+  | 'summation';
 
 export interface MultipleChoiceQuestion {
   id: string;
@@ -25,6 +26,14 @@ export interface MultipleChoiceQuestion {
     e?: string;
   };
   correctAnswer: 'a' | 'b' | 'c' | 'd' | 'e';
+  /** Imagem entre o enunciado e as alternativas. */
+  media?: {
+    src: string;
+    alt?: string;
+    credit?: string;
+  };
+  /** Texto exibido após a mídia e antes das alternativas. */
+  questionAfterMedia?: string;
 }
 
 export interface TrueFalseQuestion {
@@ -166,6 +175,22 @@ export interface OrderingQuestion {
   }>;
 }
 
+/** Questão de somatória (ex.: UEPG) — proposições 01, 02, 04, 08… */
+export interface SummationQuestion {
+  id: string;
+  type: 'summation';
+  number?: number;
+  question: string;
+  statements: Array<{
+    value: number;
+    text: string;
+    correct: boolean;
+  }>;
+  correctAnswer: number;
+  /** Ex.: "01 + 02 + 04 + 08" */
+  correctAnswerDetail?: string;
+}
+
 export type Question =
   | MultipleChoiceQuestion
   | TrueFalseQuestion
@@ -174,7 +199,8 @@ export type Question =
   | TextInputQuestion
   | TableFillQuestion
   | FillBlanksQuestion
-  | OrderingQuestion;
+  | OrderingQuestion
+  | SummationQuestion;
 
 export interface UserAnswers {
   [questionId: string]: string | number | boolean | number[];

@@ -152,8 +152,8 @@ function QuestionTrueFalse({
         })}
       </div>
       {showResults && question.correctAnswer !== undefined && selectedAnswer !== question.correctAnswer && (
-        <p className="mt-3 text-sm text-red-600">
-          Resposta correta: <strong>{question.correctAnswer ? 'Verdadeiro' : 'Falso'}</strong>
+        <p className="gabarito-texto">
+          Gabarito: <strong>{question.correctAnswer ? 'Verdadeiro' : 'Falso'}</strong>
         </p>
       )}
     </div>

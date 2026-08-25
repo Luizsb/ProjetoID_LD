@@ -762,6 +762,205 @@ td {
   display: none;
 }
 
+/* Alternativas — letra fora + seletor ao lado */
+.mc-choice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin: 0.35rem 0 0.25rem;
+}
+
+.mc-choice {
+  display: grid;
+  grid-template-columns: 1.6rem 1.55rem minmax(0, 1fr) auto;
+  align-items: start;
+  column-gap: 0.55rem;
+  margin: 0;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.mc-choice:hover {
+  background: #f7f8fb;
+  border-color: #e5e7eb;
+}
+
+.mc-choice.is-on {
+  background: color-mix(in srgb, var(--mc-choice-mark, #ea8244) 8%, white);
+  border-color: color-mix(in srgb, var(--mc-choice-mark, #ea8244) 35%, white);
+}
+
+.mc-choice__letra {
+  margin-top: 0.12rem;
+  color: var(--question-number-color, var(--mc-choice-mark, #ea8244));
+  font-family: 'Filson Soft', 'Filson Pro', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-transform: lowercase;
+}
+
+.mc-choice__select {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 1.45rem;
+  height: 1.45rem;
+  margin-top: 0.1rem;
+  border: 1.5px solid var(--mc-choice-ring, #94a3b8);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--mc-choice-mark, #ea8244);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.mc-choice.is-on .mc-choice__select {
+  border-color: var(--mc-choice-mark, #ea8244);
+  background: color-mix(in srgb, var(--mc-choice-mark, #ea8244) 12%, white);
+  color: var(--mc-choice-mark, #ea8244);
+}
+
+.mc-choice__x {
+  display: inline-block;
+  min-width: 0.7em;
+  text-align: center;
+}
+
+.mc-choice__texto {
+  color: #1f2937;
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.mc-choice__badge {
+  align-self: center;
+  flex-shrink: 0;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+  font-family: 'Filson Soft', 'Filson Pro', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.mc-choice__badge--certa {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.mc-choice__badge--errada {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.mc-choice.is-gabarito-certa {
+  background: color-mix(in srgb, #16a34a 10%, white);
+  border-color: #16a34a;
+}
+
+.mc-choice.is-gabarito-certa .mc-choice__select {
+  border-color: #16a34a;
+  background: color-mix(in srgb, #16a34a 14%, white);
+  color: #16a34a;
+}
+
+.mc-choice.is-gabarito-errada {
+  background: color-mix(in srgb, #dc2626 8%, white);
+  border-color: #dc2626;
+}
+
+.mc-choice.is-gabarito-errada .mc-choice__select {
+  border-color: #dc2626;
+  background: color-mix(in srgb, #dc2626 12%, white);
+  color: #dc2626;
+}
+
+.gabarito-texto {
+  margin: 0.75rem 0 0;
+  color: #cd2ae6;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.gabarito-texto strong {
+  font-weight: 700;
+}
+
+.mc-choice-media {
+  margin: 0.75rem auto 1.15rem;
+  text-align: center;
+}
+
+.mc-choice-media img {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.mc-choice-media .foto-com-credito-legenda {
+  margin-top: 0.35rem;
+  text-align: center;
+}
+
+.mc-choice-after-media {
+  margin: 0 0 0.85rem;
+  color: #1f2937;
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.marca-sae {
+  --mc-choice-mark: #ea8244;
+  --mc-choice-ring: #c4c9d4;
+}
+
+.marca-sae .resposta-professor,
+.marca-sae .resposta-professor .fracao,
+.marca-sae .gabarito-texto {
+  color: #cd2ae6;
+}
+
+.marca-sae .mc-choice:hover {
+  background: #fff7f2;
+  border-color: #f0d2c0;
+}
+
+.marca-sae .mc-choice.is-on {
+  background: #fff1e8;
+  border-color: #f0b892;
+  box-shadow: 0 1px 0 rgba(233, 140, 86, 0.12);
+}
+
+.marca-sae .mc-choice-mark__x {
+  display: none;
+}
+
+.marca-sae .mc-choice-mark__letter {
+  display: inline;
+}
+
+.marca-sae .mc-choice-mark.is-on {
+  background: color-mix(in srgb, var(--mc-choice-mark, #ea8244) 12%, white);
+}
+
 .marca-geekie .mc-choice-mark {
   --mc-choice-ring: transparent;
   --mc-choice-mark: #3d4c53;
@@ -1363,11 +1562,659 @@ td {
 .marca-sae {
   --question-number-color: #ea8244;
   --list-marker-color: #ea8244;
+  --titulo-bio: #e98c64;
 }
 
 .marca-sae .question-number {
   color: var(--question-number-color) !important;
   font-weight: 700;
+}
+
+/* Títulos de seção Biologia (padrão BET, cor disciplina) */
+.marca-sae h2.titulo-bio,
+.marca-sae .chapter-content h2.titulo-bio {
+  border: none;
+  padding-left: 0;
+  margin-top: 1.75rem;
+  margin-bottom: 1rem;
+  color: var(--titulo-bio);
+  font-family: 'Filson Soft', 'Filson Pro', sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.2;
+  text-transform: none;
+}
+
+.marca-sae h3.titulo-bio,
+.marca-sae .chapter-content h3.titulo-bio {
+  border-left: none;
+  padding-left: 0;
+  margin-top: 1.5rem;
+  margin-bottom: 0.85rem;
+  color: var(--titulo-bio);
+  font-family: 'Filson Soft', 'Filson Pro', sans-serif;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.25;
+  text-transform: none;
+}
+
+.marca-sae h4.titulo-bio,
+.marca-sae .chapter-content h4.titulo-bio {
+  border-left: none;
+  padding-left: 0;
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
+  color: #333c63;
+  font-family: 'Filson Soft', 'Filson Pro', sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.3;
+  text-transform: none;
+}
+
+/* Figura Biologia — abaixo do texto, tamanho maior */
+.bio-texto-figura {
+  display: block;
+  width: 100%;
+  max-width: 640px;
+  margin: 0.75rem auto 1.25rem;
+  text-align: center;
+}
+
+.bio-texto-figura img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.bio-texto-figura .foto-com-credito-legenda {
+  margin-top: 0.35rem;
+  text-align: center;
+}
+
+.bio-texto-figura .legenda-barra {
+  margin-top: 0.4rem;
+  text-align: left;
+}
+
+.marca-sae .legenda-barra {
+  border-left-color: #e98c56;
+}
+
+/* Caixa com lista — teoria celular (fundo pêssego) */
+.lista-caixa-bio {
+  box-sizing: border-box;
+  margin: 0.85rem 0 1.25rem;
+  padding: 0.95rem 1.15rem 0.95rem 1.5rem;
+  list-style: disc;
+  border: 1px solid #e5b7a5;
+  background: #f9e8e2;
+  color: #4a4a5c;
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.lista-caixa-bio li {
+  margin: 0 0 0.45rem;
+  padding-left: 0.15rem;
+  text-indent: 0;
+}
+
+.lista-caixa-bio li:last-child {
+  margin-bottom: 0;
+}
+
+.lista-caixa-bio li::marker {
+  color: #4a4a5c;
+}
+
+/* Lista com bullets (Biologia) */
+.lista {
+  margin: 0.75rem 0 1.15rem 1.35rem;
+  padding: 0;
+  list-style: disc;
+  color: #111;
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.lista li {
+  margin: 0 0 0.4rem;
+  padding-left: 0.15rem;
+  text-indent: 0;
+}
+
+.lista li:last-child {
+  margin-bottom: 0;
+}
+
+.lista li::marker {
+  color: var(--list-marker-color, #ea8244);
+}
+
+.bio-figura {
+  margin: 1rem auto 1.25rem;
+  text-align: center;
+}
+
+.bio-figura img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.bio-figura--80 img {
+  width: 80%;
+  max-width: 80%;
+}
+
+.bio-figura figcaption {
+  margin-top: 0.35rem;
+}
+
+/* Linha do tempo — experimentos geração espontânea */
+.exp-geracao {
+  position: relative;
+  margin: 1.25rem 0 1.75rem;
+  padding-left: 0.25rem;
+}
+
+.exp-geracao__item {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: 0.75rem 1rem;
+  margin-bottom: 1.35rem;
+}
+
+.exp-geracao__item:last-child {
+  margin-bottom: 0;
+}
+
+.exp-geracao__eixo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0.15rem;
+}
+
+.exp-geracao__eixo::before {
+  content: '';
+  position: absolute;
+  top: 1.55rem;
+  bottom: -1.5rem;
+  left: 50%;
+  width: 2px;
+  background: #1e3a5f;
+  transform: translateX(-50%);
+}
+
+.exp-geracao__item:last-child .exp-geracao__eixo::before {
+  display: none;
+}
+
+.exp-geracao--continuar {
+  margin-top: 0.5rem;
+}
+
+.exp-geracao__ano {
+  position: relative;
+  z-index: 1;
+  color: #e98c56;
+  font-family: 'Filson Soft', 'Filson Pro', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.exp-geracao__ponto {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 12px;
+  height: 12px;
+  margin-top: 0.35rem;
+  border-radius: 50%;
+  background: #1e3a5f;
+  box-shadow: 0 0 0 3px #fff;
+}
+
+.exp-geracao__corpo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  align-items: stretch;
+  min-width: 0;
+}
+
+.exp-geracao__caixa {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid #2a2a2a;
+  border-radius: 2px;
+  background: #fff;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.12);
+}
+
+.exp-geracao__caixa p {
+  margin: 0;
+  color: #111;
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.45;
+  text-align: justify;
+  text-indent: 0;
+}
+
+.exp-geracao__figura {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+}
+
+.exp-geracao__figura img {
+  display: block;
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.exp-geracao__figura--larga img {
+  max-width: 400px;
+}
+
+.exp-geracao__figura figcaption {
+  margin-top: 0.35rem;
+  color: #64748b;
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: center;
+}
+
+@media (max-width: 720px) {
+  .exp-geracao__item {
+    grid-template-columns: 3.4rem minmax(0, 1fr);
+    gap: 0.55rem 0.65rem;
+  }
+
+  .exp-geracao__ano {
+    font-size: 18px;
+  }
+
+  .exp-geracao__figura img {
+    max-width: 100%;
+  }
+}
+
+/* Infográfico método científico (Darwin / alpiste) */
+.metodo-darwin {
+  display: grid;
+  grid-template-columns: minmax(90px, 22%) minmax(0, 1fr);
+  gap: 0.75rem 0.9rem;
+  align-items: stretch;
+  margin: 1.5rem 0 1.75rem;
+}
+
+.metodo-darwin__figura {
+  margin: 0;
+  text-align: left;
+}
+
+.metodo-darwin__figura img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+
+.metodo-darwin__figura figcaption {
+  display: block;
+  margin-top: 0.4rem;
+  color: #64748b;
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.metodo-darwin__etapas {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.55rem;
+  min-height: 100%;
+}
+
+.metodo-darwin__etapa {
+  display: grid;
+  grid-template-columns: minmax(108px, 34%) minmax(0, 1fr);
+  gap: 0.45rem 0.7rem;
+  align-items: center;
+}
+
+.metodo-darwin__rotulo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: 2.4rem;
+  padding: 0.4rem 0.55rem;
+  border-radius: 4px;
+  background: #ea8244;
+  color: #fff;
+  font-family: 'Filson Soft', 'Filson Pro', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.metodo-darwin__rotulo::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -0.7rem;
+  width: 0.7rem;
+  height: 2px;
+  background: #ea8244;
+  transform: translateY(-50%);
+}
+
+.metodo-darwin__rotulo::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -0.85rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ea8244;
+  transform: translateY(-50%);
+}
+
+.metodo-darwin__texto {
+  margin: 0;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid #6a6a7a;
+  border-radius: 4px;
+  background: #e8e8ee;
+  color: #111;
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.35;
+  text-align: left;
+  text-indent: 0;
+}
+
+@media (max-width: 720px) {
+  .metodo-darwin {
+    grid-template-columns: 1fr;
+  }
+
+  .metodo-darwin__figura {
+    max-width: 220px;
+  }
+
+  .metodo-darwin__etapa {
+    grid-template-columns: 1fr;
+  }
+
+  .metodo-darwin__rotulo::before,
+  .metodo-darwin__rotulo::after {
+    display: none;
+  }
+}
+
+/* Habilidades na prática (SAE EM) */
+.habilidades-pratica {
+  position: relative;
+  margin: 2.25rem 0 1.75rem;
+  padding: 2.1rem 1.25rem 1.25rem;
+  background: #fff;
+  border: 2px solid #e98c56;
+  box-shadow: 5px 5px 0 rgba(233, 140, 86, 0.35);
+}
+
+.habilidades-pratica__cabecalho {
+  position: absolute;
+  top: -1.15rem;
+  left: -0.15rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  max-width: calc(100% - 0.5rem);
+}
+
+.habilidades-pratica__icone {
+  position: relative;
+  z-index: 2;
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.habilidades-pratica__titulo {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+  margin-left: -0.65rem;
+  padding: 0.45rem 1.1rem 0.45rem 1.35rem;
+  border-radius: 4px;
+  background: #1a3358;
+  font-family: 'Filson Soft', 'Filson Pro', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.habilidades-pratica__titulo-destaque,
+.habilidades-pratica__titulo-resto {
+  color: #fff;
+}
+
+.habilidades-pratica__corpo {
+  color: #1a1a1a;
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.habilidades-pratica__enunciado {
+  margin: 0 0 1rem;
+  text-align: justify;
+  text-indent: 0;
+}
+
+.habilidades-pratica__numero {
+  color: #e98c56;
+  font-weight: 700;
+}
+
+/* Botão = ícone PNG; título laranja + conteúdo só no modal */
+.cf-icon-modal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 64px;
+  height: 64px;
+  margin: 0;
+  padding: 0.7rem;
+  border: 3px solid #e98c56;
+  border-radius: 50%;
+  background: #f3e6d8;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.cf-icon-modal:hover {
+  transform: translateY(-1px);
+}
+
+.cf-icon-modal:focus-visible {
+  outline: 2px solid #e98c56;
+  outline-offset: 3px;
+}
+
+.cf-icon-modal__icone {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.cf-icon-modal__titulo {
+  margin: 0 !important;
+  color: #e98c56 !important;
+  font-family: 'Filson Soft', 'Filson Pro', sans-serif !important;
+  font-size: 26px !important;
+  font-weight: 700 !important;
+  line-height: normal;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.cf-icon-modal__corpo {
+  color: #111;
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.cf-icon-modal__corpo p {
+  margin: 0 0 0.9rem;
+  text-align: justify;
+}
+
+.cf-icon-modal__corpo p:last-child {
+  margin-bottom: 0;
+}
+
+.cf-icon-modal-grupo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem;
+  margin: 1rem 0 1.25rem;
+}
+
+/* Ícone flutuando à direita do texto relacionado */
+.cf-icon-modal-com-texto {
+  display: flow-root;
+  margin: 0 0 1rem;
+}
+
+.cf-icon-modal-com-texto__icone {
+  float: right;
+  margin: 0.15rem 0 0.75rem 1rem;
+}
+
+.cf-icon-modal-com-texto__icone .cf-icon-modal {
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .cf-icon-modal-com-texto__icone {
+    float: none;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 0 0.75rem;
+  }
+}
+
+.cf-icon-modal__acoes {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.25rem;
+}
+
+.cf-icon-modal__botao-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  background: #e98c56;
+  color: #fff;
+  font-family: 'Filson Soft', 'Filson Pro', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.cf-icon-modal__botao-link:hover {
+  background: #d67a45;
+  transform: translateY(-1px);
+}
+
+/* compatível com classes antigas do Atualidades */
+.cf-icon-atualidades {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin: 1rem 0;
+  padding: 0.7rem;
+  border: 3px solid #e98c56;
+  border-radius: 50%;
+  background: #f3e6d8;
+  cursor: pointer;
+}
+
+.cf-icon-atualidades__icone {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.cf-icon-atualidades__modal-titulo {
+  margin: 0;
+  color: #e98c56;
+  font-family: 'Filson Soft', 'Filson Pro', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.cf-icon-atualidades__modal-corpo {
+  color: #111;
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
 }
 
 /* ——— Atividade mapa malha (arrastar figuras) ——— */
@@ -5302,6 +6149,533 @@ p.bloco-leitura__referencia {
   font-style: normal;
   text-decoration: underline;
   word-break: break-all;
+}
+
+/* Caixa de citação / trecho de leitura (borda + fundo cinza-lilás) */
+.caixa-citacao {
+  margin: 1.25rem 0 0.35rem;
+  padding: 1.35rem 1.4rem;
+  background: #ececf4;
+  border: 1px solid #66667a;
+}
+
+.caixa-citacao p {
+  margin: 0 0 0.9rem;
+  color: #111;
+  font-family: 'Myriad VF', Georgia, 'Times New Roman', serif;
+  font-size: 16px;
+  line-height: 160%;
+  text-align: justify;
+  text-indent: 1.5rem;
+}
+
+.caixa-citacao p:last-child {
+  margin-bottom: 0;
+}
+
+.caixa-citacao p.caixa-citacao__reticencias {
+  text-align: left;
+  text-indent: 0;
+}
+
+p.bloco-leitura__referencia.bloco-leitura__referencia--direita {
+  text-align: right;
+}
+
+/* Faixa Saberes em ação (barra azul) */
+.saberes-acao {
+  display: block;
+  width: 100%;
+  margin: 1.75rem 0 1.25rem;
+}
+
+.saberes-acao__faixa {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0.55rem 1.15rem;
+  background: #0d4da1;
+  color: #fff;
+  font-family: 'Filson Soft', 'Filson Pro', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+  text-align: left;
+  text-transform: none;
+}
+
+.saberes-acao-questoes > * + * {
+  margin-top: 0.35rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid #d5dae3;
+}
+
+/* Faixa Enem e vestibulares */
+.enem-vestibulares {
+  display: block;
+  width: 100%;
+  margin: 1.75rem 0 1.25rem;
+}
+
+.enem-vestibulares__faixa {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0.55rem 1.15rem;
+  background: #ed1d85;
+  color: #fff;
+  font-family: 'Filson Soft', 'Filson Pro', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+  text-align: left;
+  text-transform: none;
+}
+
+.enem-vestibulares--desafio .enem-vestibulares__faixa {
+  background: #008fd5;
+}
+
+.enem-questoes > * + * {
+  margin-top: 0.35rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid #d5dae3;
+}
+
+.enem-questao {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 0.65rem 0.85rem;
+  align-items: start;
+}
+
+.enem-questao__lateral {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.enem-questao__nivel {
+  display: block;
+  width: 42px;
+  height: auto;
+  margin-top: 0.15rem;
+  object-fit: contain;
+}
+
+.enem-questao__video {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  width: 52px;
+  padding: 0.4rem 0.2rem 0.45rem;
+  border: 1.5px solid #008fd5;
+  border-radius: 10px;
+  background: #e8f6fc;
+  color: #008fd5;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.enem-questao__video:hover {
+  background: #d4eef9;
+  transform: translateY(-1px);
+}
+
+.enem-questao__video:focus-visible {
+  outline: 2px solid #008fd5;
+  outline-offset: 2px;
+}
+
+.enem-questao__video-play {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: #008fd5;
+  color: #fff;
+}
+
+.enem-questao__video-texto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Filson Soft', 'Filson Pro', sans-serif;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.enem-questao__corpo {
+  min-width: 0;
+}
+
+/* Somatória (UEPG / Desafio) */
+.soma-questao__lista {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.soma-questao__item {
+  display: grid;
+  grid-template-columns: auto 22px minmax(0, 1fr);
+  gap: 0.45rem 0.55rem;
+  align-items: start;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.soma-questao__item:hover {
+  background: #f8fafc;
+}
+
+.soma-questao__item.is-on {
+  background: color-mix(in srgb, #008fd5 8%, white);
+  border-color: color-mix(in srgb, #008fd5 35%, white);
+}
+
+.soma-questao__item.is-correta {
+  border-color: #16a34a;
+  background: color-mix(in srgb, #16a34a 8%, white);
+}
+
+.soma-questao__item.is-errada {
+  border-color: #dc2626;
+  background: color-mix(in srgb, #dc2626 6%, white);
+}
+
+.soma-questao__valor {
+  color: var(--question-number-color, #ea8244);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.45;
+}
+
+.soma-questao__check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  margin-top: 0.1rem;
+  border: 1.5px solid #94a3b8;
+  border-radius: 5px;
+  color: #008fd5;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.soma-questao__item.is-on .soma-questao__check {
+  border-color: #008fd5;
+  background: color-mix(in srgb, #008fd5 12%, white);
+}
+
+.soma-questao__texto {
+  color: #0f172a;
+  line-height: 1.45;
+}
+
+.soma-questao__resposta {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 0.35rem;
+}
+
+.soma-questao__soma-label {
+  color: var(--question-number-color, #ea8244);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.soma-questao__soma-input {
+  width: 4.5rem;
+  padding: 0.35rem 0.5rem;
+  border: 2px solid #008fd5;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+  background: #fff;
+}
+
+.soma-questao__soma-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, #008fd5 25%, transparent);
+}
+
+.soma-questao__soma-input.is-correta {
+  border-color: #16a34a;
+  background: color-mix(in srgb, #16a34a 8%, white);
+}
+
+.soma-questao__soma-input.is-errada {
+  border-color: #dc2626;
+  background: color-mix(in srgb, #dc2626 6%, white);
+}
+
+.soma-questao__soma-input.is-em-branco {
+  border-color: #cd2ae6;
+  background: color-mix(in srgb, #cd2ae6 6%, white);
+}
+
+.enem-questao__referencia {
+  display: block;
+  margin: 0.55rem 0 0.85rem;
+  color: #64748b;
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.35;
+  text-align: right;
+  text-indent: 0;
+}
+
+@media (max-width: 640px) {
+  .enem-questao {
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 0.45rem 0.55rem;
+  }
+
+  .enem-questao__nivel,
+  .enem-questao__video {
+    width: 44px;
+  }
+
+  .enem-questao__video-play {
+    width: 24px;
+    height: 24px;
+  }
+
+  .enem-questao__video-texto {
+    font-size: 7px;
+  }
+}
+
+/* Gabarito do capítulo — cores SAE (#ea8244 / #80298f / respostas #cd2ae6) */
+.gabarito-capitulo {
+  margin: 2rem 0 1.5rem;
+  padding: 1.15rem 1.25rem 1.25rem;
+  border: 1px solid #e8d5c8;
+  border-radius: 14px;
+  background: #fff8f3;
+}
+
+.gabarito-capitulo.is-ativo {
+  border-color: color-mix(in srgb, #ea8244 40%, #e8d5c8);
+  background: #fff3eb;
+}
+
+.gabarito-capitulo__topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.gabarito-capitulo__titulo {
+  margin: 0;
+  color: #0f172a;
+  font-family: 'Filson Soft', 'Filson Pro', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.gabarito-capitulo__pdf {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  background: #80298f;
+  color: #fff;
+  font-family: 'Filson Soft', 'Filson Pro', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.gabarito-capitulo__pdf:hover {
+  background: #6a2178;
+  transform: translateY(-1px);
+}
+
+.gabarito-capitulo__ativar {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border: 0;
+  border-radius: 10px;
+  background: #ea8244;
+  color: #fff;
+  font-family: 'Filson Soft', 'Filson Pro', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.25;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.gabarito-capitulo__ativar:hover {
+  background: #d96f30;
+}
+
+.gabarito-capitulo.is-ativo .gabarito-capitulo__ativar {
+  background: #ea8244;
+}
+
+.gabarito-capitulo.is-ativo .gabarito-capitulo__ativar:hover {
+  background: #d96f30;
+}
+
+.gabarito-capitulo__resultado {
+  margin-top: 1rem;
+}
+
+.gabarito-capitulo__resultado-titulo {
+  margin: 0 0 0.75rem;
+  color: #ea8244;
+  font-family: 'Filson Soft', 'Filson Pro', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.gabarito-capitulo__metricas {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.gabarito-capitulo__metrica {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.7rem 0.75rem;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+}
+
+.gabarito-capitulo__metrica-label {
+  color: #475569;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.gabarito-capitulo__metrica-valor {
+  font-family: 'Filson Soft', 'Filson Pro', sans-serif;
+  font-size: 1.65rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #0f172a;
+}
+
+.gabarito-capitulo__metrica--acerto .gabarito-capitulo__metrica-valor {
+  color: #16a34a;
+}
+
+.gabarito-capitulo__metrica--erro .gabarito-capitulo__metrica-valor {
+  color: #dc2626;
+}
+
+.gabarito-capitulo__metrica--branco .gabarito-capitulo__metrica-valor {
+  color: #64748b;
+}
+
+.gabarito-capitulo__metrica--final {
+  border-color: color-mix(in srgb, #ea8244 35%, #e2e8f0);
+  background: color-mix(in srgb, #ea8244 8%, white);
+}
+
+.gabarito-capitulo__metrica--final .gabarito-capitulo__metrica-valor {
+  color: #ea8244;
+}
+
+.gabarito-capitulo__metrica--final .gabarito-capitulo__metrica-valor::after {
+  content: '%';
+  margin-left: 0.1em;
+  font-size: 0.7em;
+}
+
+.gabarito-capitulo__nota {
+  margin: 0.75rem 0 0;
+  color: #64748b;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 720px) {
+  .gabarito-capitulo__metricas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gabarito-capitulo__topo {
+    flex-wrap: wrap;
+  }
+}
+
+/* Selo SAE — Ponto de partida */
+.ponto-de-partida {
+  position: relative;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin: 1.5rem 0 1.15rem;
+  margin-right: auto;
+}
+
+.ponto-de-partida__linha {
+  position: absolute;
+  z-index: 0;
+  left: 5px;
+  right: -6px;
+  top: 6px;
+  bottom: -5px;
+  background: #1a3358;
+  clip-path: polygon(0 0, calc(100% - 36px) 0, 100% 100%, 0 100%);
+}
+
+.ponto-de-partida__faixa {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 0.58rem 2.9rem 0.58rem 1.15rem;
+  background: #f3a370;
+  color: #fff;
+  font-family: 'Filson Soft', 'Montserrat', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  clip-path: polygon(0 0, calc(100% - 36px) 0, 100% 100%, 0 100%);
 }
 
 .bloco-leitura__destaque {

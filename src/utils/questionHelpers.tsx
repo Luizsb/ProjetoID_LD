@@ -155,7 +155,7 @@ export function renderQuestionAnswer(question: Question): React.ReactNode {
         <span className="question-number" style={{ color: 'var(--question-number-color, #ea8244)', fontWeight: 'bold' }}>{letter}. </span>
         <span
           className="resposta-professor"
-          dangerouslySetInnerHTML={{ __html: answer }}
+          dangerouslySetInnerHTML={{ __html: answer || '' }}
         />
       </p>
     );
@@ -275,6 +275,25 @@ export function renderQuestionAnswer(question: Question): React.ReactNode {
           ))}
         </ul>
       </div>
+    );
+  }
+
+  if (question.type === 'summation') {
+    return (
+      <p className="mb-3">
+        {question.number !== undefined && (
+          <span
+            className="question-number"
+            style={{ color: 'var(--question-number-color, #ea8244)', fontWeight: 'bold' }}
+          >
+            {question.number}.{' '}
+          </span>
+        )}
+        <span>
+          {question.correctAnswer}
+          {question.correctAnswerDetail ? ` (${question.correctAnswerDetail})` : ''}
+        </span>
+      </p>
     );
   }
 

@@ -7,6 +7,7 @@ import QuestionFillBlanks from './QuestionFillBlanks';
 import QuestionOrdering from './QuestionOrdering';
 import QuestionMultipleChoice from './QuestionMultipleChoice';
 import QuestionMultipleSelect from './QuestionMultipleSelect';
+import QuestionSummation from './QuestionSummation';
 
 interface QuestionRendererProps {
   question?: Question;
@@ -105,6 +106,15 @@ function QuestionRenderer({
     case 'ordering':
       return (
         <QuestionOrdering
+          question={question}
+          userAnswers={userAnswers}
+          onAnswerChange={onAnswerChange}
+          showResults={showResults}
+        />
+      );
+    case 'summation':
+      return (
+        <QuestionSummation
           question={question}
           userAnswers={userAnswers}
           onAnswerChange={onAnswerChange}

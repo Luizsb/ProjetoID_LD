@@ -1,0 +1,22 @@
+{
+  "chapterNumber": 1,
+  "chapterTitle": "Capítulo 1",
+  "startPage": 1,
+  "pageCount": 11,
+  "componentName": "BookCap01",
+  "imagesForExport": [
+    "images/page_10_img_149_88.png",
+    "images/page_11_img_36_71.png",
+    "images/page_11_img_320_284.png",
+    "images/page_1_img_88_-1.png",
+    "images/page_2_img_56_383.png",
+    "images/page_3_img_348_613.png",
+    "images/page_3_img_350_330.png",
+    "images/page_4_img_233_185.png",
+    "images/page_6_img_115_460.png",
+    "images/page_6_img_290_308.png",
+    "images/page_7_img_53_68.png",
+    "images/page_9_img_292_311.png",
+    "images/page_9_img_36_73.png"
+  ]
+}
