@@ -3,6 +3,7 @@ import type { CSSProperties, ReactNode } from 'react';
 interface AgoraEComVoceProps {
   iconSrc: string;
   iconAlt?: string;
+  className?: string;
   children: ReactNode;
 }
 
@@ -29,10 +30,11 @@ const ICON: CSSProperties = {
 function AgoraEComVoce({
   iconSrc,
   iconAlt = 'Agora é com você',
+  className,
   children,
 }: AgoraEComVoceProps) {
   return (
-    <section className="agora-e-com-voce my-6">
+    <section className={`agora-e-com-voce my-6${className ? ` ${className}` : ''}`}>
       <div style={ICON_WRAP}>
         <img src={iconSrc} alt={iconAlt} style={ICON} />
       </div>

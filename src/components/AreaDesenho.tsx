@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState, type CSSProperties, type MouseEvent, type TouchEvent } from 'react';
+import { useCallback, useEffect, useRef, useState, type CSSProperties, type MouseEvent, type ReactNode, type TouchEvent } from 'react';
 
 const COLORS = [
   '#000000',
@@ -14,6 +14,8 @@ const COLORS = [
 ] as const;
 
 const BRUSH_SIZES = [3, 6, 10, 15] as const;
+
+type DrawTool = 'freehand' | 'line' | 'eraser';
 
 type AreaDesenhoProps = {
   width?: number;
@@ -33,6 +35,10 @@ type AreaDesenhoProps = {
   gridColor?: string;
   /** Largura máxima de exibição do canvas (ex.: '100%', '320px') */
   maxWidth?: string;
+  /** Mostra a ferramenta de reta (linha reta entre dois pontos). */
+  enableLineTool?: boolean;
+  /** Conteúdo sobreposto ao quadro de desenho (ex.: fichas arrastáveis). */
+  canvasOverlay?: ReactNode;
 };
 
 function getCanvasPosition(
@@ -61,22 +67,27 @@ function AreaDesenho({
   gridRows = 4,
   gridColor = '#7eb8d4',
   maxWidth,
+  enableLineTool = false,
+  canvasOverlay,
 }: AreaDesenhoProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isDrawingRef = useRef(false);
+  const lineStartRef = useRef<{ x: number; y: number } | null>(null);
+  const snapshotRef = useRef<ImageData | null>(null);
   const [currentColor, setCurrentColor] = useState<string>(COLORS[0]);
   const [currentSize, setCurrentSize] = useState<(typeof BRUSH_SIZES)[number]>(3);
-  const [isEraser, setIsEraser] = useState(false);
+  const [tool, setTool] = useState<DrawTool>('freehand');
 
-  const startStroke = useCallback(
+  const applyStrokeStyle = useCallback(
     (ctx: CanvasRenderingContext2D) => {
+      const isEraser = tool === 'eraser';
       ctx.globalCompositeOperation = isEraser ? 'destination-out' : 'source-over';
       ctx.strokeStyle = isEraser ? 'rgba(0,0,0,1)' : currentColor;
       ctx.lineWidth = currentSize;
-      ctx.lineCap = 'round';
+      ctx.lineCap = tool === 'line' ? 'butt' : 'round';
       ctx.lineJoin = 'round';
     },
-    [currentColor, currentSize, isEraser],
+    [currentColor, currentSize, tool],
   );
 
   const persist = useCallback(() => {
@@ -107,7 +118,19 @@ function AreaDesenho({
 
   const handleColorSelect = (color: string) => {
     setCurrentColor(color);
-    setIsEraser(false);
+    setTool((current) => (current === 'eraser' ? 'freehand' : current));
+  };
+
+  const drawStraightLine = (
+    ctx: CanvasRenderingContext2D,
+    from: { x: number; y: number },
+    to: { x: number; y: number },
+  ) => {
+    applyStrokeStyle(ctx);
+    ctx.beginPath();
+    ctx.moveTo(from.x, from.y);
+    ctx.lineTo(to.x, to.y);
+    ctx.stroke();
   };
 
   const handlePointerDown = (clientX: number, clientY: number) => {
@@ -118,7 +141,14 @@ function AreaDesenho({
 
     isDrawingRef.current = true;
     const pos = getCanvasPosition(canvas, clientX, clientY);
-    startStroke(ctx);
+
+    if (tool === 'line') {
+      lineStartRef.current = pos;
+      snapshotRef.current = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      return;
+    }
+
+    applyStrokeStyle(ctx);
     ctx.beginPath();
     ctx.moveTo(pos.x, pos.y);
   };
@@ -131,13 +161,38 @@ function AreaDesenho({
     if (!ctx) return;
 
     const pos = getCanvasPosition(canvas, clientX, clientY);
+
+    if (tool === 'line') {
+      const start = lineStartRef.current;
+      const snapshot = snapshotRef.current;
+      if (!start || !snapshot) return;
+      ctx.putImageData(snapshot, 0, 0);
+      drawStraightLine(ctx, start, pos);
+      return;
+    }
+
     ctx.lineTo(pos.x, pos.y);
     ctx.stroke();
   };
 
-  const handlePointerUp = () => {
+  const handlePointerUp = (clientX?: number, clientY?: number) => {
     if (!isDrawingRef.current) return;
     isDrawingRef.current = false;
+
+    if (tool === 'line') {
+      const canvas = canvasRef.current;
+      const ctx = canvas?.getContext('2d');
+      const start = lineStartRef.current;
+      const snapshot = snapshotRef.current;
+      if (canvas && ctx && start && snapshot && clientX !== undefined && clientY !== undefined) {
+        const pos = getCanvasPosition(canvas, clientX, clientY);
+        ctx.putImageData(snapshot, 0, 0);
+        drawStraightLine(ctx, start, pos);
+      }
+      lineStartRef.current = null;
+      snapshotRef.current = null;
+    }
+
     persist();
   };
 
@@ -167,14 +222,16 @@ function AreaDesenho({
   const accent = borderColor;
   const hasOverlaySurface = Boolean(backgroundImage || showGrid);
   const showExternalHint = hasOverlaySurface && !compact && Boolean(hint);
+  const isEraser = tool === 'eraser';
 
   const canvasPointerProps = {
     onMouseDown: (e: MouseEvent<HTMLCanvasElement>) =>
       handlePointerDown(e.clientX, e.clientY),
     onMouseMove: (e: MouseEvent<HTMLCanvasElement>) =>
       handlePointerMove(e.clientX, e.clientY),
-    onMouseUp: handlePointerUp,
-    onMouseLeave: handlePointerUp,
+    onMouseUp: (e: MouseEvent<HTMLCanvasElement>) =>
+      handlePointerUp(e.clientX, e.clientY),
+    onMouseLeave: () => handlePointerUp(),
     onTouchStart: (e: TouchEvent<HTMLCanvasElement>) => {
       e.preventDefault();
       const touch = e.touches[0];
@@ -187,7 +244,8 @@ function AreaDesenho({
     },
     onTouchEnd: (e: TouchEvent<HTMLCanvasElement>) => {
       e.preventDefault();
-      handlePointerUp();
+      const touch = e.changedTouches[0];
+      handlePointerUp(touch?.clientX, touch?.clientY);
     },
   };
 
@@ -195,6 +253,7 @@ function AreaDesenho({
     'area-desenho__canvas',
     hasOverlaySurface ? 'area-desenho__canvas--com-fundo' : '',
     isEraser ? 'area-desenho__canvas--borracha' : '',
+    tool === 'line' ? 'area-desenho__canvas--reta' : '',
   ]
     .filter(Boolean)
     .join(' ');
@@ -275,6 +334,7 @@ function AreaDesenho({
                 ) : null}
               </>
             )}
+            {canvasOverlay}
           </div>
         </div>
 
@@ -289,7 +349,7 @@ function AreaDesenho({
                     type="button"
                     title={color}
                     onClick={() => handleColorSelect(color)}
-                    className={`area-desenho__cor${!isEraser && currentColor === color ? ' is-ativa' : ''}`}
+                    className={`area-desenho__cor${tool !== 'eraser' && currentColor === color ? ' is-ativa' : ''}`}
                     style={{ backgroundColor: color }}
                   />
                 ))}
@@ -315,12 +375,31 @@ function AreaDesenho({
             <div className="area-desenho__grupo">
               <span className="area-desenho__label">Ações:</span>
               <div className="area-desenho__acoes">
+                {enableLineTool ? (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => setTool('freehand')}
+                      className={`area-desenho__btn area-desenho__btn--lapis${tool === 'freehand' ? ' is-ativa' : ''}`}
+                    >
+                      Lápis
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setTool('line')}
+                      className={`area-desenho__btn area-desenho__btn--reta${tool === 'line' ? ' is-ativa' : ''}`}
+                      title="Clique e arraste para traçar uma reta"
+                    >
+                      Reta
+                    </button>
+                  </>
+                ) : null}
                 <button
                   type="button"
-                  onClick={() => setIsEraser((v) => !v)}
-                  className={`area-desenho__btn area-desenho__btn--borracha${isEraser ? ' is-ativa' : ''}`}
+                  onClick={() => setTool((current) => (current === 'eraser' ? 'freehand' : 'eraser'))}
+                  className={`area-desenho__btn area-desenho__btn--borracha${tool === 'eraser' ? ' is-ativa' : ''}`}
                 >
-                  {isEraser ? 'Borracha ativa' : 'Borracha'}
+                  {tool === 'eraser' ? 'Borracha ativa' : 'Borracha'}
                 </button>
                 <button
                   type="button"

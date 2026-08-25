@@ -22,7 +22,13 @@ function QuestionFillBlanks({
         <span dangerouslySetInnerHTML={{ __html: question.question }} />
       </p>
 
-      <ul className="ml-0 list-none space-y-4">
+      <ul
+        className={`ml-0 list-none space-y-4${
+          question.items.some((item) => item.choiceOptions?.length) || question.itemsLayout === 'grid-3'
+            ? ' questao-pertence'
+            : ''
+        }${question.itemsLayout === 'grid-3' ? ' questao-pertence--raiz' : ''}`}
+      >
         {question.items.map((item) => (
           <li key={item.letter} className="text-black">
             <span className="question-letter mr-2">{item.letter})</span>
@@ -38,14 +44,35 @@ function QuestionFillBlanks({
                 <span key={`${item.letter}_${index}`}>
                   <span dangerouslySetInnerHTML={{ __html: fragment }} />
                   {!isLastFragment && (
+                    item.choiceOptions && item.choiceOptions.length > 0 ? (
+                      <span className="pertence-opcoes">
+                        {item.choiceOptions.map((option) => {
+                          const isOn = value === option;
+                          return (
+                            <button
+                              key={option}
+                              type="button"
+                              className={`pertence-opcoes__botao${isOn ? ' is-ativa' : ''}`}
+                              disabled={showResults}
+                              onClick={() => onAnswerChange(blankId, isOn ? '' : option)}
+                            >
+                              {option}
+                            </button>
+                          );
+                        })}
+                      </span>
+                    ) : (
                     <input
                       type="text"
                       value={value}
                       onChange={(e) => onAnswerChange(blankId, e.target.value)}
                       disabled={showResults}
                       placeholder={placeholder}
-                      className="mx-1 inline-block h-[31px] w-[180px] max-w-full rounded-[5px] bg-[rgba(221,221,221,0.50)] px-3 pt-1 align-middle text-left text-[14px] font-normal leading-normal text-[#000000] placeholder:text-[#BDBDBD] font-myriad-vf focus:outline-none"
+                      className={`mx-1 inline-block h-[31px] max-w-full rounded-[5px] bg-[rgba(221,221,221,0.50)] px-2 pt-1 align-middle text-left text-[14px] font-normal leading-normal text-[#000000] placeholder:text-[#BDBDBD] font-myriad-vf focus:outline-none${
+                        question.itemsLayout === 'grid-3' ? ' w-[2.6rem] text-center' : ' w-[180px] px-3'
+                      }${showResults && expectedValue ? ' resposta-professor' : ''}`}
                     />
+                    )
                   )}
                 </span>
               );

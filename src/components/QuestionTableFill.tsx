@@ -1,4 +1,5 @@
 import { UserAnswers } from '../types/questions';
+import AutoExpandTextarea from './AutoExpandTextarea';
 
 interface TableRow {
   id: string;
@@ -118,12 +119,12 @@ function QuestionTableFill({
                               backgroundColor: 'white',
                             }}
                           >
-                            <textarea
+                            <AutoExpandTextarea
                               value={userAnswer}
-                              onChange={(e) => onAnswerChange(questionId, fieldId, e.target.value)}
-                              placeholder="Digite aqui..."
+                              onChange={(value) => onAnswerChange(questionId, fieldId, value)}
+                              placeholder=""
                               disabled={showResults}
-                              className="mt-2 block h-[31px] w-full max-w-full rounded-[5px] bg-[rgba(221,221,221,0.50)] px-3 pt-1 text-left text-[14px] font-normal leading-normal text-[#000000] placeholder:text-[#BDBDBD] font-myriad-vf focus:outline-none resize-none"
+                              className="mt-2 block w-full max-w-full rounded-[5px] bg-[rgba(221,221,221,0.50)] px-3 pt-1 text-left text-[14px] font-normal leading-normal text-[#000000] placeholder:text-[#BDBDBD] font-myriad-vf focus:outline-none"
                               style={{
                                 fontFamily: 'myriad-vf, sans-serif',
                                 color: '#000000',
@@ -153,14 +154,15 @@ function QuestionTableFill({
                   <span style={{ color: '#00776E', fontWeight: 'bold' }}>{subQ.letter}) </span>
                   <span style={{ color: 'black' }}>{subQ.question}</span>
                 </p>
-                <textarea
+                <AutoExpandTextarea
                   value={subUserAnswer}
-                  onChange={(e) => onAnswerChange(questionId, subQuestionId, e.target.value)}
-                  placeholder={subQ.placeholder || 'Digite sua resposta aqui...'}
+                  onChange={(value) => onAnswerChange(questionId, subQuestionId, value)}
+                  placeholder={subQ.placeholder || ''}
                   disabled={showResults}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-y min-h-[80px] text-black"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
                   style={{
                     fontFamily: 'Ubuntu, sans-serif',
+                    minHeight: '80px',
                   }}
                 />
               </div>

@@ -2,12 +2,14 @@ interface AcesseAEurekaProps {
   iconSrc: string;
   href: string;
   iconAlt?: string;
+  ctaLabel?: string;
 }
 
 function AcesseAEureka({
   iconSrc,
   href,
   iconAlt = 'Acesse a Eureka!',
+  ctaLabel = 'Clique para acessar',
 }: AcesseAEurekaProps) {
   return (
     <section className="acesse-eureka">
@@ -25,6 +27,7 @@ function AcesseAEureka({
           <br />
           Acesse a Eureka!
         </span>
+        <span className="acesse-eureka__botao">{ctaLabel}</span>
         <span className="sr-only">{iconAlt}</span>
       </a>
     </section>

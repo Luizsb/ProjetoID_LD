@@ -23,7 +23,7 @@ function QuestionTrueFalse({
         {/* Título principal com número */}
         <p className="mb-4">
           {question.number !== undefined && (
-            <span style={{ color: '#00776E', fontWeight: 'bold' }}>{question.number}. </span>
+            <span className="question-number" style={{ color: 'var(--question-number-color, #ea8244)', fontWeight: 'bold' }}>{question.number}. </span>
           )}
           <span style={{ color: 'black' }} dangerouslySetInnerHTML={{ __html: question.question }} />
         </p>
@@ -36,9 +36,9 @@ function QuestionTrueFalse({
             const isCorrect = selectedAnswer === stmt.correctAnswer;
 
             return (
-              <div key={stmt.letter} className="flex items-start gap-2">
+              <div key={stmt.letter} className="questao-vf__linha">
                 <span className="question-letter">{stmt.letter}) </span>
-                <div className="flex gap-2 flex-shrink-0">
+                <div className="questao-vf__opcoes">
                   {[true, false].map((value) => {
                     const label = value ? 'V' : 'F';
                     const isSelected = selectedAnswer === value;
@@ -46,14 +46,14 @@ function QuestionTrueFalse({
                     return (
                       <label
                         key={String(value)}
-                        className={`flex items-center justify-center w-8 h-8 rounded cursor-pointer transition-colors text-sm font-semibold ${
+                        className={`questao-vf__opcao${
                           isSelected
                             ? showResults && isCorrect
-                              ? 'bg-green-200 border-2 border-green-600 text-green-800'
+                              ? ' is-acertou'
                               : showResults && !isCorrect
-                              ? 'bg-red-200 border-2 border-red-600 text-red-800'
-                              : 'bg-blue-200 border-2 border-blue-600 text-blue-900'
-                            : 'bg-white hover:bg-gray-100 border-2 border-gray-300 text-gray-700'
+                              ? ' is-errou'
+                              : ' is-selecionada'
+                            : ''
                         }`}
                       >
                         <input
@@ -70,7 +70,7 @@ function QuestionTrueFalse({
                     );
                   })}
                 </div>
-                <p className="mb-0" style={{ color: 'black' }}>
+                <p className="questao-vf__texto mb-0" style={{ color: 'black' }}>
                   <span dangerouslySetInnerHTML={{ __html: stmt.statement }} />
                 </p>
               </div>

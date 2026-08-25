@@ -1,6 +1,8 @@
 import { TextInputQuestion, UserAnswers } from '../types/questions';
 import QuestionTextInputWithEmbedded from './QuestionTextInputWithEmbedded';
 import AreaDesenho from './AreaDesenho';
+import CampoFracao from './CampoFracao';
+import AutoExpandTextarea from './AutoExpandTextarea';
 
 interface QuestionTextInputProps {
   question: TextInputQuestion;
@@ -37,18 +39,20 @@ function QuestionTextInput({
   // Se tiver subquestões, renderiza o formato com número e letras
   if (question.subQuestions && question.subQuestions.length > 0) {
     const simpleTextareaClass =
-      'mt-2 block h-[31px] w-[765px] max-w-full rounded-[5px] bg-[rgba(221,221,221,0.50)] px-3 pt-1 text-left text-[14px] font-normal leading-normal text-[#000000] placeholder:text-[#BDBDBD] font-myriad-vf focus:outline-none resize-none';
+      'mt-2 block w-[765px] max-w-full rounded-[5px] bg-[rgba(221,221,221,0.50)] px-3 pt-1 text-left text-[14px] font-normal leading-normal text-[#000000] placeholder:text-[#BDBDBD] font-myriad-vf focus:outline-none';
 
     return (
-      <div className="mb-6">
+      <div className={hidePrompt || hideInput ? 'mb-2' : 'mb-6'}>
+        {!hidePrompt ? (
         <p className="mb-4">
           {question.number !== undefined && (
             <span className="question-number" style={{ color: 'var(--question-number-color, #ea8244)', fontWeight: 'bold' }}>{question.number}. </span>
           )}
           <span style={{ color: 'black' }} dangerouslySetInnerHTML={{ __html: question.question }} />
         </p>
+        ) : null}
 
-        {question.media ? (
+        {!hideInput && question.media ? (
           <div className="mb-6 flex flex-col items-center">
             {question.media.drawing ? (
               <AreaDesenho
@@ -83,18 +87,174 @@ function QuestionTextInput({
           </div>
         ) : null}
 
-        <div className="space-y-4">
-          {question.subQuestions.map((subQ) => {
-            const subQuestionId = `${question.id}_${subQ.letter}`;
+        {!hideInput ? (
+          <>
+        {question.exampleHtml ? (
+          <div
+            className="caixa-exemplo-dizima"
+            dangerouslySetInnerHTML={{ __html: question.exampleHtml }}
+          />
+        ) : null}
+
+        <div
+          className={
+            question.subQuestionsLayout === 'grid-2'
+              ? `geratriz-grade${
+                  (question.subQuestions?.length ?? 0) > 6
+                    ? ' geratriz-grade--col-split'
+                    : (question.subQuestions?.length ?? 0) === 6 ||
+                        (question.subQuestions?.length ?? 0) === 5
+                      ? ' geratriz-grade--col-split-3'
+                      : (question.subQuestions?.length ?? 0) === 4
+                        ? ''
+                        : ' geratriz-grade--seq'
+                }`
+              : question.subQuestionsLayout === 'grid-3'
+                ? `geratriz-grade geratriz-grade--3${
+                    (question.subQuestions?.length ?? 0) > 6 ? ' geratriz-grade--3-tall' : ''
+                  }`
+                : 'space-y-4'
+          }
+        >
+          {question.subQuestions.map((subQ, subIndex) => {
+            const subQuestionId = `${question.id}_${subQ.letter || subIndex}`;
             const subUserAnswer = (userAnswers[subQuestionId] as string) || '';
+            const [firstFrac, secondFrac = ''] = subUserAnswer.split(/\s*=\s*/);
+            const isFractionRow = subQ.inputKind === 'fraction' || subQ.inputKind === 'fractions';
+            const isInlineRow = subQ.inputKind === 'inline';
+            const isFractionDecimal = subQ.inputKind === 'fraction-decimal';
+            const [fracPart = '', decimalPart = ''] = isFractionDecimal
+              ? subUserAnswer.split('||')
+              : [firstFrac, secondFrac];
 
             return (
-              <div key={subQ.letter} className="mb-4">
+              <div key={`${subQ.letter || 'item'}-${subIndex}`} className={isFractionRow || isInlineRow || isFractionDecimal ? 'geratriz-item geratriz-item--wrap' : 'mb-4'}>
+                {isFractionDecimal ? (
+                  <>
+                    {subQ.letter ? (
+                      <span className="question-letter">{subQ.letter}) </span>
+                    ) : null}
+                    {subQ.question ? (
+                      <span
+                        className="geratriz-item__dizima"
+                        dangerouslySetInnerHTML={{ __html: subQ.question }}
+                      />
+                    ) : null}
+                    <span className="geratriz-item__igual">=</span>
+                    <CampoFracao
+                      value={fracPart}
+                      disabled={showResults}
+                      ariaLabel={`Item ${subQ.letter}, forma fracionária`}
+                      onChange={(value) =>
+                        onAnswerChange(subQuestionId, `${value}||${decimalPart}`)
+                      }
+                    />
+                    <span className="geratriz-item__igual">=</span>
+                    <input
+                      type="text"
+                      value={decimalPart}
+                      disabled={showResults}
+                      placeholder={subQ.placeholder || 'decimal'}
+                      onChange={(event) =>
+                        onAnswerChange(subQuestionId, `${fracPart}||${event.target.value}`)
+                      }
+                      className="geratriz-item__texto geratriz-item__texto--curto"
+                      aria-label={`Item ${subQ.letter}, forma decimal`}
+                    />
+                    {showResults && subQ.correctAnswer ? (
+                      <span
+                        className="resposta-professor"
+                        dangerouslySetInnerHTML={{ __html: subQ.correctAnswer }}
+                      />
+                    ) : null}
+                  </>
+                ) : isFractionRow ? (
+                  <>
+                    {subQ.letter ? (
+                      <span className="question-letter">{subQ.letter}) </span>
+                    ) : null}
+                    {subQ.question ? (
+                      <span
+                        className="geratriz-item__dizima"
+                        dangerouslySetInnerHTML={{ __html: subQ.question }}
+                      />
+                    ) : null}
+                    <span className="geratriz-item__igual">=</span>
+                    <CampoFracao
+                      value={firstFrac}
+                      disabled={showResults}
+                      ariaLabel={`Item ${subQ.letter}, fração`}
+                      onChange={(value) => {
+                        if (subQ.inputKind === 'fractions') {
+                          onAnswerChange(
+                            subQuestionId,
+                            secondFrac ? `${value} = ${secondFrac}` : value,
+                          );
+                          return;
+                        }
+                        onAnswerChange(subQuestionId, value);
+                      }}
+                    />
+                    {subQ.inputKind === 'fractions' ? (
+                      <>
+                        <span className="geratriz-item__igual">=</span>
+                        <CampoFracao
+                          value={secondFrac}
+                          disabled={showResults}
+                          ariaLabel={`Item ${subQ.letter}, fração simplificada`}
+                          onChange={(value) =>
+                            onAnswerChange(
+                              subQuestionId,
+                              `${firstFrac || ''} = ${value}`.trim(),
+                            )
+                          }
+                        />
+                      </>
+                    ) : null}
+                    {showResults && subQ.correctAnswer ? (
+                      <span
+                        className="resposta-professor"
+                        dangerouslySetInnerHTML={{ __html: subQ.correctAnswer }}
+                      />
+                    ) : null}
+                  </>
+                ) : isInlineRow ? (
+                  <>
+                    {subQ.letter ? (
+                      <span className="question-letter">{subQ.letter}) </span>
+                    ) : null}
+                    {subQ.question ? (
+                      <span
+                        className="geratriz-item__dizima"
+                        dangerouslySetInnerHTML={{ __html: subQ.question }}
+                      />
+                    ) : null}
+                    {/≅|≈/.test(subQ.question || '') ? null : (
+                      <span className="geratriz-item__igual">=</span>
+                    )}
+                    <AutoExpandTextarea
+                      value={subUserAnswer}
+                      disabled={showResults}
+                      placeholder={subQ.placeholder || ''}
+                      onChange={(value) => onAnswerChange(subQuestionId, value)}
+                      expand="horizontal"
+                      className="geratriz-item__texto geratriz-item__texto--curto"
+                      aria-label={`Item ${subQ.letter}`}
+                    />
+                    {showResults && subQ.correctAnswer ? (
+                      <span
+                        className="resposta-professor"
+                        dangerouslySetInnerHTML={{ __html: subQ.correctAnswer }}
+                      />
+                    ) : null}
+                  </>
+                ) : (
+                  <>
                 <p className="mb-2">
                   {subQ.letter ? (
                     <span className="question-letter">{subQ.letter}) </span>
                   ) : null}
-                  {subQ.question ? <span style={{ color: 'black' }}>{subQ.question}</span> : null}
+                  {subQ.question ? <span style={{ color: 'black' }} dangerouslySetInnerHTML={{ __html: subQ.question }} /> : null}
                 </p>
 
                 {subQ.hideAnswerField ? null : subQ.choices && subQ.choices.length > 0 ? (
@@ -155,16 +315,34 @@ function QuestionTextInput({
 
                       return (
                         <div key={index} className="mb-3">
-                          <ul className="mb-2 ml-6 list-disc">
-                            <li className="text-black">{subItem.label}</li>
-                          </ul>
-                          <textarea
-                            value={subItemAnswer}
-                            onChange={(e) => onAnswerChange(subItemId, e.target.value)}
-                            placeholder={subItem.placeholder || 'Digite aqui...'}
-                            disabled={showResults}
-                            className={simpleTextareaClass}
-                          />
+                          {/≅|≈/.test(subItem.label) ? (
+                            <div className="flex flex-wrap items-center gap-2">
+                              <ul className="mb-0 ml-6 list-disc">
+                                <li className="text-black">{subItem.label}</li>
+                              </ul>
+                              <AutoExpandTextarea
+                                value={subItemAnswer}
+                                onChange={(value) => onAnswerChange(subItemId, value)}
+                                placeholder={subItem.placeholder || ''}
+                                disabled={showResults}
+                                expand="horizontal"
+                                className="geratriz-item__texto geratriz-item__texto--curto"
+                              />
+                            </div>
+                          ) : (
+                            <>
+                              <ul className="mb-2 ml-6 list-disc">
+                                <li className="text-black">{subItem.label}</li>
+                              </ul>
+                              <AutoExpandTextarea
+                                value={subItemAnswer}
+                                onChange={(value) => onAnswerChange(subItemId, value)}
+                                placeholder={subItem.placeholder || ''}
+                                disabled={showResults}
+                                className={simpleTextareaClass}
+                              />
+                            </>
+                          )}
                           {showResults && subItem.correctAnswer && (
                             <div className="mt-2 rounded bg-gray-100 p-2 text-sm">
                               <p className="mb-1 font-semibold text-gray-700">Resposta esperada:</p>
@@ -176,31 +354,35 @@ function QuestionTextInput({
                     })}
                   </div>
                 ) : (
-                  <textarea
+                  <AutoExpandTextarea
                     value={subUserAnswer}
-                    onChange={(e) => onAnswerChange(subQuestionId, e.target.value)}
-                    placeholder={subQ.placeholder || 'Digite aqui...'}
+                    onChange={(value) => onAnswerChange(subQuestionId, value)}
+                    placeholder={subQ.placeholder || ''}
                     disabled={showResults}
                     className={simpleTextareaClass}
                   />
                 )}
 
                 {showResults && subQ.correctAnswer && !subQ.subItems && !subQ.hideAnswerField && (
-                  <div className="mt-2 rounded bg-gray-100 p-2 text-sm">
-                    <p className="mb-1 font-semibold text-gray-700">Resposta esperada:</p>
-                    <p className="text-gray-600">{subQ.correctAnswer}</p>
-                  </div>
+                  <div
+                    className="resposta-professor mt-2 text-sm leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: subQ.correctAnswer }}
+                  />
+                )}
+                  </>
                 )}
               </div>
             );
           })}
         </div>
+          </>
+        ) : null}
       </div>
     );
   }
 
   const simpleTextareaClass =
-    'mt-2 block h-[31px] w-[765px] max-w-full rounded-[5px] bg-[rgba(221,221,221,0.50)] px-3 pt-1 text-left text-[14px] font-normal leading-normal text-[#000000] placeholder:text-[#BDBDBD] font-myriad-vf focus:outline-none resize-none';
+    'mt-2 block w-[765px] max-w-full rounded-[5px] bg-[rgba(221,221,221,0.50)] px-3 pt-1 text-left text-[14px] font-normal leading-normal text-[#000000] placeholder:text-[#BDBDBD] font-myriad-vf focus:outline-none';
 
   // Formato simples (sem subquestões)
   if (question.listDiscLayout) {
@@ -225,18 +407,18 @@ function QuestionTextInput({
                 {question.embeddedContent}
               </div>
             ) : null}
-            <textarea
+            <AutoExpandTextarea
               value={userAnswer}
-              onChange={(e) => onAnswerChange(question.id, e.target.value)}
-              placeholder={question.placeholder || 'Digite aqui...'}
+              onChange={(value) => onAnswerChange(question.id, value)}
+              placeholder={question.placeholder || ''}
               disabled={showResults}
               className={simpleTextareaClass}
             />
             {showResults && question.correctAnswer && (
-              <div className="mt-3 p-3 bg-gray-100 rounded">
-                <p className="text-sm font-semibold text-gray-700 mb-1">Resposta esperada:</p>
-                <p className="text-sm text-gray-600 whitespace-pre-wrap">{question.correctAnswer}</p>
-              </div>
+              <div
+                className="resposta-professor mt-3 text-sm leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: question.correctAnswer }}
+              />
             )}
           </li>
         </ul>
@@ -256,18 +438,18 @@ function QuestionTextInput({
       )}
       {!hideInput && (
         <>
-          <textarea
+          <AutoExpandTextarea
             value={userAnswer}
-            onChange={(e) => onAnswerChange(question.id, e.target.value)}
-            placeholder={question.placeholder || 'Digite aqui...'}
+            onChange={(value) => onAnswerChange(question.id, value)}
+            placeholder={question.placeholder || ''}
             disabled={showResults}
-            className="h-[31px] w-[765px] max-w-full rounded-[5px] bg-[rgba(221,221,221,0.50)] px-3 pt-1 text-left text-[14px] font-normal leading-normal text-[#000000] placeholder:text-[#BDBDBD] font-myriad-vf focus:outline-none resize-none"
+            className="campo-texto-expansivel w-[765px] max-w-full rounded-[5px] bg-[rgba(221,221,221,0.50)] px-3 pt-1 text-left text-[14px] font-normal leading-normal text-[#000000] placeholder:text-[#BDBDBD] font-myriad-vf focus:outline-none"
           />
           {showResults && question.correctAnswer && (
-            <div className="mt-3 p-3 bg-gray-100 rounded">
-              <p className="text-sm font-semibold text-gray-700 mb-1">Resposta esperada:</p>
-              <p className="text-sm text-gray-600">{question.correctAnswer}</p>
-            </div>
+            <div
+              className="resposta-professor mt-3 text-sm leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: question.correctAnswer }}
+            />
           )}
         </>
       )}

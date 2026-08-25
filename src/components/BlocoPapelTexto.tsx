@@ -4,6 +4,7 @@ interface BlocoPapelTextoProps {
   imageSrc: string;
   imageAlt: string;
   credit?: string;
+  className?: string;
   children: ReactNode;
 }
 
@@ -11,10 +12,11 @@ function BlocoPapelTexto({
   imageSrc,
   imageAlt,
   credit,
+  className,
   children,
 }: BlocoPapelTextoProps) {
   return (
-    <figure className="bloco-papel-texto my-8">
+    <figure className={`bloco-papel-texto my-8${className ? ` ${className}` : ''}`}>
       <div className="bloco-papel-texto__folha">
         <div className="bloco-papel-texto__foto">
           <img src={imageSrc} alt={imageAlt} />

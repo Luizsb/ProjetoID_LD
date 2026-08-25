@@ -71,11 +71,17 @@ export interface TextInputQuestion {
   placeholder?: string;
   correctAnswer?: string; // Opcional, para validação na visão do professor
   number?: number; // Número da questão (ex: 1, 2, 3...)
+  /** Grade das subquestões (ex.: 2 colunas no Agora é com você). */
+  subQuestionsLayout?: 'stack' | 'grid-2' | 'grid-3';
+  /** Bloco de exemplo entre o enunciado e os itens. */
+  exampleHtml?: string;
   subQuestions?: Array<{
     letter: string; // Letra da subquestão (ex: 'a', 'b', 'c')
     question: string; // Texto da subquestão
     placeholder?: string;
     correctAnswer?: string;
+    /** Campo empilhado de numerador/denominador. */
+    inputKind?: 'text' | 'fraction' | 'fractions' | 'inline' | 'fraction-decimal';
     /** Sem campo de resposta (atividade só na imagem/desenho). */
     hideAnswerField?: boolean;
     /** Opções exclusivas com caixa X (ex.: direita / esquerda), como no impresso SAE. */
@@ -136,11 +142,15 @@ export interface FillBlanksQuestion {
   type: 'fill-blanks';
   number?: number;
   question: string;
+  /** Grade dos itens (ex.: 3 colunas no Agora é com você). */
+  itemsLayout?: 'stack' | 'grid-3';
   items: Array<{
     letter: string; // Letra do item (ex: 'a', 'b', 'c')
     fragments: string[]; // Texto quebrado por lacunas. Ex: ["A troca ... de ", "."]
     placeholders?: string[]; // Placeholder por lacuna
     correctAnswers?: string[]; // Resposta esperada por lacuna (visão do professor)
+    /** Opções fixas da lacuna (ex.: ∈ e ∉). */
+    choiceOptions?: string[];
   }>;
 }
 

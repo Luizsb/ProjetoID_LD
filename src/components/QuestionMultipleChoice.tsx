@@ -51,14 +51,18 @@ function QuestionMultipleChoice({
                 <span className="mc-choice-mark__x">{isOn ? 'X' : ''}</span>
                 <span className="mc-choice-mark__letter">{key})</span>
               </span>
-              <span className="text-[16px] leading-[150%] text-neutral-800">{question.options[key]}</span>
+              <span
+                className="text-[16px] leading-[150%] text-neutral-800"
+                dangerouslySetInnerHTML={{ __html: question.options[key] || '' }}
+              />
             </label>
           );
         })}
       </div>
       {showResults && selectedAnswer !== question.correctAnswer ? (
         <p className="mt-3 text-sm text-red-600">
-          Resposta correta: <strong>{question.options[question.correctAnswer]}</strong>
+          Resposta correta:{' '}
+          <strong dangerouslySetInnerHTML={{ __html: question.options[question.correctAnswer] || '' }} />
         </p>
       ) : null}
     </>

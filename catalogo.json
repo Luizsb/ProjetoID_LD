@@ -130,7 +130,7 @@
       "id": "SAS_AT27_AF8_L1_LDIDA_MAT_AL_IMP_C1",
       "marcaId": "SAS",
       "titulo": "Matemática — 8º ano",
-      "subtitulo": "Anos finais · Livro do aluno · Capítulo 1 (miniatura)",
+      "subtitulo": "Anos finais · Livro do aluno · Capítulo 1",
       "disciplina": "Matemática",
       "segmento": "AF",
       "ano": "8º ano",
@@ -138,18 +138,6 @@
       "status": "pronto",
       "fontePdf": "fonte/SAS_AT27_AF8_L1_LDIDA_MAT_AL_IMP_C1_miniatura.pdf",
       "playerKey": "sas-at27-af8-mat-c1"
-    },
-    {
-      "id": "SAS_AT27_AF8_L1_LDIDA_MAT_AL_IMP_C1-agoravai",
-      "marcaId": "SAS",
-      "titulo": "Matemática — 8º ano (agora vai)",
-      "subtitulo": "Anos finais · Livro do aluno · Capítulo 1 · versão de teste",
-      "disciplina": "Matemática",
-      "segmento": "AF",
-      "ano": "8º ano",
-      "capitulo": "C01",
-      "status": "pronto",
-      "playerKey": "sas-at27-af8-mat-c1-agoravai"
     },
     {
       "id": "SAS_PG27_EM1_V1_LDIDA_LIT_AL_IMP_C1",

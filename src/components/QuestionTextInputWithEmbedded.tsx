@@ -1,4 +1,5 @@
 import { TextInputQuestion, UserAnswers } from '../types/questions';
+import AutoExpandTextarea from './AutoExpandTextarea';
 
 interface QuestionTextInputWithEmbeddedProps {
   question: TextInputQuestion;
@@ -57,14 +58,15 @@ function QuestionTextInputWithEmbedded({
       )}
 
       {/* Campo de texto para resposta */}
-      <textarea
+      <AutoExpandTextarea
         value={userAnswer}
-        onChange={(e) => onAnswerChange(question.id, e.target.value)}
-        placeholder={question.placeholder || 'Digite sua resposta aqui...'}
+        onChange={(value) => onAnswerChange(question.id, value)}
+        placeholder={question.placeholder || ''}
         disabled={showResults}
-        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-y min-h-[100px] text-black"
+        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
         style={{
           fontFamily: 'inherit',
+          minHeight: '100px',
         }}
       />
 
