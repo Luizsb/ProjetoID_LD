@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { Question, UserAnswers } from '../types/questions';
 import QuestionTrueFalse from './QuestionTrueFalse';
 import QuestionAlternative from './QuestionAlternative';
@@ -16,6 +17,7 @@ interface QuestionRendererProps {
   showResults?: boolean;
   hidePrompt?: boolean;
   hideInput?: boolean;
+  embedded?: ReactNode;
 }
 
 function QuestionRenderer({
@@ -25,6 +27,7 @@ function QuestionRenderer({
   showResults = false,
   hidePrompt = false,
   hideInput = false,
+  embedded,
 }: QuestionRendererProps) {
   if (!question) {
     return null;
@@ -40,6 +43,7 @@ function QuestionRenderer({
           showResults={showResults}
           hidePrompt={hidePrompt}
           hideInput={hideInput}
+          embedded={embedded}
         />
       );
     case 'true-false':

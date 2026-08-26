@@ -33,6 +33,20 @@ function AgoraEComVoce({
   className,
   children,
 }: AgoraEComVoceProps) {
+  const isEm = Boolean(className?.includes('agora-e-com-voce--em'));
+
+  if (isEm) {
+    return (
+      <section
+        className={`agora-e-com-voce${className ? ` ${className}` : ''}`}
+        aria-label="Agora é com você"
+      >
+        <img className="agora-e-com-voce__selo" src={iconSrc} alt={iconAlt} />
+        <div className="agora-e-com-voce__caixa">{children}</div>
+      </section>
+    );
+  }
+
   return (
     <section className={`agora-e-com-voce my-6${className ? ` ${className}` : ''}`}>
       <div style={ICON_WRAP}>

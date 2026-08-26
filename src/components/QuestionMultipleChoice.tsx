@@ -1,3 +1,4 @@
+import { type ReactNode } from 'react';
 import { MultipleChoiceQuestion, UserAnswers } from '../types/questions';
 import { QuestionWrapper } from './shared/QuestionWrapper';
 
@@ -12,6 +13,8 @@ interface QuestionMultipleChoiceProps {
   showResults?: boolean;
   hidePrompt?: boolean;
   hideInput?: boolean;
+  /** Conteúdo entre o enunciado inicial e o texto após a mídia (ex.: poema). */
+  embedded?: ReactNode;
 }
 
 function QuestionMultipleChoice({
@@ -21,6 +24,7 @@ function QuestionMultipleChoice({
   showResults = false,
   hidePrompt = false,
   hideInput = false,
+  embedded,
 }: QuestionMultipleChoiceProps) {
   const selectedAnswer = userAnswers[question.id] as ChoiceKey | undefined;
   const answered = Boolean(selectedAnswer);
@@ -82,7 +86,17 @@ function QuestionMultipleChoice({
   );
 
   if (hidePrompt) {
-    return <div className="mb-6">{options}</div>;
+    return (
+      <div className="mb-6">
+        {question.questionAfterMedia ? (
+          <p
+            className="mc-choice-after-media"
+            dangerouslySetInnerHTML={{ __html: question.questionAfterMedia }}
+          />
+        ) : null}
+        {options}
+      </div>
+    );
   }
 
   return (
@@ -103,7 +117,8 @@ function QuestionMultipleChoice({
           ) : null}
         </figure>
       ) : null}
-      {question.questionAfterMedia ? (
+      {embedded}
+      {!hideInput && question.questionAfterMedia ? (
         <p
           className="mc-choice-after-media"
           dangerouslySetInnerHTML={{ __html: question.questionAfterMedia }}

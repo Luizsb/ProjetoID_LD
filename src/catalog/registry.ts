@@ -16,6 +16,8 @@ export const bookLoaders: Record<string, () => Promise<BookModule>> = {
     import('../../marcas/SAE/livros/SAE_AT27_EM1_V1_LDIDA_BIO_AL_IMP_C01/capitulos/Capitulo.tsx'),
   'sas-at27-af8-mat-c1': () =>
     import('../../marcas/SAS/livros/SAS_AT27_AF8_L1_LDIDA_MAT_AL_IMP_C1/capitulos/Capitulo.tsx'),
+  'sas-pg27-em1-lit-c1': () =>
+    import('../../marcas/SAS/livros/SAS_PG27_EM1_V1_LDIDA_LIT_AL_IMP_C1/capitulos/Capitulo.tsx'),
   'gki-27-em1-bio-c01': () =>
     import('../../marcas/GEEKIE/livros/GKI_27_EM1_V1_LDIDA_BIO_AL_C01/capitulos/GKI_27_EM1_V1_LDIDA_BIO_AL_C01.tsx'),
   'gki-27-af8-mat-c1': () =>

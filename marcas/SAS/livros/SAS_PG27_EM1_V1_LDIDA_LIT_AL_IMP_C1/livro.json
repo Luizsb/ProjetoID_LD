@@ -6,7 +6,7 @@
   "segmento": "EM",
   "ano": "1",
   "capitulo": "C01",
-  "status": "fonte-recebida",
+  "status": "pronto",
   "fontePdf": "fonte/SAS_PG27_EM1_V1_LDIDA_LIT_AL_IMP_C1_MINIATURA.pdf",
   "playerKey": "sas-pg27-em1-lit-c1",
   "componente": "capitulos/Capitulo.tsx"
