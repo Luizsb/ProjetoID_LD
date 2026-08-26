@@ -69,6 +69,10 @@ export interface MultipleSelectQuestion {
   correctAnswer: number[];
   number?: number;
   columns?: number;
+  /** Mostra A), B), C)… à esquerda de cada opção. */
+  showLetters?: boolean;
+  /** Só uma opção por vez (ex.: SIM / NÃO). */
+  exclusive?: boolean;
 }
 
 export interface TextInputQuestion {
@@ -84,6 +88,8 @@ export interface TextInputQuestion {
   subQuestionsLayout?: 'stack' | 'grid-2' | 'grid-3';
   /** Bloco de exemplo entre o enunciado e os itens. */
   exampleHtml?: string;
+  /** Letra da alternativa no impresso (ex.: A, B). */
+  letter?: string;
   subQuestions?: Array<{
     letter: string; // Letra da subquestão (ex: 'a', 'b', 'c')
     question: string; // Texto da subquestão

@@ -9,6 +9,7 @@ interface QuestionMultipleSelectProps {
   userAnswers: UserAnswers;
   onAnswerChange: (questionId: string, answer: number[]) => void;
   showResults?: boolean;
+  hidePrompt?: boolean;
 }
 
 function selectedIndices(value: UserAnswers[string] | undefined): number[] {
@@ -26,6 +27,7 @@ function QuestionMultipleSelect({
   userAnswers,
   onAnswerChange,
   showResults = false,
+  hidePrompt = false,
 }: QuestionMultipleSelectProps) {
   const selected = selectedIndices(userAnswers[question.id]);
   const columns = question.columns ?? 3;
@@ -33,28 +35,36 @@ function QuestionMultipleSelect({
 
   const toggle = (index: number) => {
     if (showResults) return;
+    if (question.exclusive) {
+      onAnswerChange(question.id, selected.includes(index) ? [] : [index]);
+      return;
+    }
     const next = selected.includes(index)
       ? selected.filter((item) => item !== index)
       : [...selected, index].sort((a, b) => a - b);
     onAnswerChange(question.id, next);
   };
 
-  return (
-    <QuestionWrapper number={question.number} question={question.question} useHTML className="px-0">
+  const options = (
+    <>
       <div
-        className="mt-3 grid gap-x-8 gap-y-3"
+        className={`${hidePrompt ? 'mt-0' : 'mt-3'} grid gap-x-8 gap-y-3`}
         style={{
-          gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
+          gridTemplateColumns: `repeat(${columns}, max-content)`,
           gridTemplateRows: `repeat(${rows}, auto)`,
           gridAutoFlow: 'column',
         }}
       >
         {question.options.map((option, index) => {
           const isOn = selected.includes(index);
+          const hasKey = question.correctAnswer.length > 0;
           const shouldBeOn = question.correctAnswer.includes(index);
           return (
             <label key={option} className="flex cursor-pointer items-center gap-2 select-none">
-            <input
+              {question.showLetters ? (
+                <span className="question-letter w-7 shrink-0">{String.fromCharCode(65 + index)})</span>
+              ) : null}
+              <input
                 type="checkbox"
                 checked={isOn}
                 disabled={showResults}
@@ -62,7 +72,7 @@ function QuestionMultipleSelect({
                 className="sr-only"
               />
               <span
-                className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-[1.5px] bg-white text-[13px] font-bold leading-none"
+                className="ms-choice-mark flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-[1.5px] bg-white text-[13px] font-bold leading-none"
                 style={{
                   borderColor: RING,
                   color: MARK,
@@ -72,18 +82,28 @@ function QuestionMultipleSelect({
                 {isOn ? 'X' : ''}
               </span>
               <span className="text-[15px] text-neutral-800">{option}</span>
-              {showResults && isOn !== shouldBeOn ? (
+              {showResults && hasKey && isOn !== shouldBeOn ? (
                 <span className="text-xs text-red-600">{shouldBeOn ? 'faltou' : 'não'}</span>
               ) : null}
             </label>
           );
         })}
       </div>
-      {showResults ? (
+      {showResults && question.correctAnswer.length > 0 ? (
         <p className="mt-3 text-sm text-neutral-600">
           Respostas corretas: {question.correctAnswer.map((index) => question.options[index]).join(', ')}
         </p>
       ) : null}
+    </>
+  );
+
+  if (hidePrompt) {
+    return <div className="mb-3">{options}</div>;
+  }
+
+  return (
+    <QuestionWrapper number={question.number} question={question.question} useHTML className="px-0">
+      {options}
     </QuestionWrapper>
   );
 }

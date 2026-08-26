@@ -67,6 +67,7 @@ function QuestionRenderer({
           userAnswers={userAnswers}
           onAnswerChange={onAnswerChange}
           showResults={showResults}
+          hidePrompt={hidePrompt}
         />
       );
     case 'text-input':

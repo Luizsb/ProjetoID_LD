@@ -48,6 +48,9 @@ function QuestionTextInput({
           {question.number !== undefined && (
             <span className="question-number" style={{ color: 'var(--question-number-color, #ea8244)', fontWeight: 'bold' }}>{question.number}. </span>
           )}
+          {question.letter ? (
+            <span className="question-letter">{question.letter}) </span>
+          ) : null}
           <span style={{ color: 'black' }} dangerouslySetInnerHTML={{ __html: question.question }} />
         </p>
         ) : null}
@@ -393,6 +396,9 @@ function QuestionTextInput({
             {question.number !== undefined && (
               <span className="question-number font-bold" style={{ color: 'var(--question-number-color, #ea8244)' }}>{question.number}. </span>
             )}
+            {question.letter ? (
+              <span className="question-letter">{question.letter}) </span>
+            ) : null}
             <span dangerouslySetInnerHTML={{ __html: question.question }} />
             {question.embeddedContent ? (
               <div
@@ -433,6 +439,9 @@ function QuestionTextInput({
           {question.number !== undefined && (
             <span className="question-number" style={{ color: 'var(--question-number-color, #ea8244)', fontWeight: 'bold' }}>{question.number}. </span>
           )}
+          {question.letter ? (
+            <span className="question-letter">{question.letter}) </span>
+          ) : null}
           <span style={{ color: 'black' }} dangerouslySetInnerHTML={{ __html: question.question }} />
         </p>
       )}
