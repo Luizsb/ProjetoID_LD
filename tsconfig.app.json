@@ -20,5 +20,5 @@
       "@player/*": ["src/*"]
     }
   },
-  "include": ["src", "marcas/**/capitulos/Capitulo.tsx", "marcas/GEEKIE/**/capitulos/*.tsx"]
+  "include": ["src", "marcas/**/capitulos/Capitulo.tsx", "marcas/GEEKIE/**/capitulos/*.tsx", "marcas/SAE/**/capitulos/*.tsx"]
 }

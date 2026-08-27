@@ -445,6 +445,35 @@ function QuestionTextInput({
           <span style={{ color: 'black' }} dangerouslySetInnerHTML={{ __html: question.question }} />
         </p>
       )}
+      {!hideInput && question.media ? (
+        <div className="mb-6 flex flex-col items-center">
+          {question.media.drawing ? (
+            <AreaDesenho
+              backgroundImage={question.media.src}
+              storageKey={question.media.drawing.storageKey}
+              width={question.media.drawing.width ?? 492}
+              height={question.media.drawing.height ?? 794}
+              hint={
+                question.media.drawing.hint ??
+                'Marque o X e trace o trajeto sobre a imagem'
+              }
+              borderColor={question.media.drawing.borderColor ?? '#80298F'}
+              maxWidth={question.media.drawing.maxWidth ?? '100%'}
+              className="w-full"
+            />
+          ) : (
+            <figure className="foto-com-credito foto-com-credito--lg">
+              <img
+                src={question.media.src}
+                alt={question.media.alt || ''}
+              />
+              {question.media.credit ? (
+                <figcaption>{question.media.credit}</figcaption>
+              ) : null}
+            </figure>
+          )}
+        </div>
+      ) : null}
       {!hideInput && (
         <>
           <AutoExpandTextarea

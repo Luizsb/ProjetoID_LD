@@ -225,8 +225,17 @@ export function renderQuestionAnswer(question: Question): React.ReactNode {
             <span className="question-number" style={{ color: 'var(--question-number-color, #ea8244)', fontWeight: 'bold' }}>{question.number}. </span>
           )}
           <span dangerouslySetInnerHTML={{ __html: question.question }} />
+          {question.teacherAnswer ? (
+            <>
+              {' '}
+              <span
+                className="resposta-professor"
+                dangerouslySetInnerHTML={{ __html: question.teacherAnswer }}
+              />
+            </>
+          ) : null}
         </p>
-        <ul className="list-none ml-0 space-y-2">
+        <ul className={`${question.listDiscLayout ? 'list-disc ml-6' : 'list-none ml-0'} space-y-2`}>
           {question.items.map((item) => {
             const promptIsLetter = item.letter.trim().length === 1;
             const rebuilt = item.fragments
@@ -235,19 +244,31 @@ export function renderQuestionAnswer(question: Question): React.ReactNode {
                 if (index === item.fragments.length - 1) {
                   return fragment;
                 }
-                return `${fragment}${answer ?? '___'}`;
+                if (question.hideItemLetters) {
+                  return `${fragment}(${answer ?? '___'})`;
+                }
+                return `${fragment}<span class="resposta-professor">${answer ?? '___'}</span>`;
               })
               .join('');
             return (
               <li key={item.letter}>
-                <span className="question-letter">
-                  {promptIsLetter ? `${item.letter})` : item.letter}
-                </span>
-                {promptIsLetter ? ' ' : ' → '}
-                {rebuilt.trim() ? (
-                  <span dangerouslySetInnerHTML={{ __html: rebuilt }} />
+                {question.hideItemLetters || question.listDiscLayout ? (
+                  <span
+                    className={question.hideItemLetters ? 'resposta-professor' : undefined}
+                    dangerouslySetInnerHTML={{ __html: rebuilt }}
+                  />
                 ) : (
-                  <span>Sem resposta esperada cadastrada.</span>
+                  <>
+                    <span className="question-letter">
+                      {promptIsLetter ? `${item.letter})` : item.letter}
+                    </span>
+                    {promptIsLetter ? ' ' : ' → '}
+                    {rebuilt.trim() ? (
+                      <span dangerouslySetInnerHTML={{ __html: rebuilt }} />
+                    ) : (
+                      <span>Sem resposta esperada cadastrada.</span>
+                    )}
+                  </>
                 )}
               </li>
             );

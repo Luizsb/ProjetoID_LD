@@ -1112,6 +1112,18 @@ td {
   font-weight: 400 !important;
 }
 
+.marca-sae .professor-button__dialog .resposta-professor strong,
+.marca-sae .professor-button__dialog .resposta-professor b,
+.marca-sae .professor-button__dialog strong,
+.marca-sae .professor-button__dialog b {
+  font-weight: 700 !important;
+}
+
+.marca-sae .professor-button__dialog .codigo-bncc {
+  color: #80298F !important;
+  font-weight: 700 !important;
+}
+
 .marca-sae .mc-choice:hover {
   background: #fff7f2;
   border-color: #f0d2c0;
@@ -4335,6 +4347,10 @@ td {
   color: var(--list-marker-color, #ea8244);
 }
 
+.marca-sae ul.list-disc li::marker {
+  color: var(--list-marker-color, #80298F);
+}
+
 .marca-geekie ul.list-disc li::marker {
   color: var(--list-marker-color, #f27060);
 }
@@ -4624,8 +4640,8 @@ td {
 }
 
 .marca-sae {
-  --question-number-color: #ea8244;
-  --list-marker-color: #ea8244;
+  --question-number-color: #80298F;
+  --list-marker-color: #80298F;
   --titulo-bio: #e98c64;
 }
 
@@ -9275,6 +9291,293 @@ p.bloco-leitura__referencia.bloco-leitura__referencia--direita {
   border-top: 1px solid #d5dae3;
 }
 
+/* Seções SAE Anos Finais: ícone + barra preta (Conversa vai, Para saber mais, etc.) */
+.secao-af {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 1.75rem 0 1.35rem;
+}
+
+.secao-af__icone {
+  position: relative;
+  z-index: 1;
+  width: 5.6rem;
+  height: 5.6rem;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.secao-af__barra {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  min-height: 2.55rem;
+  margin-left: -1.15rem;
+  padding: 0.5rem 1.15rem 0.5rem 1.85rem;
+  background: #111;
+}
+
+.secao-af__titulo {
+  margin: 0;
+  color: #fff;
+  font-family: 'Courier New', Courier, ui-monospace, monospace;
+  font-size: clamp(0.95rem, 2.4vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.conectando-pontos-termos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.6rem;
+  margin: 0.15rem 0 1.35rem;
+}
+
+.conectando-pontos-termos span {
+  display: inline-block;
+  padding: 0.28rem 0.72rem;
+  background: #edd6ea;
+  color: #1f1f1f;
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.35;
+  border-radius: 3px;
+}
+
+.prompt-atividade {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  margin: 0 0 1.15rem;
+  padding: 0.85rem 1rem;
+  text-indent: 0;
+}
+
+.prompt-atividade__icone {
+  width: 2.4rem;
+  height: 2.4rem;
+  flex-shrink: 0;
+  margin-top: 0.05rem;
+  object-fit: contain;
+}
+
+.prompt-atividade__texto {
+  flex: 1;
+  margin: 0;
+  color: #333;
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.tratados-grade {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.35rem 1.1rem;
+  margin: 1.35rem 0 1.75rem;
+}
+
+.tratado-caixa {
+  position: relative;
+  padding: 1.2rem 1rem 1rem 1.15rem;
+  border: 1.5px solid var(--tratado-cor);
+  border-radius: 16px;
+  background: #fff;
+}
+
+.tratado-caixa--1 {
+  --tratado-cor: #f0b429;
+}
+
+.tratado-caixa--2 {
+  --tratado-cor: #e56a2a;
+}
+
+.tratado-caixa--3 {
+  --tratado-cor: #3d7bd9;
+}
+
+.tratado-caixa--4 {
+  --tratado-cor: #43a047;
+}
+
+.tratado-caixa--5 {
+  --tratado-cor: #e85a9b;
+}
+
+.tratado-caixa--larga {
+  grid-column: 1 / -1;
+}
+
+.tratado-caixa__numero {
+  position: absolute;
+  top: -0.7rem;
+  left: -0.45rem;
+  display: flex;
+  width: 1.75rem;
+  height: 1.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.45rem;
+  background: var(--tratado-cor);
+  color: #fff;
+  font-family: 'Filson Soft', 'Filson Pro', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.tratado-caixa p {
+  margin: 0;
+  color: #222;
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: left;
+  text-indent: 0;
+}
+
+@media (max-width: 700px) {
+  .tratados-grade {
+    grid-template-columns: 1fr;
+  }
+}
+
+.codigo-bncc {
+  color: #80298F;
+  font-weight: 700;
+}
+
+.caixa-reportagem {
+  position: relative;
+  margin: 0.35rem 0 1.4rem;
+  overflow: hidden;
+  padding: 1.35rem 1.4rem 1.15rem;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.28) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 78% 72%, rgba(255, 255, 255, 0.22) 0 1px, transparent 1.5px),
+    #cfaebc;
+  background-size: 18px 18px, 22px 22px, auto;
+}
+
+
+.caixa-reportagem::before {
+  top: 0.7rem;
+  left: -0.45rem;
+}
+
+.caixa-reportagem::after {
+  right: -0.45rem;
+  bottom: 0.7rem;
+}
+
+.caixa-reportagem__titulo {
+  margin: 0 0 0.85rem;
+  font-size: 1.2rem!important;
+  line-height: 1.35;
+  text-indent: 0;
+}
+
+.caixa-reportagem__texto {
+  margin: 0 0 0.95rem;
+  color: #111;
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-indent: 0;
+}
+
+.caixa-reportagem__fonte {
+  margin: 0;
+  color: #333;
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 10px!important;
+  font-weight: 400;
+  line-height: 1.4;
+  text-indent: 0;
+}
+
+.caixa-reportagem__fonte a {
+  color: inherit;
+  word-break: break-all;
+}
+
+.caixa-saber-mais {
+  position: relative;
+  margin: 1.5rem 0 1.75rem;
+  overflow: hidden;
+  padding: 1.1rem 1.2rem 1.35rem;
+  background: #e6dcf2;
+  
+}
+
+.caixa-saber-mais__enfeite {
+  position: absolute;
+  top: -0.35rem;
+  right: -0.85rem;
+  z-index: 1;
+  width: 8.2rem;
+  height: auto;
+  pointer-events: none;
+}
+
+.caixa-saber-mais .secao-af {
+  position: relative;
+  z-index: 2;
+  width: calc(100% - 6.5rem);
+  margin: 0.35rem 0 1rem;
+}
+
+.caixa-saber-mais__titulo {
+  position: relative;
+  z-index: 2;
+  margin: 0 0 0.85rem;
+  color: #111;
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 20px!important;
+  font-weight: 700!important;
+  line-height: 1.35;
+  text-align: center;
+  text-indent: 0;
+}
+
+.caixa-saber-mais__texto {
+  position: relative;
+  z-index: 2;
+  margin: 0 0 0.95rem;
+  color: #333;
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.55;
+  text-align: justify;
+  text-indent: 1.5rem;
+}
+
+.caixa-saber-mais__fonte {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  color: #444;
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 11px!important;
+  font-weight: 400;
+  line-height: 1.4;
+  text-indent: 0;
+}
+
+.caixa-saber-mais__fonte a {
+  color: inherit;
+  word-break: break-all;
+}
+
 /* Faixa Enem e vestibulares */
 .enem-vestibulares {
   display: block;
@@ -9863,6 +10166,106 @@ p.bloco-leitura__referencia.bloco-leitura__referencia--direita {
   pointer-events: none;
 }
 
+.bloco-limite-glossario {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(12.5rem, 0.85fr);
+  gap: 1rem 1.15rem;
+  align-items: start;
+  margin: 0.35rem 0 1.35rem;
+}
+
+.caixa-definicoes {
+  padding: 1.05rem 1.15rem 1.05rem 1.25rem;
+  background: #d8e9eb;
+  border-radius: 18px;
+}
+
+.caixa-definicoes ul {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.caixa-definicoes li {
+  margin: 0 0 0.7rem;
+  color: #333;
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.45;
+  text-indent: 0;
+}
+
+.caixa-definicoes li:last-child {
+  margin-bottom: 0;
+}
+
+.caixa-definicoes li::marker {
+  color: #80298F;
+}
+
+.termo-glossario {
+  color: #8b2154;
+  font-weight: 700;
+}
+
+.glossario-sae-af {
+  position: relative;
+  padding-top: 0.55rem;
+}
+
+.glossario-sae-af__barra {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 2.05rem;
+  padding: 0.35rem 0.75rem 0.35rem 1.85rem;
+  background: #111;
+}
+
+.glossario-sae-af__fita {
+  position: absolute;
+  top: -0.35rem;
+  left: 0.2rem;
+  width: 1.35rem;
+  height: auto;
+}
+
+.glossario-sae-af__titulo {
+  margin: 0;
+  color: #fff;
+  font-family: 'Courier New', Courier, ui-monospace, monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.glossario-sae-af__corpo {
+  margin: 0;
+  padding: 0.75rem 0.8rem 0.85rem;
+  border: 1.5px solid #7ec8d4;
+  border-top: 0;
+  border-radius: 0 0 10px 10px;
+  background: #fff;
+  color: #333;
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 15px;
+  line-height: 1.4;
+  text-indent: 0;
+}
+
+.glossario-sae-af__termo {
+  color: #8b2154;
+  font-weight: 700;
+}
+
+@media (max-width: 700px) {
+  .bloco-limite-glossario {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 640px) {
   .bloco-leitura__linha {
     grid-template-columns: 1fr;
@@ -10120,6 +10523,77 @@ p.bloco-leitura__referencia.bloco-leitura__referencia--direita {
 
 .area-desenho__btn--limpar {
   background: #dc3545;
+}
+
+.area-colar-imagem__drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  width: 100%;
+  min-height: 280px;
+  padding: 1.5rem 1.25rem;
+  background: #faf7ff;
+  border: 3px dashed;
+  border-radius: 14px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.area-colar-imagem__drop.is-dragging,
+.area-colar-imagem__drop:hover {
+  background: #f3e9f8;
+}
+
+.area-colar-imagem__titulo {
+  font-family: 'Myriad VF', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.area-colar-imagem__dica {
+  max-width: 28rem;
+  color: #475569;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.area-colar-imagem__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 0.85rem;
+}
+
+.area-colar-imagem__acoes button {
+  padding: 0.45rem 0.9rem;
+  border: 2px solid #80298f;
+  border-radius: 999px;
+  background: #fff;
+  color: #80298f;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.area-colar-imagem__acoes button:hover {
+  background: #f9ddff;
+}
+
+.area-colar-imagem__erro {
+  margin: 0.65rem 0 0;
+  color: #b42318;
+  font-size: 13px;
+}
+
+.area-colar-imagem .area-desenho__superficie {
+  max-width: min(100%, 520px);
+}
+
+.mapa-atividade .area-desenho__superficie {
+  max-width: min(100%, 560px);
 }
 
 .bloco-papel-texto {
@@ -10403,7 +10877,7 @@ p.bloco-leitura__referencia.bloco-leitura__referencia--direita {
 }
 
 .marca-sae .mapa-figuras__dicas li::marker {
-  color: var(--list-marker-color, #ea8244);
+  color: var(--list-marker-color, #80298F);
 }
 
 .mapa-figuras__banco {

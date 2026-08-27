@@ -6,6 +6,8 @@ interface PosterProps {
   creditLine1?: string;
   creditLine2?: string;
   creditAlign?: 'left' | 'center' | 'right';
+  /** `contain` mostra a imagem inteira (mapas verticais). O padrão recorta no formato da capa. */
+  fit?: 'cover' | 'contain';
 }
 
 function Poster({
@@ -14,6 +16,7 @@ function Poster({
   creditLine1 = 'Myles Birket Foster/Wikimedia Commons. FOSTER, Myles Birket.',
   creditLine2 = 'FOSTER, Myles Birket. O mercado de peixe nos degraus da ponte de Rialto, Veneza. 1875. Aquarela realçada com bodycolor, 43 x 67 cm. Assinado com monograma.',
   creditAlign = 'right',
+  fit = 'cover',
 }: PosterProps) {
   const src =
     /^(https?:)?\/\//.test(imageSrc) || imageSrc.startsWith('/')
@@ -22,22 +25,37 @@ function Poster({
   const hasCredits = Boolean(creditLine1 || creditLine2);
   const creditMargin =
     creditAlign === 'center' ? '0 auto' : creditAlign === 'left' ? '0' : '0 0 0 auto';
+  const isContain = fit === 'contain';
 
   return (
     <section
-      className="flex w-full items-center justify-center px-3 py-4 sm:px-4 sm:py-5 md:h-[371px] md:px-0 md:py-0"
+      className={
+        isContain
+          ? 'flex w-full items-center justify-center px-3 py-6 sm:px-4 sm:py-8 md:px-0'
+          : 'flex w-full items-center justify-center px-3 py-4 sm:px-4 sm:py-5 md:h-[371px] md:px-0 md:py-0'
+      }
       style={{
         backgroundImage: `url('${publicUrl('images/pattern_branco.png')}')`,
         backgroundRepeat: 'repeat',
-        paddingTop: '0px!important',
+        ...(isContain ? {} : { paddingTop: '0px!important' }),
         backgroundSize: 'contain',
       }}
     >
-      <figure className="relative aspect-[533/335] w-full max-w-[533px] overflow-hidden rounded-[20px]">
+      <figure
+        className={
+          isContain
+            ? 'relative w-full max-w-[420px] overflow-hidden rounded-[20px]'
+            : 'relative aspect-[533/335] w-full max-w-[533px] overflow-hidden rounded-[20px]'
+        }
+      >
         <img
           src={src}
           alt={alt}
-          className="block h-full w-full object-cover"
+          className={
+            isContain
+              ? 'block h-auto w-full object-contain'
+              : 'block h-full w-full object-cover'
+          }
         />
 
         {hasCredits ? (

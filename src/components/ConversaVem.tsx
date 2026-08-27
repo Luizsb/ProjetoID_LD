@@ -1,6 +1,15 @@
 import { publicUrl } from '../lib/publicUrl';
+import SecaoAf from './SecaoAf';
 
-function ConversaVem() {
+interface ConversaVemProps {
+  imageSrc?: string;
+}
+
+function ConversaVem({ imageSrc }: ConversaVemProps) {
+  if (imageSrc) {
+    return <SecaoAf imageSrc={imageSrc} title="Conversa vem..." alt="Conversa vem" />;
+  }
+
   return (
     <div className="flex items-center gap-3 my-6">
       <img
@@ -11,12 +20,12 @@ function ConversaVem() {
       <h2
         style={{
           color: '#00000',
-            fontFamily: "'Filson Soft', sans-serif",
-            fontSize: '20px',
-            fontStyle: 'normal',
-            fontWeight: 400,
-            lineHeight: 'normal',
-            textTransform: 'uppercase',
+          fontFamily: "'Filson Soft', sans-serif",
+          fontSize: '20px',
+          fontStyle: 'normal',
+          fontWeight: 400,
+          lineHeight: 'normal',
+          textTransform: 'uppercase',
         }}
       >
         Conversa vem
@@ -26,4 +35,3 @@ function ConversaVem() {
 }
 
 export default ConversaVem;
-

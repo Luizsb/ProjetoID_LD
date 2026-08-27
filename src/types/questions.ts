@@ -159,6 +159,22 @@ export interface FillBlanksQuestion {
   question: string;
   /** Grade dos itens (ex.: 3 colunas no Agora é com você). */
   itemsLayout?: 'stack' | 'grid-3';
+  /** Oculta o prefixo a) b) c) — usado em relacionar colunas com “( ) texto”. */
+  hideItemLetters?: boolean;
+  /** Itens com marcador de lista, sem a) b) c). */
+  listDiscLayout?: boolean;
+  /** Texto extra no gabarito (ex.: código BNCC). */
+  teacherAnswer?: string;
+  /** Imagem entre o enunciado e as lacunas. */
+  media?: {
+    src: string;
+    alt?: string;
+    credit?: string;
+    /** Fonte/legenda em HTML, abaixo do crédito. */
+    caption?: string;
+  };
+  /** Texto exibido após a mídia e antes das lacunas. */
+  questionAfterMedia?: string;
   items: Array<{
     letter: string; // Letra do item (ex: 'a', 'b', 'c')
     fragments: string[]; // Texto quebrado por lacunas. Ex: ["A troca ... de ", "."]
